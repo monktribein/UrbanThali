@@ -40,7 +40,7 @@ export default function ShippingPage() {
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>4. Order Tracking</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  You'll receive real-time updates about your order status via SMS and email. Track your delivery through our app or website.
+                  You&apos;ll receive real-time updates about your order status via SMS and email. Track your delivery through our app or website.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>5. Contact Us</h3>

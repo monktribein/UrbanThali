@@ -35,12 +35,12 @@ export default function RefundPage() {
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>3. Quality Issues</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  If you're not satisfied with the quality of your food, please contact us within 30 minutes of delivery. We'll investigate and provide appropriate resolution.
+                  If you&apos;re not satisfied with the quality of your food, please contact us within 30 minutes of delivery. We&apos;ll investigate and provide appropriate resolution.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>4. Delivery Issues</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  In case of delivery delays or issues, we'll work with you to resolve the matter. Refunds or re-delivery may be offered based on the situation.
+                  In case of delivery delays or issues, we&apos;ll work with you to resolve the matter. Refunds or re-delivery may be offered based on the situation.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>5. Contact Us</h3>

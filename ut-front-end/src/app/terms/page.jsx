@@ -25,22 +25,22 @@ export default function TermsPage() {
               <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>1. Acceptance of Terms</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  By accessing and using Urban Thali's services, you accept and agree to be bound by the terms and provision of this agreement.
+                  By accessing and using Urban Thali&apos;s services, you accept and agree to be bound by the terms and provision of this agreement.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>2. Use License</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  Permission is granted to temporarily download one copy of the materials on Urban Thali's website for personal, non-commercial transitory viewing only.
+                  Permission is granted to temporarily download one copy of the materials on Urban Thali&apos;s website for personal, non-commercial transitory viewing only.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>3. Disclaimer</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  The materials on Urban Thali's website are provided on an 'as is' basis. Urban Thali makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties.
+                  The materials on Urban Thali&apos;s website are provided on an &apos;as is&apos; basis. Urban Thali makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>4. Limitations</h3>
                 <p style={{ color: '#6b7280', marginBottom: '20px', lineHeight: '1.6' }}>
-                  In no event shall Urban Thali or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Urban Thali's website.
+                  In no event shall Urban Thali or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Urban Thali&apos;s website.
                 </p>
                 
                 <h3 style={{ color: '#1f2937', marginBottom: '20px' }}>5. Contact Information</h3>

@@ -161,7 +161,7 @@ const MyOrders = ({ orderData }) => {
                 color: "#6b7280",
                 fontWeight: "400"
               }}>
-                You haven't placed any order yet.
+                You haven&apos;t placed any order yet.
               </div>
             </div>
           </div>

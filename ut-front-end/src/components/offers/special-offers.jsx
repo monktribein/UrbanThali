@@ -52,7 +52,7 @@ const SpecialOffers = () => {
                 maxWidth: '500px',
                 margin: '0 auto'
               }}>
-                Don't miss out on these amazing deals and save on your favorite thalis
+                Don&apos;t miss out on these amazing deals and save on your favorite thalis
               </p>
             </div>
           </div>

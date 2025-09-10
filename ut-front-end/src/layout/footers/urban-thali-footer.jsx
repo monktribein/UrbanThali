@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const UrbanThaliFooter = () => {
   return (
@@ -19,9 +20,11 @@ const UrbanThaliFooter = () => {
                   margin: '0px',
                   padding: '0px'
                 }}>
-                  <img 
+                  <Image 
                     src="/assets/img/logo/urban-thali-logo.png" 
                     alt="Urban Thali Logo" 
+                    width={200}
+                    height={120}
                     style={{ 
                       height: '120px', 
                       width: 'auto',

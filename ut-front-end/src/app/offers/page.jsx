@@ -29,7 +29,7 @@ export default function OffersPage() {
               }}>
                 <h3 style={{ color: '#FCB53B', marginBottom: '20px' }}>Coming Soon!</h3>
                 <p style={{ color: '#6b7280' }}>
-                  We're working on bringing you the best offers and deals. Check back soon for exciting discounts!
+                  We&apos;re working on bringing you the best offers and deals. Check back soon for exciting discounts!
                 </p>
               </div>
             </div>
