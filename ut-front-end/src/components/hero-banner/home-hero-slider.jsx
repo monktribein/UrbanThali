@@ -17,42 +17,42 @@ import { ArrowRightLong, SliderNextBtn, SliderPrevBtn, TextShape } from "@/svg";
 
 // slider data
 const sliderData = [
-  {
-    id: 1,
-    pre_title: { text: "Starting at", price: 274 },
-    title: "The best tablet Collection 2023",
-    subtitle: {
-      text_1: "Exclusive offer ",
-      percent: 35,
-      text_2: "off this week",
-    },
-    img: slider_img_1,
-    green_bg: true,
-  },
-  {
-    id: 2,
-    pre_title: { text: "Starting at", price: 999 },
-    title: "The best note book collection 2023",
-    subtitle: {
-      text_1: "Exclusive offer ",
-      percent: 10,
-      text_2: "off this week",
-    },
-    img: slider_img_2,
-    green_bg: true,
-  },
-  {
-    id: 3,
-    pre_title: { text: "Starting at", price: 999 },
-    title: "The best note book collection 2023",
-    subtitle: {
-      text_1: "Exclusive offer ",
-      percent: 10,
-      text_2: "off this week",
-    },
-    img: slider_img_3,
-    is_light: true,
-  },
+  // {
+  //   id: 1,
+  //   pre_title: { text: "Starting at", price: 274 },
+  //   title: "The best tablet Collection 2023",
+  //   subtitle: {
+  //     text_1: "Exclusive offer ",
+  //     percent: 35,
+  //     text_2: "off this week",
+  //   },
+  //   img: slider_img_1,
+  //   green_bg: true,
+  // },
+  // {
+  //   id: 2,
+  //   pre_title: { text: "Starting at", price: 999 },
+  //   title: "The best note book collection 2023",
+  //   subtitle: {
+  //     text_1: "Exclusive offer ",
+  //     percent: 10,
+  //     text_2: "off this week",
+  //   },
+  //   img: slider_img_2,
+  //   green_bg: true,
+  // },
+  // {
+  //   id: 3,
+  //   pre_title: { text: "Starting at", price: 999 },
+  //   title: "The best note book collection 2023",
+  //   subtitle: {
+  //     text_1: "Exclusive offer ",
+  //     percent: 10,
+  //     text_2: "off this week",
+  //   },
+  //   img: slider_img_3,
+  //   is_light: true,
+  // },
 ];
 
 function Shape({ img, num }) {
