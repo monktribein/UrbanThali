@@ -1,35 +1,42 @@
+// Placeholder images for blog (since blog functionality is not needed for Urban Thali)
+const placeholderImage = {
+  src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzZiNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIFBsYWNlaG9sZGVyPC90ZXh0Pjwvc3ZnPg==',
+  width: 400,
+  height: 300
+};
+
 // electronic
-import blog_1 from "@assets/img/blog/blog-1.jpg";
-import blog_2 from "@assets/img/blog/blog-2.jpg";
-import blog_3 from "@assets/img/blog/blog-3.jpg";
+const blog_1 = placeholderImage;
+const blog_2 = placeholderImage;
+const blog_3 = placeholderImage;
 // fashion
-import blog_4 from '@assets/img/blog/2/blog-1.jpg';
-import blog_5 from '@assets/img/blog/2/blog-2.jpg';
-import blog_6 from '@assets/img/blog/2/blog-3.jpg';
+const blog_4 = placeholderImage;
+const blog_5 = placeholderImage;
+const blog_6 = placeholderImage;
 // blog postbox 
-import blog_post_1 from '@assets/img/blog/blog-big-3.jpg';
-import blog_post_2 from '@assets/img/blog/blog-big-2.jpg';
-import blog_post_3 from '@assets/img/blog/blog-big-4.jpg';
-import blog_post_4 from '@assets/img/blog/blog-big-5.jpg';
-import blog_post_5 from '@assets/img/blog/blog-big-6.jpg';
+const blog_post_1 = placeholderImage;
+const blog_post_2 = placeholderImage;
+const blog_post_3 = placeholderImage;
+const blog_post_4 = placeholderImage;
+const blog_post_5 = placeholderImage;
 // blog grid 
-import blog_grid_1 from '@assets/img/blog/grid/blog-grid-1.jpg';
-import blog_grid_2 from '@assets/img/blog/grid/blog-grid-2.jpg';
-import blog_grid_3 from '@assets/img/blog/grid/blog-grid-3.jpg';
-import blog_grid_4 from '@assets/img/blog/grid/blog-grid-4.jpg';
-import blog_grid_5 from '@assets/img/blog/grid/blog-grid-5.jpg';
-import blog_grid_6 from '@assets/img/blog/grid/blog-grid-6.jpg';
-import blog_grid_7 from '@assets/img/blog/grid/blog-grid-7.jpg';
-import blog_grid_8 from '@assets/img/blog/grid/blog-grid-8.jpg';
+const blog_grid_1 = placeholderImage;
+const blog_grid_2 = placeholderImage;
+const blog_grid_3 = placeholderImage;
+const blog_grid_4 = placeholderImage;
+const blog_grid_5 = placeholderImage;
+const blog_grid_6 = placeholderImage;
+const blog_grid_7 = placeholderImage;
+const blog_grid_8 = placeholderImage;
 // list img 
-import list_img_1 from '@assets/img/blog/grid/blog-grid-1.jpg';
-import list_img_2 from '@assets/img/blog/grid/blog-grid-2.jpg';
-import list_img_3 from '@assets/img/blog/grid/blog-grid-3.jpg';
-import list_img_4 from '@assets/img/blog/grid/blog-grid-4.jpg';
-import list_img_5 from '@assets/img/blog/grid/blog-grid-5.jpg';
-import list_img_6 from '@assets/img/blog/grid/blog-grid-6.jpg';
-import list_img_7 from '@assets/img/blog/grid/blog-grid-2.jpg';
-import list_img_8 from '@assets/img/blog/grid/blog-grid-3.jpg';
+const list_img_1 = placeholderImage;
+const list_img_2 = placeholderImage;
+const list_img_3 = placeholderImage;
+const list_img_4 = placeholderImage;
+const list_img_5 = placeholderImage;
+const list_img_6 = placeholderImage;
+const list_img_7 = placeholderImage;
+const list_img_8 = placeholderImage;
 
 const blogData = [
   {
