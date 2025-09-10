@@ -23,10 +23,11 @@ const UrbanThaliFooter = () => {
                   <Image 
                     src="/assets/img/logo/urban-thali-logo.png" 
                     alt="Urban Thali Logo" 
-                    width={200}
-                    height={120}
+                    width={150}
+                    height={80}
                     style={{ 
-                      height: '120px', 
+                      backgroundColor: '#FFF9E6',
+                      height: '80px', 
                       width: 'auto',
                       margin: '0px',
                       padding: '0px',

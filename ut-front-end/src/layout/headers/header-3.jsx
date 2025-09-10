@@ -53,7 +53,7 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
         <TopNavbar />
         
         <div id="header-sticky" className={`tp-header-area tp-header-style-transparent-white tp-header-transparent tp-header-sticky has-dark-logo tp-header-height ${sticky ? 'header-sticky' : ''}`} style={headerStyles}>
-          <div className="tp-header-bottom-3" style={{ padding: '10px 15px', minHeight: '60px', display: 'flex', alignItems: 'center' }}>
+          <div className="tp-header-bottom-3" style={{ padding: '10px 15px', minHeight: '50px', display: 'flex', alignItems: 'center' }}>
             <div className="container-fluid">
               <div className="row align-items-center">
                 <div className="col-6 col-sm-4 col-lg-2">
