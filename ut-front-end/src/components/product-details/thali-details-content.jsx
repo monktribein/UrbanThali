@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
+import useNotification from '@/hooks/use-notification';
 
 const ThaliDetailsContent = ({ thali }) => {
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
+  const { showSuccess } = useNotification();
 
   // Allow unlimited additions to cart
   const isInCart = false;
@@ -18,6 +20,7 @@ const ThaliDetailsContent = ({ thali }) => {
       orderQuantity: quantity
     };
     dispatch(add_cart_product(productToAdd));
+    showSuccess(`${quantity} ${thali.title} added to cart!`);
   };
 
   const handleQuantityChange = (change) => {

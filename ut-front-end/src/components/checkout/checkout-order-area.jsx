@@ -169,6 +169,22 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           type="submit"
           disabled={!stripe || isCheckoutSubmit}
           className="tp-checkout-btn w-100"
+          style={{
+            backgroundColor: (!stripe || isCheckoutSubmit) ? '#6b7280' : '#FCB53B',
+            color: 'white',
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '600',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            cursor: (!stripe || isCheckoutSubmit) ? 'not-allowed' : 'pointer',
+            opacity: (!stripe || isCheckoutSubmit) ? 0.6 : 1
+          }}
         >
           Place Order
         </button>

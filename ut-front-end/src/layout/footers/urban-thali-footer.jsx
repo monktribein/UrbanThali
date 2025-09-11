@@ -120,8 +120,8 @@ const UrbanThaliFooter = () => {
                     transition: 'all 0.3s ease'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#E4405F';
-                    e.target.style.borderColor = '#E4405F';
+                    e.target.style.backgroundColor = '#FCB53B';
+                    e.target.style.borderColor = '##FCB53B';
                   }}
                   onMouseOut={(e) => {
                     e.target.style.backgroundColor = 'transparent';
@@ -149,8 +149,8 @@ const UrbanThaliFooter = () => {
                     transition: 'all 0.3s ease'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#FF0000';
-                    e.target.style.borderColor = '#FF0000';
+                    e.target.style.backgroundColor = '#FCB53B';
+                    e.target.style.borderColor = '#FCB53B';
                   }}
                   onMouseOut={(e) => {
                     e.target.style.backgroundColor = 'transparent';
@@ -447,7 +447,7 @@ const UrbanThaliFooter = () => {
                 fontSize: '14px', 
                 margin: 0
               }}>
-                Made with <span style={{ color: '#ff69b4' }}>❤️</span> for food lovers everywhere
+                Made with <span style={{ color: '#ff69b4' }}>❤️</span> from <a href="https://nktech.in/"> NKTech</a>
               </p>
             </div>
           </div>

@@ -12,7 +12,10 @@ const CommonBreadcrumb = ({
       className={`breadcrumb__area ${
         center ? "text-center" : ""
       } include-bg pt-95 pb-50`}
-      style={{ backgroundColor: bg_clr && `#EFF1F5` }}
+      style={{ 
+        backgroundColor: bg_clr && `#EFF1F5`,
+        paddingTop: '135px' // Additional top padding for fixed navbars
+      }}
     >
       <div className="container">
         <div className="row">

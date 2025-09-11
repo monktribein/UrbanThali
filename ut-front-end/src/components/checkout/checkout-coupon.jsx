@@ -28,6 +28,24 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
             <button
               type="submit"
               className="tp-return-customer-btn tp-checkout-btn"
+              style={{
+                backgroundColor: '#FCB53B',
+                color: 'white',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontSize: '14px',
+                fontWeight: '600',
+                textAlign: 'center',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = '#B45253';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = '#FCB53B';
+              }}
             >
               Apply
             </button>

@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
+import useNotification from '@/hooks/use-notification';
 
 const ProductDetailsContent = ({ productItem }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const { showSuccess } = useNotification();
 
   if (!productItem) {
     return (
@@ -35,6 +37,7 @@ const ProductDetailsContent = ({ productItem }) => {
       orderQuantity: quantity
     };
     dispatch(add_cart_product(productToAdd));
+    showSuccess(`${quantity} ${productItem.title} added to cart!`);
   };
 
   const handleQuantityChange = (change) => {

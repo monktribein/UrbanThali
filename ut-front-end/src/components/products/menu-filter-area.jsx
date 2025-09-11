@@ -15,7 +15,7 @@ const MenuFilterArea = () => {
     {
       id: 1,
       title: "Mini Urban Thali",
-      subtitle: "Mini",
+      // subtitle: "Mini",
       rating: 4.5,
       prepTime: "15 min",
       servings: "1 serving",
@@ -28,7 +28,7 @@ const MenuFilterArea = () => {
     {
       id: 2,
       title: "Everyday Thali",
-      subtitle: "Everyday",
+      // subtitle: "Everyday",
       rating: 4.6,
       prepTime: "20 min",
       servings: "2 servings",
@@ -41,7 +41,7 @@ const MenuFilterArea = () => {
     {
       id: 3,
       title: "Urban Premium Thali",
-      subtitle: "Premium",
+      // subtitle: "Premium",
       rating: 4.7,
       prepTime: "25 min",
       servings: "2 servings",
@@ -54,7 +54,7 @@ const MenuFilterArea = () => {
     {
       id: 4,
       title: "Urban Feast Thali",
-      subtitle: "Feast",
+      // subtitle: "Feast",
       rating: 4.8,
       prepTime: "30 min",
       servings: "2-3 servings",
@@ -67,7 +67,7 @@ const MenuFilterArea = () => {
     {
       id: 5,
       title: "Maharaja Urban Thali",
-      subtitle: "Maharaja",
+      // subtitle: "Maharaja",
       rating: 4.9,
       prepTime: "35 min",
       servings: "3-4 servings",
@@ -81,7 +81,7 @@ const MenuFilterArea = () => {
     {
       id: 6,
       title: "Extra Roti",
-      subtitle: "Bread",
+      // subtitle: "Bread",
       rating: 4.3,
       prepTime: "3 min",
       servings: "1 serving",
@@ -94,7 +94,7 @@ const MenuFilterArea = () => {
     {
       id: 7,
       title: "Curd",
-      subtitle: "Dairy",
+      // subtitle: "Dairy",
       rating: 4.1,
       prepTime: "2 min",
       servings: "1 serving",
@@ -107,7 +107,7 @@ const MenuFilterArea = () => {
     {
       id: 8,
       title: "Jeera Rice",
-      subtitle: "Rice",
+      // subtitle: "Rice",
       rating: 4.0,
       prepTime: "8 min",
       servings: "1 serving",
@@ -120,7 +120,7 @@ const MenuFilterArea = () => {
     {
       id: 9,
       title: "Masala Chhach",
-      subtitle: "Drink",
+      // subtitle: "Drink",
       rating: 4.6,
       prepTime: "3 min",
       servings: "1 serving",
@@ -133,7 +133,7 @@ const MenuFilterArea = () => {
     {
       id: 10,
       title: "Masala Papad",
-      subtitle: "Sides",
+      // subtitle: "Sides",
       rating: 4.4,
       prepTime: "2 min",
       servings: "1 serving",
@@ -146,7 +146,7 @@ const MenuFilterArea = () => {
     {
       id: 11,
       title: "Gulab Jamun (2pcs)",
-      subtitle: "Dessert",
+      // subtitle: "Dessert",
       rating: 4.2,
       prepTime: "5 min",
       servings: "1 serving",
@@ -159,7 +159,7 @@ const MenuFilterArea = () => {
     {
       id: 12,
       title: "Green Salad",
-      subtitle: "Sides",
+      // subtitle: "Sides",
       rating: 4.0,
       prepTime: "3 min",
       servings: "1 serving",
@@ -172,7 +172,7 @@ const MenuFilterArea = () => {
     {
       id: 13,
       title: "Shikanji Bottle",
-      subtitle: "Drink",
+      // subtitle: "Drink",
       rating: 4.1,
       prepTime: "2 min",
       servings: "1 serving",
@@ -185,7 +185,7 @@ const MenuFilterArea = () => {
     {
       id: 14,
       title: "Paneer Curry (Extra)",
-      subtitle: "Curry",
+      // subtitle: "Curry",
       rating: 4.2,
       prepTime: "10 min",
       servings: "1 serving",
@@ -198,7 +198,7 @@ const MenuFilterArea = () => {
     {
       id: 15,
       title: "Cold Drink (200ml)",
-      subtitle: "Beverage",
+      // subtitle: "Beverage",
       rating: 4.3,
       prepTime: "1 min",
       servings: "1 serving",

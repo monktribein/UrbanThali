@@ -53,7 +53,7 @@ const TopNavbar = () => {
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}
-                onMouseOver={(e) => e.target.style.color = '#FCB53B'}
+                onMouseOver={(e) => e.target.style.color = '#1877F2'}
                 onMouseOut={(e) => e.target.style.color = '#000000'}
               >
                 <i className="fab fa-facebook-f"></i>
@@ -113,7 +113,7 @@ const TopNavbar = () => {
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}
-                onMouseOver={(e) => e.target.style.color = '#FCB53B'}
+                onMouseOver={(e) => e.target.style.color = '#0077B5'}
                 onMouseOut={(e) => e.target.style.color = '#000000'}
               >
                 <i className="fab fa-linkedin-in"></i>

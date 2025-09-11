@@ -68,19 +68,8 @@ const CartCheckout = () => {
             fontWeight: '600',
             textAlign: 'center',
             display: 'block',
-            transition: 'all 0.3s ease',
             cursor: hasThaliInCart ? 'pointer' : 'not-allowed',
             opacity: hasThaliInCart ? 1 : 0.6
-          }}
-          onMouseOver={(e) => {
-            if (hasThaliInCart) {
-              e.target.style.backgroundColor = '#B45253';
-            }
-          }}
-          onMouseOut={(e) => {
-            if (hasThaliInCart) {
-              e.target.style.backgroundColor = '#FCB53B';
-            }
           }}
         >
           {hasThaliInCart ? 'Proceed to Checkout' : 'Add Thali First'}
