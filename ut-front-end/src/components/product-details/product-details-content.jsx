@@ -20,7 +20,7 @@ const ProductDetailsContent = ({ productItem }) => {
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center">
               <h2>Product not found</h2>
-              <p>Sorry, the product you're looking for doesn't exist.</p>
+              <p>Sorry, the product you&apos;re looking for doesn&apos;t exist.</p>
               <Link href="/shop" className="tp-btn">Back to Shop</Link>
             </div>
           </div>

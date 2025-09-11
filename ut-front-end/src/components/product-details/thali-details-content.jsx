@@ -132,7 +132,7 @@ const ThaliDetailsContent = ({ thali }) => {
                           color: '#1f2937',
                           marginBottom: '10px'
                         }}>
-                          What's Included:
+                          What&apos;s Included:
                         </h3>
                         <ul style={{ paddingLeft: '0', listStyle: 'none', margin: 0 }}>
                           {thali.items.map((item, index) => (
