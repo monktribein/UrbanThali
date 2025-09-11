@@ -403,15 +403,34 @@ const MenuFilterArea = () => {
 
   return (
     <section id="menu-section" className="tp-product-area">
-      <div className="container-fluid" style={{ paddingLeft: '20px', paddingRight: '20px', overflow: 'hidden', backgroundColor: '#FFF9E6', borderRadius: '12px', padding: '30px 20px' }}>
+      <div className="container-fluid" style={{ 
+        paddingLeft: '20px', 
+        paddingRight: '20px', 
+        overflow: 'hidden', 
+        backgroundColor: '#FFF9E6', 
+        borderRadius: '12px', 
+        padding: '30px 20px'
+      }}>
         {/* Header Section */}
         <div className="row" style={{marginLeft: '0', marginRight: '0'}}>
           <div className="col-xl-12" style={{paddingLeft: '0', paddingRight: '0'}}>
-            <div className="tp-section-title-wrapper-3 mb-20 text-center" style={{paddingLeft: '20px', paddingRight: '20px'}}>
-              <h3 className="tp-section-title-3" style={{fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '4px'}}>
+            <div className="tp-section-title-wrapper-3 mb-20 text-center" style={{
+              paddingLeft: '20px', 
+              paddingRight: '20px'
+            }}>
+              <h3 className="tp-section-title-3" style={{
+                fontSize: '2.5rem', 
+                fontWeight: 'bold', 
+                marginBottom: '4px'
+              }}>
                 Discover Our Full Menu
               </h3>
-              <p style={{fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto'}}>
+              <p style={{
+                fontSize: '16px', 
+                color: '#666', 
+                maxWidth: '600px', 
+                margin: '0 auto'
+              }}>
                 Indulge in traditional thalis, paired with irresistible add-ons.
               </p>
             </div>
@@ -419,9 +438,17 @@ const MenuFilterArea = () => {
         </div>
 
         {/* Filter Buttons */}
-        <div className="row mb-30">
+        <div className="row mb-30" style={{
+          '@media (max-width: 768px)': {
+            marginBottom: '20px'
+          }
+        }}>
           <div className="col-lg-12">
-            <div className="tp-menu-filter-buttons d-flex justify-content-center gap-3 flex-wrap">
+            <div className="tp-menu-filter-buttons d-flex justify-content-center gap-3 flex-wrap" style={{
+              '@media (max-width: 768px)': {
+                gap: '10px'
+              }
+            }}>
               <button
                 onClick={() => handleFilterChange('thali')}
                 className={`tp-menu-filter-btn ${activeFilter === 'thali' ? 'active' : ''}`}
@@ -466,9 +493,18 @@ const MenuFilterArea = () => {
 
         {/* Menu Items Grid */}
         {activeFilter === 'thali' && (
-          <div className="row" style={{ marginLeft: '0', marginRight: '0', display: 'flex', gap: '12px' }}>
+          <div className="row" style={{ 
+            marginLeft: '0', 
+            marginRight: '0', 
+            display: 'flex', 
+            gap: '12px',
+            flexWrap: 'wrap'
+          }}>
             {thaliItems.map((item) => (
-              <div key={item.id} style={{ width: 'calc(20% - 9.6px)', marginBottom: '30px' }}>
+              <div key={item.id} style={{ 
+                width: 'calc(20% - 9.6px)', 
+                marginBottom: '30px'
+              }}>
                 <div style={{
                   backgroundColor: 'white',
                   borderRadius: '12px',

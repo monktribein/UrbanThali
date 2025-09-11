@@ -97,24 +97,52 @@ const BestSellingThalis = () => {
   ];
 
   return (
-    <section className="tp-product-area pt-60 pb-60" style={{marginLeft: '0', marginRight: '0', paddingLeft: '0', paddingRight: '0'}}>
+    <section className="tp-product-area pt-60 pb-60" style={{
+      marginLeft: '0', 
+      marginRight: '0', 
+      paddingLeft: '0', 
+      paddingRight: '0'
+    }}>
       <div className="container-fluid" style={{paddingLeft: '0', paddingRight: '0'}}>
         <div className="row" style={{marginLeft: '0', marginRight: '0'}}>
           <div className="col-xl-12" style={{paddingLeft: '0', paddingRight: '0'}}>
-            <div className="tp-section-title-wrapper-3 mb-30 text-center" style={{paddingLeft: '20px', paddingRight: '20px'}}>
-              <h3 className="tp-section-title-3" style={{fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '15px'}}>
+            <div className="tp-section-title-wrapper-3 mb-30 text-center" style={{
+              paddingLeft: '20px', 
+              paddingRight: '20px'
+            }}>
+              <h3 className="tp-section-title-3" style={{
+                fontSize: '2.5rem', 
+                fontWeight: 'bold', 
+                marginBottom: '15px'
+              }}>
                 Best Selling Thalis
               </h3>
-              <p style={{fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto'}}>
+              <p style={{
+                fontSize: '16px', 
+                color: '#666', 
+                maxWidth: '600px', 
+                margin: '0 auto'
+              }}>
                 Discover our premium thali collection, from mini portions to luxury gold thalis, carefully curated for every appetite
               </p>
             </div>
           </div>
         </div>
         
-        <div className="row" style={{ marginLeft: '0', marginRight: '0', display: 'flex', gap: '12px', paddingLeft: '20px', paddingRight: '20px' }}>
+        <div className="row" style={{ 
+          marginLeft: '0', 
+          marginRight: '0', 
+          display: 'flex', 
+          gap: '12px', 
+          paddingLeft: '20px', 
+          paddingRight: '20px',
+          flexWrap: 'wrap'
+        }}>
           {thaliProducts.map((product) => (
-            <div key={product.id} style={{ width: 'calc(20% - 9.6px)', marginBottom: '30px' }}>
+            <div key={product.id} style={{ 
+              width: 'calc(20% - 9.6px)', 
+              marginBottom: '30px'
+            }}>
               <div style={{
                 backgroundColor: 'white',
                 borderRadius: '12px',
