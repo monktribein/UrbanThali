@@ -15,11 +15,13 @@ export default function ProductDetailsPage({ params }) {
   return (
     <Wrapper>
       <HeaderThree />
-      {isThaliProduct ? (
-        <ThaliDetailsArea id={params.id} />
-      ) : (
-        <ProductDetailsArea id={params.id} />
-      )}
+      <div style={{ paddingTop: '135px' }}>
+        {isThaliProduct ? (
+          <ThaliDetailsArea id={params.id} />
+        ) : (
+          <ProductDetailsArea id={params.id} />
+        )}
+      </div>
       <UrbanThaliFooter />
     </Wrapper>
   );

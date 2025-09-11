@@ -9,7 +9,7 @@ const TopNavbar = () => {
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1000,
+      zIndex: 1001,
       width: '100%',
       height: '35px',
       minHeight: '35px',

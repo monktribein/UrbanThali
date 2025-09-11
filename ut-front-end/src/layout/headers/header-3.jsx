@@ -29,7 +29,7 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
   // Mobile responsive styles
   const headerStyles = {
     position: 'fixed',
-    top: '0',
+    top: '35px', // Position below the top navbar
     left: 0,
     right: 0,
     zIndex: 1000,
@@ -43,8 +43,8 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
   return (
     <>
       <header>
-        {/* Top Navbar - Hidden to make main navbar stick to top */}
-        {/* <TopNavbar /> */}
+        {/* Top Navbar */}
+        <TopNavbar />
         
         <div id="header-sticky" className={`tp-header-area tp-header-style-transparent-white tp-header-transparent tp-header-sticky has-dark-logo tp-header-height ${sticky ? 'header-sticky' : ''}`} style={headerStyles}>
           <div className="tp-header-bottom-3" style={{ 
