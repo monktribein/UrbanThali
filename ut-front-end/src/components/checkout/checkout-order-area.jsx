@@ -45,7 +45,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           ))}
 
           {/*  shipping */}
-          <li className="tp-order-info-list-shipping">
+          {/* <li className="tp-order-info-list-shipping">
             <span>Shipping</span>
             <div className="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
               <span>
@@ -83,7 +83,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                 <ErrorMsg msg={errors?.shippingOption?.message} />
               </span>
             </div>
-          </li>
+          </li> */}
 
            {/*  subtotal */}
            <li className="tp-order-info-list-subtotal">
@@ -121,9 +121,9 @@ const CheckoutOrderArea = ({ checkoutData }) => {
             name="payment"
             value="Card"
           />
-          <label onClick={() => setShowCard(true)} htmlFor="back_transfer" data-bs-toggle="direct-bank-transfer">
+          {/* <label onClick={() => setShowCard(true)} htmlFor="back_transfer" data-bs-toggle="direct-bank-transfer">
             Credit Card
-          </label>
+          </label> */}
           {showCard && (
             <div className="direct-bank-transfer">
               <div className="payment_card">

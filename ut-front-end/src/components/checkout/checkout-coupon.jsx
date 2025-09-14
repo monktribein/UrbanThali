@@ -7,7 +7,7 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
   const { coupon_info } = useSelector((state) => state.coupon);
   return (
     <div className="tp-checkout-verify-item">
-      <p className="tp-checkout-verify-reveal">
+      {/* <p className="tp-checkout-verify-reveal">
         Have a coupon?{" "}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -16,7 +16,7 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
         >
           Click here to enter your code
         </button>
-      </p>
+      </p> */}
 
       {isOpen && (
         <div id="tpCheckoutCouponForm" className="tp-return-customer">

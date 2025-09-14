@@ -5,7 +5,7 @@ import Link from 'next/link';
 const TopNavbar = () => {
   return (
     <div className="tp-header-top-beauty p-relative z-index-1 d-none d-md-block" style={{
-      position: 'fixed',
+      position: 'relative',
       top: 0,
       left: 0,
       right: 0,

@@ -8,12 +8,12 @@
 
 /* Body padding to account for fixed navbar */
 body {
-  padding-top: 0 !important;
+  padding-top: 0 !important; /* Remove extra white space */
 }
 
 @media (max-width: 768px) {
   body {
-    padding-top: 0 !important;
+    padding-top: 0 !important; /* Remove extra white space on mobile too */
   }
 }
 
@@ -481,4 +481,59 @@ body {
   body {
     -webkit-overflow-scrolling: touch;
   }
+}
+
+/* Hide checkout sections on cart page */
+.tp-cart-area {
+  .tp-checkout-verify-item,
+  .tp-checkout-verify-reveal {
+    display: none !important;
+  }
+}
+
+/* Remove extra white space between header and content */
+header {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tp-header-area {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tp-header-bottom-3 {
+  margin: 0 !important;
+}
+
+/* Remove default margins from main content sections */
+.tp-login-area,
+.tp-checkout-area,
+.tp-slider-area,
+.tp-banner-area,
+.tp-cart-area {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove margins from breadcrumb sections */
+.tp-breadcrumb-area {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove extra spacing from specific page sections */
+.tp-login-area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+.tp-checkout-area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+.breadcrumb__area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
 }

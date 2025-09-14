@@ -7,6 +7,7 @@ import { clearCart } from '@/redux/features/cartSlice';
 import CartCheckout from './cart-checkout';
 import CartItem from './cart-item';
 import RenderCartProgress from '../common/render-cart-progress';
+import AddOnsSection from './add-ons-section';
 
 const CartArea = () => {
   const { cart_products } = useSelector((state) => state.cart);
@@ -90,6 +91,9 @@ const CartArea = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* Add-ons Section */}
+                <AddOnsSection />
               </div>
               <div className="col-xl-3 col-lg-4 col-md-6">
                 <CartCheckout />
