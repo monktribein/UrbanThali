@@ -23,12 +23,12 @@ const adminRoutes = require("./routes/admin.routes");
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // middleware
-app.use(cors({
-  origin :[
-    'http://urban-thali.vercel.app',
-    'https://urbanthali.com'
-  ],
-  credentials: true}
+app.use(cors(
+  // origin :[
+  //   'http://urban-thali.vercel.app',
+  //   'https://urbanthali.com'
+  // ],
+  // credentials: true}
 ));
 app.use(express.json());
 app.use(morgan('dev'));
