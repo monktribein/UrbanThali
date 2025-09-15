@@ -1,245 +1,78 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { add_cart_product } from "@/redux/features/cartSlice";
+import { useGetThaliItemsQuery, useGetAddOnItemsQuery } from "@/redux/features/foodItemApi";
 
 const MenuFilterArea = () => {
   const [activeFilter, setActiveFilter] = useState('thali');
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
 
-  // Sample data for all menu items
-  const allMenuItems = [
-    // Thali items
-    {
-      id: 1,
-      title: "Mini Urban Thali",
-      // subtitle: "Mini",
-      rating: 4.5,
-      prepTime: "15 min",
-      servings: "1 serving",
-      price: "₹139",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "1 Veg Curry (Dal/Chole/Rajma), Steamed Rice / 2 Roti, Salad + Papad",
-      category: "thali",
-      cuisine: "Indian, Thali, Traditional"
-    },
-    {
-      id: 2,
-      title: "Everyday Thali",
-      // subtitle: "Everyday",
-      rating: 4.6,
-      prepTime: "20 min",
-      servings: "2 servings",
-      price: "₹169",
-      image: "/assets/img/product/collection/collection-2.jpg",
-      description: "2 Veg Curries (Dal + Seasonal Veg), 2 Roti + Steamed Rice, Salad + Pickle",
-      category: "thali",
-      cuisine: "Indian, Thali, Traditional"
-    },
-    {
-      id: 3,
-      title: "Urban Premium Thali",
-      // subtitle: "Premium",
-      rating: 4.7,
-      prepTime: "25 min",
-      servings: "2 servings",
-      price: "₹199",
-      image: "/assets/img/product/collection/collection-3.jpg",
-      description: "2 Veg Curries (Dal + Paneer/Seasonal Veg), 2 Roti / 2 Parathas + Steamed Rice, Curd + Salad + Sweet",
-      category: "thali",
-      cuisine: "Indian, Thali, Traditional"
-    },
-    {
-      id: 4,
-      title: "Urban Feast Thali",
-      // subtitle: "Feast",
-      rating: 4.8,
-      prepTime: "30 min",
-      servings: "2-3 servings",
-      price: "₹249",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "3 Veg Curries (Dal + Paneer + Seasonal Veg), 4 Roti / 2 paratha+ Jeera Rice, Salad + Papad + Pickle + Sweet",
-      category: "thali",
-      cuisine: "Indian, Thali, Traditional"
-    },
-    {
-      id: 5,
-      title: "Maharaja Urban Thali",
-      // subtitle: "Maharaja",
-      rating: 4.9,
-      prepTime: "35 min",
-      servings: "3-4 servings",
-      price: "₹299",
-      image: "/assets/img/product/collection/collection-2.jpg",
-      description: "4 Veg Curries (Dal + Paneer + Chhole/Rajma + Seasonal Veg), 4 Roti / 2 Naan / 2 parathas + Pulao/Jeera Rice, Raita + Salad + Papad + 2 Sweets",
-      category: "thali",
-      cuisine: "Indian, Thali, Traditional"
-    },
-    // Add-ons items
-    {
-      id: 6,
-      title: "Extra Roti",
-      // subtitle: "Bread",
-      rating: 4.3,
-      prepTime: "3 min",
-      servings: "1 serving",
-      price: "₹15",
-      image: "/assets/img/product/collection/collection-3.jpg",
-      description: "Freshly baked roti",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 7,
-      title: "Curd",
-      // subtitle: "Dairy",
-      rating: 4.1,
-      prepTime: "2 min",
-      servings: "1 serving",
-      price: "₹25",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Fresh homemade curd",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 8,
-      title: "Jeera Rice",
-      // subtitle: "Rice",
-      rating: 4.0,
-      prepTime: "8 min",
-      servings: "1 serving",
-      price: "₹30",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Aromatic cumin flavored rice",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 9,
-      title: "Masala Chhach",
-      // subtitle: "Drink",
-      rating: 4.6,
-      prepTime: "3 min",
-      servings: "1 serving",
-      price: "₹35",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Spiced buttermilk drink",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 10,
-      title: "Masala Papad",
-      // subtitle: "Sides",
-      rating: 4.4,
-      prepTime: "2 min",
-      servings: "1 serving",
-      price: "₹25",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Spiced crispy papad",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 11,
-      title: "Gulab Jamun (2pcs)",
-      // subtitle: "Dessert",
-      rating: 4.2,
-      prepTime: "5 min",
-      servings: "1 serving",
-      price: "₹45",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Sweet dessert balls",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 12,
-      title: "Green Salad",
-      // subtitle: "Sides",
-      rating: 4.0,
-      prepTime: "3 min",
-      servings: "1 serving",
-      price: "₹30",
-      image: "/assets/img/product/collection/collection-2.jpg",
-      description: "Fresh mixed vegetables",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 13,
-      title: "Shikanji Bottle",
-      // subtitle: "Drink",
-      rating: 4.1,
-      prepTime: "2 min",
-      servings: "1 serving",
-      price: "₹15",
-      image: "/assets/img/product/collection/collection-3.jpg",
-      description: "Refreshing lemon drink",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 14,
-      title: "Paneer Curry (Extra)",
-      // subtitle: "Curry",
-      rating: 4.2,
-      prepTime: "10 min",
-      servings: "1 serving",
-      price: "₹50",
-      image: "/assets/img/product/collection/collection-1.jpg",
-      description: "Rich cottage cheese curry",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    },
-    {
-      id: 15,
-      title: "Cold Drink (200ml)",
-      // subtitle: "Beverage",
-      rating: 4.3,
-      prepTime: "1 min",
-      servings: "1 serving",
-      price: "On MRP",
-      image: "/assets/img/product/collection/collection-2.jpg",
-      description: "Refreshing cold beverage",
-      category: "addons",
-      cuisine: "Add-ons, Extras"
-    }
-  ];
+  // Fetch data from API
+  const { data: thaliItems = [], isLoading: thaliLoading } = useGetThaliItemsQuery();
+  const { data: addOnItems = [], isLoading: addOnLoading } = useGetAddOnItemsQuery();
 
-  // Filter items based on active filter (removed 'all' option)
+  // Combine API data and transform it
+  const allMenuItems = useMemo(() => {
+    // Transform API data - only use what comes from the API
+    const apiThalis = thaliItems.map(item => ({
+      id: item._id,
+      _id: item._id,
+      title: item.name,
+      rating: 4.5,
+      prepTime: `${item.preparationTime || 20} min`,
+      servings: `${item.unit || '1'} serving`,
+      price: `₹${item.price}`,
+      image: item.img,
+      description: item.description || '',
+      category: 'thali',
+      cuisine: 'Indian, Thali, Traditional',
+      available: item.available
+    }));
+
+    const apiAddOns = addOnItems.map(item => ({
+      id: item._id,
+      _id: item._id,
+      title: item.name,
+      rating: 4.2,
+      prepTime: `${item.preparationTime || 5} min`,
+      servings: `${item.unit || '1'} serving`,
+      price: `₹${item.price}`,
+      image: item.img,
+      description: item.description || '',
+      category: 'addons',
+      cuisine: 'Add-ons, Extras',
+      available: item.available
+    }));
+
+    // Only return API data - no fallback
+    return [...apiThalis, ...apiAddOns];
+  }, [thaliItems, addOnItems]);
+
+  // Filter items based on active filter
   const filteredItems = allMenuItems.filter(item => {
     return item.category === activeFilter;
   });
-
-  // Get thali items
-  const thaliItems = allMenuItems.filter(item => item.category === 'thali');
-  
-  // Get add-ons items
-  const addonsItems = allMenuItems.filter(item => item.category === 'addons');
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
   };
 
-
   // Check if there are any thali items in cart
-  const hasThaliInCart = cart_products.some(item => item.category === 'thali');
+  const hasThaliInCart = cart_products.some(item => item.category === 'thali' || item.category?.name === 'Thali');
 
   const handleAddToCart = (item) => {
-    // Convert price string to number (remove ₹ and convert to number)
-    const price = parseFloat(item.price.replace('₹', ''));
-    
     // Create cart item with required properties
     const cartItem = {
-      _id: item.id.toString(),
+      _id: item._id || item.id.toString(),
+      id: item._id || item.id,
       title: item.title,
-      price: price,
-      quantity: 100, // Set a high quantity for availability
-      img: item.image, // Changed from 'image' to 'img' to match cart component expectations
+      price: typeof item.price === 'number' ? item.price : parseFloat(item.price.replace('₹', '')),
+      quantity: item.quantity,  // Set high available stock to allow multiple additions
+      img: item.image,
+      image: item.image,
       category: item.category,
       description: item.description
     };
@@ -248,51 +81,59 @@ const MenuFilterArea = () => {
   };
 
   // Helper function to render product card
-  const renderProductCard = (item) => (
-    <div key={item.id} className="col-lg-2 col-md-3 col-sm-6 mb-30" style={{ paddingLeft: '8px', paddingRight: '8px' }}>
-      <div className="tp-product-item-3 p-relative transition-3" style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-        overflow: 'hidden',
-        height: '100%',
-        width: '100%'
-      }}>
-        {/* Product Image */}
-        <div className="tp-product-thumb-3 p-relative fix" style={{height: '180px', overflow: 'hidden'}}>
-          <div 
-            className="include-bg"
-            style={{
-              backgroundImage: `url(${item.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              height: '100%',
-              width: '100%'
-            }}
-          ></div>
-        </div>
+  const renderProductCard = (item) => {
+    // Ensure we have all required fields with fallbacks
+    const imageUrl = item.image || item.img || '/assets/img/product/collection/collection-1.jpg';
+    const title = item.title || item.name || 'Unnamed Item';
+    const itemId = item.id || item._id || 'unknown';
+    
+    return (
+      <div key={itemId} className="col-lg-2 col-md-3 col-sm-6 mb-30" style={{ paddingLeft: '8px', paddingRight: '8px' }}>
+        <div className="tp-product-item-3 p-relative transition-3" style={{
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+          overflow: 'hidden',
+          height: '100%',
+          width: '100%'
+        }}>
+          {/* Product Image */}
+          <div className="tp-product-thumb-3 p-relative fix" style={{height: '180px', overflow: 'hidden'}}>
+            <div 
+              className="include-bg"
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '100%',
+                width: '100%'
+              }}
+            ></div>
+          </div>
 
-        {/* Product Content */}
-        <div className="tp-product-content-3" style={{padding: '12px'}}>
-          <h3 className="tp-product-title-3" style={{
-            fontSize: '18px',
-            fontWeight: '700',
-            marginBottom: '2px',
-            color: '#1f2937'
-          }}>
-            <Link href={`/product-details/${item.id}`} style={{color: 'inherit', textDecoration: 'none'}}>
-              {item.title}
-            </Link>
-          </h3>
+          {/* Product Content */}
+          <div className="tp-product-content-3" style={{padding: '12px'}}>
+            <h3 className="tp-product-title-3" style={{
+              fontSize: '18px',
+              fontWeight: '700',
+              marginBottom: '2px',
+              color: '#1f2937'
+            }}>
+              <Link href={`/product-details/${itemId}`} style={{color: 'inherit', textDecoration: 'none'}}>
+                {title}
+              </Link>
+            </h3>
 
-          <p style={{
-            fontSize: '14px',
-            color: '#6b7280',
-            marginBottom: '4px',
-            fontWeight: '500'
-          }}>
-            {item.subtitle}
-          </p>
+          {item.subtitle && (
+            <p style={{
+              fontSize: '14px',
+              color: '#6b7280',
+              marginBottom: '4px',
+              fontWeight: '500'
+            }}>
+              {item.subtitle}
+            </p>
+          )}
 
           {/* Rating */}
           <div className="tp-product-rating" style={{marginBottom: '4px'}}>
@@ -340,17 +181,19 @@ const MenuFilterArea = () => {
             </div>
           </div>
 
-          {/* Cuisine Type */}
           <div style={{marginBottom: '8px'}}>
-            <span style={{
+            <p style={{
               fontSize: '12px',
               color: '#6b7280',
-              backgroundColor: '#f3f4f6',
-              padding: '4px 8px',
-              borderRadius: '4px'
+              lineHeight: '1.4',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical'
             }}>
-              {item.cuisine}
-            </span>
+              {item.description}
+            </p>
           </div>
 
           {/* Price and Add to Cart */}
@@ -365,7 +208,7 @@ const MenuFilterArea = () => {
                 fontWeight: '700',
                 color: '#FCB53B'
               }}>
-                {item.price}
+                {typeof item.price === 'number' ? `₹${item.price}` : item.price}
               </span>
             </div>
             <div className="tp-product-cart-3">
@@ -399,7 +242,23 @@ const MenuFilterArea = () => {
         </div>
       </div>
     </div>
-  );
+    );
+  };
+
+  // Show loading state
+  const isLoading = thaliLoading || addOnLoading;
+  
+  if (isLoading) {
+    return (
+      <section id="menu-section" className="tp-product-area">
+        <div className="container">
+          <div className="text-center" style={{ padding: '60px 0' }}>
+            <p>Loading menu items...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="menu-section" className="tp-product-area">
@@ -500,158 +359,7 @@ const MenuFilterArea = () => {
             gap: '12px',
             flexWrap: 'wrap'
           }}>
-            {thaliItems.map((item) => (
-              <div key={item.id} style={{ 
-                width: 'calc(20% - 9.6px)', 
-                marginBottom: '30px'
-              }}>
-                <div style={{
-                  backgroundColor: 'white',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                  overflow: 'hidden',
-                  height: '100%',
-                  width: '100%'
-                }}>
-                  {/* Product Image */}
-                  <div style={{height: '180px', overflow: 'hidden'}}>
-                    <div 
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        height: '100%',
-                        width: '100%'
-                      }}
-                    ></div>
-                  </div>
-
-                  {/* Product Content */}
-                  <div style={{padding: '12px'}}>
-                    <h3 style={{
-                      fontSize: '18px',
-                      fontWeight: '700',
-                      marginBottom: '2px',
-                      color: '#1f2937'
-                    }}>
-                      <Link href={`/product-details/${item.id}`} style={{color: 'inherit', textDecoration: 'none'}}>
-                        {item.title}
-                      </Link>
-                    </h3>
-
-                    <p style={{
-                      fontSize: '14px',
-                      color: '#6b7280',
-                      marginBottom: '4px',
-                      fontWeight: '500'
-                    }}>
-                      {item.subtitle}
-                    </p>
-
-                    {/* Rating */}
-                    <div style={{marginBottom: '4px'}}>
-                      <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                        <div style={{display: 'flex', alignItems: 'center'}}>
-                          {[...Array(5)].map((_, i) => (
-                            <svg
-                              key={i}
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill={i < Math.floor(item.rating) ? '#ffc107' : '#e5e7eb'}
-                              style={{marginRight: '2px'}}
-                            >
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                          ))}
-                        </div>
-                        <span style={{fontSize: '12px', color: '#6b7280', marginLeft: '4px'}}>
-                          {item.rating}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Product Details - Time and Servings */}
-                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px'}}>
-                      {/* Time */}
-                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#6b7280'}}>
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{width: '16px', height: '16px'}}>
-                          <circle cx="12" cy="12" r="10"/>
-                          <polyline points="12,6 12,12 16,14"/>
-                        </svg>
-                        <span>{item.prepTime}</span>
-                      </div>
-                      
-                      {/* Servings */}
-                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#6b7280'}}>
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{width: '16px', height: '16px'}}>
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                          <circle cx="9" cy="7" r="4"/>
-                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        <span>{item.servings}</span>
-                      </div>
-                    </div>
-
-                    {/* Cuisine Type */}
-                    <div style={{marginBottom: '8px'}}>
-                      <span style={{
-                        fontSize: '12px',
-                        color: '#6b7280',
-                        backgroundColor: '#f3f4f6',
-                        padding: '4px 8px',
-                        borderRadius: '4px'
-                      }}>
-                        {item.cuisine}
-                      </span>
-                    </div>
-
-                    {/* Price and Add to Cart */}
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
-                    }}>
-                      <div>
-                        <span style={{
-                          fontSize: '20px',
-                          fontWeight: '700',
-                          color: '#FCB53B'
-                        }}>
-                          {item.price}
-                        </span>
-                      </div>
-                      <div>
-                        <button
-                          onClick={() => handleAddToCart(item)}
-                          style={{
-                            backgroundColor: '#FCB53B',
-                            color: 'white',
-                            padding: '6px 16px',
-                            borderRadius: '6px',
-                            textDecoration: 'none',
-                            fontSize: '13px',
-                            fontWeight: '600',
-                            border: 'none',
-                            cursor: 'pointer',
-                            transition: 'all 0.3s ease',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            height: '32px',
-                            minWidth: '80px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                          }}
-                        >
-                          Add
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+            {filteredItems.map((item) => renderProductCard(item))}
           </div>
         )}
 
@@ -681,7 +389,7 @@ const MenuFilterArea = () => {
               scrollbarWidth: 'thin',
               scrollbarColor: '#FCB53B #f0f0f0'
             }}>
-              {addonsItems.map((item) => (
+              {filteredItems.map((item) => (
                 <div key={item.id} style={{ 
                   minWidth: '280px', 
                   flexShrink: 0,
