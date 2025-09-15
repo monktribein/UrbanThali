@@ -128,52 +128,56 @@ const ThaliDetailsContent = ({ thali }) => {
                       </div>
 
                       {/* Items Included */}
-                      <div style={{ marginBottom: '20px' }}>
-                        <h3 style={{
-                          fontSize: '1.1rem',
-                          fontWeight: '600',
-                          color: '#1f2937',
-                          marginBottom: '10px'
-                        }}>
-                          What&apos;s Included:
-                        </h3>
-                        <ul style={{ paddingLeft: '0', listStyle: 'none', margin: 0 }}>
-                          {thali.items.map((item, index) => (
-                            <li key={index} style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              marginBottom: '5px',
-                              fontSize: '0.9rem',
-                              color: '#4b5563'
-                            }}>
-                              <span style={{
-                                color: '#FCB53B',
-                                marginRight: '8px',
-                                fontSize: '1rem'
+                      {thali.items && thali.items.length > 0 && (
+                        <div style={{ marginBottom: '20px' }}>
+                          <h3 style={{
+                            fontSize: '1.1rem',
+                            fontWeight: '600',
+                            color: '#1f2937',
+                            marginBottom: '10px'
+                          }}>
+                            What&apos;s Included:
+                          </h3>
+                          <ul style={{ paddingLeft: '0', listStyle: 'none', margin: 0 }}>
+                            {thali.items.map((item, index) => (
+                              <li key={index} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                marginBottom: '5px',
+                                fontSize: '0.9rem',
+                                color: '#4b5563'
                               }}>
-                                •
-                              </span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                                <span style={{
+                                  color: '#FCB53B',
+                                  marginRight: '8px',
+                                  fontSize: '1rem'
+                                }}>
+                                  •
+                                </span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
 
                       {/* Product Details */}
                       <div style={{ marginBottom: '20px' }}>
                         <div className="row">
-                          <div className="col-6">
-                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                              </svg>
-                              <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                                {thali.prepTime}
-                              </span>
+                          {thali.prepTime && (
+                            <div className="col-6">
+                              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
+                                  <circle cx="12" cy="12" r="10"/>
+                                  <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+                                  {thali.prepTime}
+                                </span>
+                              </div>
                             </div>
-                          </div>
+                          )}
                           <div className="col-6">
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>

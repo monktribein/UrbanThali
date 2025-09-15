@@ -12,9 +12,15 @@ export default function MenuPage() {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '135px' }}>
+      <div style={{ paddingTop: 0, marginTop: 0 }} className="no-top-gap">
         <MenuFilterArea />
       </div>
+      <style jsx global>{`
+        .no-top-gap, .no-top-gap > * {
+          margin-top: 0 !important;
+          padding-top: 0 !important;
+        }
+      `}</style>
       <UrbanThaliFooter />
     </Wrapper>
   );
