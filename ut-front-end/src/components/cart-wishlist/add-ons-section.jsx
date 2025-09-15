@@ -3,52 +3,152 @@ import React from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
-import { useGetAddOnItemsQuery } from '@/redux/features/foodItemApi';
 
 const AddOnsSection = () => {
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
 
-  // Fetch add-on items from API
-  const { data: addonsItems = [], isLoading, error } = useGetAddOnItemsQuery();
-
-  // Only use API data - no fallback
-  const displayItems = addonsItems;
+  // Add-ons data (same as in menu-filter-area.jsx)
+  const addonsItems = [
+    {
+      id: 6,
+      title: "Extra Roti",
+      rating: 4.3,
+      prepTime: "3 min",
+      servings: "1 serving",
+      price: "₹15",
+      image: "/assets/img/product/collection/collection-3.jpg",
+      description: "Freshly baked roti",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 7,
+      title: "Curd",
+      rating: 4.1,
+      prepTime: "2 min",
+      servings: "1 serving",
+      price: "₹25",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Fresh homemade curd",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 8,
+      title: "Jeera Rice",
+      rating: 4.0,
+      prepTime: "8 min",
+      servings: "1 serving",
+      price: "₹30",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Aromatic cumin flavored rice",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 9,
+      title: "Masala Chhach",
+      rating: 4.6,
+      prepTime: "3 min",
+      servings: "1 serving",
+      price: "₹35",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Spiced buttermilk drink",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 10,
+      title: "Masala Papad",
+      rating: 4.4,
+      prepTime: "2 min",
+      servings: "1 serving",
+      price: "₹25",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Spiced crispy papad",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 11,
+      title: "Gulab Jamun (2pcs)",
+      rating: 4.2,
+      prepTime: "5 min",
+      servings: "1 serving",
+      price: "₹45",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Sweet dessert balls",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 12,
+      title: "Green Salad",
+      rating: 4.0,
+      prepTime: "3 min",
+      servings: "1 serving",
+      price: "₹30",
+      image: "/assets/img/product/collection/collection-2.jpg",
+      description: "Fresh mixed vegetables",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 13,
+      title: "Shikanji Bottle",
+      rating: 4.1,
+      prepTime: "2 min",
+      servings: "1 serving",
+      price: "₹15",
+      image: "/assets/img/product/collection/collection-3.jpg",
+      description: "Refreshing lemon drink",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 14,
+      title: "Paneer Curry (Extra)",
+      rating: 4.2,
+      prepTime: "10 min",
+      servings: "1 serving",
+      price: "₹50",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "Rich cottage cheese curry",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    },
+    {
+      id: 15,
+      title: "Cold Drink (200ml)",
+      rating: 4.3,
+      prepTime: "1 min",
+      servings: "1 serving",
+      price: "On MRP",
+      image: "/assets/img/product/collection/collection-2.jpg",
+      description: "Refreshing cold beverage",
+      category: "addons",
+      cuisine: "Add-ons, Extras"
+    }
+  ];
 
   const handleAddToCart = (item) => {
-    // API data format - since we're only using API data now
+    // Convert price string to number (remove ₹ and convert to number)
+    const price = parseFloat(item.price.replace('₹', ''));
+    
+    // Create cart item with required properties
     const cartItem = {
-      _id: item._id,
-      id: item._id,
-      title: item.name,
-      price: item.price,
-      quantity: item.quantity || 100,  // Use API quantity or default to 100
-      img: item.img,
-      image: item.img,
-      category: item.category?.name || 'addons',
+      _id: item.id.toString(),
+      title: item.title,
+      price: price,
+      quantity: 100, // Set a high quantity for availability
+      img: item.image,
+      category: item.category,
       description: item.description
     };
     
     dispatch(add_cart_product(cartItem));
   };
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="tp-cart-addons-section" style={{ marginTop: '30px', textAlign: 'center' }}>
-        <p>Loading add-ons...</p>
-      </div>
-    );
-  }
-
-  // Show error state
-  if (error) {
-    return (
-      <div className="tp-cart-addons-section" style={{ marginTop: '30px', textAlign: 'center' }}>
-        <p>Error loading add-ons. Using default options.</p>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -90,8 +190,8 @@ const AddOnsSection = () => {
           scrollbarWidth: 'none',
           msOverflowStyle: 'none'
         }}>
-        {displayItems.map((item) => (
-          <div key={item._id || item.id} style={{
+        {addonsItems.map((item) => (
+          <div key={item.id} style={{
             border: '1px solid #e5e5e5',
             borderRadius: '8px',
             padding: '12px',
@@ -124,8 +224,8 @@ const AddOnsSection = () => {
                 flexShrink: 0
               }}>
                 <Image
-                  src={item.img || item.image}
-                  alt={item.name || item.title}
+                  src={item.image}
+                  alt={item.title}
                   width={40}
                   height={40}
                   style={{ objectFit: 'cover' }}
@@ -139,7 +239,7 @@ const AddOnsSection = () => {
                   margin: '0 0 2px 0',
                   lineHeight: '1.2'
                 }}>
-                  {item.name || item.title}
+                  {item.title}
                 </h4>
                 <p style={{
                   fontSize: '12px',
@@ -147,7 +247,7 @@ const AddOnsSection = () => {
                   fontWeight: '600',
                   margin: 0
                 }}>
-                  {item._id ? `₹${item.price}` : item.price}
+                  {item.price}
                 </p>
               </div>
             </div>

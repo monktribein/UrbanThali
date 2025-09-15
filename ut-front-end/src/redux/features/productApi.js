@@ -25,7 +25,7 @@ export const productApi = apiSlice.injectEndpoints({
     }),
     // get single product
     getProduct: builder.query({
-      query: (id) => `/api/food-item/single-food-item/${id}`,
+      query: (id) => `/api/product/single-product/${id}`,
       providesTags: (result, error, arg) => [{ type: "Product", id: arg }],
       invalidatesTags: (result, error, arg) => [
         { type: "RelatedProducts", id:arg },
@@ -33,15 +33,10 @@ export const productApi = apiSlice.injectEndpoints({
     }),
     // get related products
     getRelatedProducts: builder.query({
-      query: (id) => `/api/food-item/related-food-item/${id}`,
+      query: (id) => `/api/product/related-product/${id}`,
       providesTags: (result, error, arg) => [
         { type: "RelatedProducts", id: arg },
       ],
-    }),
-    // get single food item (thali)
-    getFoodItem: builder.query({
-      query: (id) => `/api/food-item/single-food-item/${id}`,
-      providesTags: (result, error, arg) => [{ type: "FoodItem", id: arg }],
     }),
   }),
 });
@@ -54,5 +49,4 @@ export const {
   useGetTopRatedProductsQuery,
   useGetProductQuery,
   useGetRelatedProductsQuery,
-  useGetFoodItemQuery,
 } = productApi;

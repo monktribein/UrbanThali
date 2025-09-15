@@ -3,57 +3,98 @@ import React from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { add_cart_product } from "@/redux/features/cartSlice";
-import { useGetThaliItemsQuery } from "@/redux/features/foodItemApi";
 
 const BestSellingThalis = () => {
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
   
-  // Fetch thali items from API
-  const { data: thaliProducts = [], isLoading, error } = useGetThaliItemsQuery();
-  
   // handle add product
   const handleAddProduct = (product) => {
-    // Transform the product to match cart format
-    const cartProduct = {
-      ...product,
-      id: product._id,
-      title: product.name,
-      image: product.img,
-      category: product.category?.name || 'thali',
-      quantity: product.quantity || 100  // Use API quantity or default to 100
-    };
-    dispatch(add_cart_product(cartProduct));
+    dispatch(add_cart_product(product));
   };
   
-  // Only use API data - no fallback
-  const displayThalis = thaliProducts.slice(0, 5);  // Use API data (up to 5 items)
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <section className="tp-product-area pt-60 pb-60">
-        <div className="container">
-          <div className="text-center">
-            <p>Loading thali products...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Show error state
-  if (error) {
-    return (
-      <section className="tp-product-area pt-60 pb-60">
-        <div className="container">
-          <div className="text-center">
-            <p>Error loading thali products. Please try again later.</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const thaliProducts = [
+    {
+      _id: "thali-1",
+      id: 1,
+      title: "Mini Urban Thali",
+      subtitle: "Mini",
+      rating: 4.5,
+      prepTime: "15 min",
+      servings: "1 serving",
+      price: 139,
+      img: "/assets/img/product/collection/collection-1.jpg",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "1 Veg Curry (Dal/Chole/Rajma), Steamed Rice / 2 Roti, Salad + Papad",
+      category: "thali",
+      quantity: 100,
+      status: "in-stock"
+    },
+    {
+      _id: "thali-2",
+      id: 2,
+      title: "Everyday Thali",
+      subtitle: "Everyday",
+      rating: 4.6,
+      prepTime: "20 min",
+      servings: "2 servings",
+      price: 169,
+      img: "/assets/img/product/collection/collection-2.jpg",
+      image: "/assets/img/product/collection/collection-2.jpg",
+      description: "2 Veg Curries (Dal + Seasonal Veg), 2 Roti + Steamed Rice, Salad + Pickle",
+      category: "thali",
+      quantity: 100,
+      status: "in-stock"
+    },
+    {
+      _id: "thali-3",
+      id: 3,
+      title: "Urban Premium Thali",
+      subtitle: "Premium",
+      rating: 4.7,
+      prepTime: "25 min",
+      servings: "2 servings",
+      price: 199,
+      img: "/assets/img/product/collection/collection-3.jpg",
+      image: "/assets/img/product/collection/collection-3.jpg",
+      description: "2 Veg Curries (Dal + Paneer/Seasonal Veg), 2 Roti / 2 Parathas + Steamed Rice, Curd + Salad + Sweet",
+      category: "thali",
+      quantity: 100,
+      status: "in-stock"
+    },
+    {
+      _id: "thali-4",
+      id: 4,
+      title: "Urban Feast Thali",
+      subtitle: "Feast",
+      rating: 4.8,
+      prepTime: "30 min",
+      servings: "2-3 servings",
+      price: 249,
+      img: "/assets/img/product/collection/collection-1.jpg",
+      image: "/assets/img/product/collection/collection-1.jpg",
+      description: "3 Veg Curries (Dal + Paneer + Seasonal Veg), 4 Roti / 2 paratha+ Jeera Rice, Salad + Papad + Pickle + Sweet",
+      category: "thali",
+      quantity: 100,
+      status: "in-stock"
+    },
+    {
+      _id: "thali-5",
+      id: 5,
+      title: "Maharaja Urban Thali",
+      subtitle: "Maharaja",
+      rating: 4.9,
+      prepTime: "35 min",
+      servings: "3-4 servings",
+      price: 299,
+      img: "/assets/img/product/collection/collection-2.jpg",
+      image: "/assets/img/product/collection/collection-2.jpg",
+      description: "4 Veg Curries (Dal + Paneer + Chhole/Rajma + Seasonal Veg), 4 Roti / 2 Naan / 2 parathas + Pulao/Jeera Rice, Raita + Salad + Papad + 2 Sweets",
+      category: "thali",
+      quantity: 100,
+      status: "in-stock"
+    }
+  ];
 
   return (
     <section className="tp-product-area pt-60 pb-60" style={{
@@ -97,8 +138,8 @@ const BestSellingThalis = () => {
           paddingRight: '20px',
           flexWrap: 'wrap'
         }}>
-          {displayThalis.map((product) => (
-            <div key={product._id} style={{ 
+          {thaliProducts.map((product) => (
+            <div key={product.id} style={{ 
               width: 'calc(20% - 9.6px)', 
               marginBottom: '30px'
             }}>
@@ -114,7 +155,7 @@ const BestSellingThalis = () => {
                 <div style={{height: '180px', overflow: 'hidden'}}>
                   <div 
                     style={{
-                      backgroundImage: `url(${product.img})`,
+                      backgroundImage: `url(${product.image})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       height: '100%',
@@ -131,8 +172,8 @@ const BestSellingThalis = () => {
                     marginBottom: '2px',
                     color: '#1f2937'
                   }}>
-                    <Link href={`/product-details/${product._id}`} style={{color: 'inherit', textDecoration: 'none'}}>
-                      {product.name}
+                    <Link href={`/product-details/${product.id}`} style={{color: 'inherit', textDecoration: 'none'}}>
+                      {product.title}
                     </Link>
                   </h3>
 
@@ -142,7 +183,7 @@ const BestSellingThalis = () => {
                     marginBottom: '4px',
                     fontWeight: '500'
                   }}>
-                    {product.category?.name || 'Thali'}
+                    {product.subtitle}
                   </p>
 
                   {/* Rating */}
@@ -155,7 +196,7 @@ const BestSellingThalis = () => {
                             width="14"
                             height="14"
                             viewBox="0 0 24 24"
-                            fill={i < 4 ? '#ffc107' : '#e5e7eb'}
+                            fill={i < Math.floor(product.rating) ? '#ffc107' : '#e5e7eb'}
                             style={{marginRight: '2px'}}
                           >
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -163,7 +204,7 @@ const BestSellingThalis = () => {
                         ))}
                       </div>
                       <span style={{fontSize: '12px', color: '#6b7280', marginLeft: '4px'}}>
-                        4.5
+                        {product.rating}
                       </span>
                     </div>
                   </div>
@@ -176,7 +217,7 @@ const BestSellingThalis = () => {
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12,6 12,12 16,14"/>
                       </svg>
-                      <span>20 min</span>
+                      <span>{product.prepTime}</span>
                     </div>
                     
                     {/* Servings */}
@@ -187,24 +228,21 @@ const BestSellingThalis = () => {
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                       </svg>
-                      <span>{product.unit || '1'} serving</span>
+                      <span>{product.servings}</span>
                     </div>
                   </div>
 
-                  {/* Description or Tags */}
+                  {/* Cuisine Type */}
                   <div style={{marginBottom: '8px'}}>
-                    <p style={{
+                    <span style={{
                       fontSize: '12px',
                       color: '#6b7280',
-                      lineHeight: '1.4',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical'
+                      backgroundColor: '#f3f4f6',
+                      padding: '4px 8px',
+                      borderRadius: '4px'
                     }}>
-                      {product.description }
-                    </p>
+                      Indian, Thali, Traditional
+                    </span>
                   </div>
 
                   {/* Price and Add to Cart */}
@@ -221,23 +259,12 @@ const BestSellingThalis = () => {
                       }}>
                         ₹{product.price}
                       </span>
-                      {product.originalPrice > product.price && (
-                        <span style={{
-                          fontSize: '14px',
-                          color: '#9ca3af',
-                          textDecoration: 'line-through',
-                          marginLeft: '8px'
-                        }}>
-                          ₹{product.originalPrice}
-                        </span>
-                      )}
                     </div>
                     <div>
                       <button
                         onClick={() => handleAddProduct(product)}
-                        disabled={!product.available}
                         style={{
-                          backgroundColor: product.available ? '#FCB53B' : '#d1d5db',
+                          backgroundColor: '#FCB53B',
                           color: 'white',
                           padding: '6px 16px',
                           borderRadius: '6px',
@@ -245,7 +272,7 @@ const BestSellingThalis = () => {
                           fontSize: '13px',
                           fontWeight: '600',
                           border: 'none',
-                          cursor: product.available ? 'pointer' : 'not-allowed',
+                          cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                           height: '32px',
@@ -255,7 +282,7 @@ const BestSellingThalis = () => {
                           justifyContent: 'center'
                         }}
                       >
-                        {product.available ? 'Add' : 'Out of Stock'}
+                        Add
                       </button>
                     </div>
                   </div>

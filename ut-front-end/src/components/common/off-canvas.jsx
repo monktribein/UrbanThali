@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 // internal
 import { CloseTwo } from '@/svg';
-// Logo path
+import urban_thali_logo from '@assets/img/logo/urban-thali-logo.png';
 import MobileMenus from './mobile-menus';
 import { userLoggedOut } from '@/redux/features/auth/authSlice';
 
@@ -33,10 +33,8 @@ const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen }) => {
               <div className="offcanvas__logo logo">
                 <Link href="/">
                   <Image 
-                    src="/assets/img/logo/urban-thali-logo.png" 
+                    src={urban_thali_logo} 
                     alt="Urban Thali Logo" 
-                    width={150}
-                    height={60}
                     style={{ 
                       height: 'auto', 
                       width: '100%', 

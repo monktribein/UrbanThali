@@ -20,7 +20,7 @@ const CartArea = () => {
             <div className='text-center pt-50'>
               <h3>No Cart Items Found</h3>
               <Link 
-                href="/menu" 
+                href="/shop" 
                 className="tp-cart-checkout-btn mt-20"
                 style={{
                   backgroundColor: '#FCB53B',
