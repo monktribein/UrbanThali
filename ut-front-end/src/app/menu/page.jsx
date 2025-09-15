@@ -1,4 +1,4 @@
-"use client";
+
 import React from 'react';
 import Wrapper from "@/layout/wrapper";
 import HeaderThree from "@/layout/headers/header-3";
