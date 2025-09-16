@@ -1,11 +1,11 @@
 'use client'
 import React, { useState,useEffect } from "react";
 import {useSearchParams, useRouter} from 'next/navigation';
-// import ShopLoader from "../loader/shop/shop-loader";
 import ErrorMsg from "../common/error-msg";
 // import ShopFilterOffCanvas from "../common/shop-filter-offcanvas";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import ShopContent from "./shop-content";
+import ShopFilterOffCanvas from "../common/shop-filter-offcanvas";
 
 const ShopArea = ({shop_right=false,hidden_sidebar=false}) => {
   const searchParams = useSearchParams();
@@ -58,7 +58,7 @@ const ShopArea = ({shop_right=false,hidden_sidebar=false}) => {
   let content = null;
 
   if (isLoading) {
-    content = <ShopLoader loading={isLoading}/>;
+    content = <div className="pb-80 text-center">Loading products...</div>;
   }
   if (!isLoading && isError) {
     content = <div className="pb-80 text-center">

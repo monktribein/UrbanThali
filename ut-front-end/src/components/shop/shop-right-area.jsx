@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "@/ui/Pagination";
-import ProductItem from "../products/fashion/product-item";
+import ShopListItem from "./shop-list-item";
 import CategoryFilter from "./shop-filter/category-filter";
 import ColorFilter from "./shop-filter/color-filter";
 import PriceFilter from "./shop-filter/price-filter";
@@ -76,7 +76,7 @@ const ShopRightArea = ({
                                 key={item._id}
                                 className="col-xl-4 col-md-6 col-sm-6"
                               >
-                                <ProductItem product={item} />
+                                <ShopListItem product={item} />
                               </div>
                             ))}
                         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "@/ui/Pagination";
-import ProductItem from "../products/fashion/product-item";
+import ShopListItem from "./shop-list-item";
 import ShopListItem from "./shop-list-item";
 import ShopTopLeft from "./shop-top-left";
 import ShopTopRight from "./shop-top-right";
@@ -67,7 +67,7 @@ const ShopHiddenSidebarArea = ({
                                 key={item._id}
                                 className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
                               >
-                                <ProductItem product={item} />
+                                <ShopListItem product={item} />
                               </div>
                             ))}
                         </div>

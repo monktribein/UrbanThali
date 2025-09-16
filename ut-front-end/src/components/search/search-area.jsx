@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import NiceSelect from "@/ui/nice-select";
 import ErrorMsg from "@/components/common/error-msg";
 import SearchPrdLoader from "@/components/loader/search-prd-loader";
-// import ProductItem from "@/components/products/fashion/product-item";
+import ShopListItem from "@/components/shop/shop-list-item";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 
 
@@ -123,7 +123,7 @@ export default function SearchArea() {
                                 key={item._id}
                                 className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
                               >
-                                <ProductItem product={item} />
+                                <ShopListItem product={item} />
                               </div>
                             ))}
                         </div>
