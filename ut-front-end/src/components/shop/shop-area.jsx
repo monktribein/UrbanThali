@@ -1,9 +1,9 @@
 'use client'
 import React, { useState,useEffect } from "react";
 import {useSearchParams, useRouter} from 'next/navigation';
-import ShopLoader from "../loader/shop/shop-loader";
+// import ShopLoader from "../loader/shop/shop-loader";
 import ErrorMsg from "../common/error-msg";
-import ShopFilterOffCanvas from "../common/shop-filter-offcanvas";
+// import ShopFilterOffCanvas from "../common/shop-filter-offcanvas";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import ShopContent from "./shop-content";
 

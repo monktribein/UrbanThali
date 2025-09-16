@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import NiceSelect from "@/ui/nice-select";
 import ErrorMsg from "@/components/common/error-msg";
 import SearchPrdLoader from "@/components/loader/search-prd-loader";
-import ProductItem from "@/components/products/fashion/product-item";
+// import ProductItem from "@/components/products/fashion/product-item";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 
 

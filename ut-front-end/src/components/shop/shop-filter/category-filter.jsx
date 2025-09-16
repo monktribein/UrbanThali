@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import ErrorMsg from "@/components/common/error-msg";
 import { useGetShowCategoryQuery } from "@/redux/features/categoryApi";
 import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
-import ShopCategoryLoader from "@/components/loader/shop/shop-category-loader";
+// import ShopCategoryLoader from "@/components/loader/shop/shop-category-loader";
 
 const CategoryFilter = ({setCurrPage,shop_right=false}) => {
   const { data: categories, isLoading, isError } = useGetShowCategoryQuery();

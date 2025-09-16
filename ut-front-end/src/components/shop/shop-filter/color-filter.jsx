@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import ErrorMsg from "@/components/common/error-msg";
 import { useGetAllProductsQuery } from "@/redux/features/productApi";
 import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
-import ShopColorLoader from "@/components/loader/shop/color-filter-loader";
+// import ShopColorLoader from "@/components/loader/shop/color-filter-loader";
 
 const ColorFilter = ({setCurrPage,shop_right=false}) => {
   const { data: products, isError, isLoading } = useGetAllProductsQuery();
