@@ -52,13 +52,13 @@ const CartArea = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.backgroundColor = '#B45253';
+                  e.target.style.backgroundColor = '#e09d33';
                 }}
                 onMouseOut={(e) => {
                   e.target.style.backgroundColor = '#FCB53B';
                 }}
               >
-                Continue Shopping
+                Add Thalis
               </Link>
             </div>
           }

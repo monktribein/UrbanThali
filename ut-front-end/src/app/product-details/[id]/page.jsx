@@ -34,7 +34,7 @@ export default async function ProductDetailsPage({ params }) {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '135px' }}>
+      <div style={{ paddingTop: '10px' }}>
         {isThaliProduct ? (
           <ThaliDetailsArea id={id} />
         ) : (

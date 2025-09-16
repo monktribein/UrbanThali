@@ -45,7 +45,7 @@ const handleCloseCartMini = () => {
           <div className="cartmini__top-wrapper">
             <div className="cartmini__top p-relative">
               <div className="cartmini__top-title">
-                <h4>Shopping cart</h4>
+                <h4> Cart</h4>
               </div>
               <div className="cartmini__close">
                 <button onClick={() => dispatch(closeCartMini())} type="button" className="cartmini__close-btn cartmini-close-btn">
@@ -81,7 +81,7 @@ const handleCloseCartMini = () => {
             {cart_products.length === 0 && <div className="cartmini__empty text-center">
               <Image src={empty_cart_img} alt="empty-cart-img" />
               <p>Your Cart is empty</p>
-              <Link href="/menu" className="tp-btn">Go to Shop</Link>
+              {/* <Link href="/menu" className="tp-btn">Go to Shop</Link> */}
             </div>}
           </div>
           <div className="cartmini__checkout">

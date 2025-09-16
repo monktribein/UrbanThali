@@ -48,8 +48,8 @@ const ThaliDetailsArea = ({ id }) => {
   } else if (isError || !thali) {
     content = (
       <div style={{ 
-        paddingTop: '80px', 
-        paddingBottom: '40px', 
+        paddingTop: '40px', 
+        paddingBottom: '20px', 
         backgroundColor: '#FFF9E6',
         minHeight: 'auto'
       }}>
