@@ -13,9 +13,7 @@ const TopRatedProducts = () => {
   let content = null;
 
   if (isLoading) {
-    content = (
-      <ShopTopRatedLoader loading={isLoading}/>
-    );
+    content = (<div>Loading top rated...</div>);
   }
   else if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;

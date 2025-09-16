@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "@/ui/Pagination";
 import ShopListItem from "./shop-list-item";
-import ShopListItem from "./shop-list-item";
 import ShopTopLeft from "./shop-top-left";
 import ShopTopRight from "./shop-top-right";
 

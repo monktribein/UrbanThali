@@ -28,7 +28,7 @@ const ProductBrand = ({setCurrPage,shop_right=false}) => {
   let content = null;
 
   if (isLoading) {
-    content = <ShopBrandLoader loading={isLoading}/>;
+    content = <div>Loading brands...</div>;
   } else if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
   } else if (!isLoading && !isError && brands?.result?.length === 0) {

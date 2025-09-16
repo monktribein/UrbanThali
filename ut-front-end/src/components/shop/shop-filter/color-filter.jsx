@@ -31,7 +31,7 @@ const ColorFilter = ({setCurrPage,shop_right=false}) => {
   let content = null;
 
   if (isLoading) {
-    content = <ShopColorLoader loading={isLoading}/>;
+    content = <li>Loading colors...</li>;
   }
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;

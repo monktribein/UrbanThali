@@ -31,7 +31,7 @@ const CategoryFilter = ({setCurrPage,shop_right=false}) => {
   let content = null;
 
   if (isLoading) {
-    content = <ShopCategoryLoader loading={isLoading}/>;
+    content = <li>Loading categories...</li>;
   }
   if (!isLoading && isError) {
     content = <ErrorMsg msg="There was an error" />;
