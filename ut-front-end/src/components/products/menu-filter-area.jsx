@@ -371,7 +371,8 @@ const MenuFilterArea = () => {
             marginRight: '0', 
             display: 'flex', 
             gap: '12px',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            justifyContent: 'center'
           }}>
             {filteredItems.map((item) => renderProductCard(item))}
           </div>

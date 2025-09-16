@@ -286,10 +286,11 @@ const MenuModal = ({ isOpen, onClose }) => {
           {/* Contact Info */}
           <div style={{
             textAlign: 'center',
-            padding: '20px',
+            padding: '10px',
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
-            border: '2px solid #FFD700'
+            border: '2px solid #FFD700',
+            
           }}>
             <div style={{
               display: 'flex',
@@ -302,10 +303,10 @@ const MenuModal = ({ isOpen, onClose }) => {
                 <span style={{ fontSize: '1.5rem' }}>📞</span>
                 <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>9076303231</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '1.5rem' }}>💬</span>
                 <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>9076303231</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

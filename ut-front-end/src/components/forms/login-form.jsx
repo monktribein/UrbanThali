@@ -73,7 +73,7 @@ const LoginForm = () => {
       <div className="tp-login-input-wrapper">
         <div className="tp-login-input-box">
           <div className="tp-login-input">
-            <input {...register("email", { required: `Email is required!` })} name="email" id="email" type="email" placeholder="urbanthali@mail.com" />
+            <input {...register("email", { required: `Email is required!` })} name="email" id="email" type="email" placeholder="Enter Your Email" />
           </div>
           <div className="tp-login-input-title">
             <label htmlFor="email">Your Email</label>

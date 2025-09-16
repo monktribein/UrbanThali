@@ -77,7 +77,7 @@ const RegisterForm = () => {
               id="name"
               name="name"
               type="text"
-              placeholder="Shahnewaz Sakil"
+              placeholder="Enter Your Name"
             />
           </div>
           <div className="tp-login-input-title">
@@ -92,7 +92,7 @@ const RegisterForm = () => {
               id="email"
               name="email"
               type="email"
-              placeholder="urbanthali@mail.com"
+              placeholder="Enter Your Email"
             />
           </div>
           <div className="tp-login-input-title">

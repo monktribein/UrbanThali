@@ -12,8 +12,8 @@ function BackToTopCom({ cls }) {
         type="button" 
         className="back-to-top-btn"
         style={{
-          backgroundColor: '#1f2937', // Dark gray/black theme color
-          color: '#FCB53B', // Urban Thali orange for the icon
+          backgroundColor: '#FCB53B', // Dark gray/black theme color
+          color: '#1f2937', // Urban Thali orange for the icon
           border: 'none',
           borderRadius: '50%',
           width: '44px',
@@ -32,8 +32,8 @@ function BackToTopCom({ cls }) {
           e.target.style.transform = 'translateY(-2px)';
         }}
         onMouseOut={(e) => {
-          e.target.style.backgroundColor = '#1f2937';
-          e.target.style.color = '#FCB53B';
+          e.target.style.backgroundColor = '#FCB53B';
+          e.target.style.color = '#1f2937';
           e.target.style.transform = 'translateY(0)';
         }}
       >

@@ -43,48 +43,6 @@ const CheckoutOrderArea = ({ checkoutData }) => {
               <span>₹{item.price.toFixed(2)}</span>
             </li>
           ))}
-
-          {/*  shipping */}
-          {/* <li className="tp-order-info-list-shipping">
-            <span>Shipping</span>
-            <div className="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
-              <span>
-                <input
-                  {...register(`shippingOption`, {
-                    required: `Shipping Option is required!`,
-                  })}
-                  id="flat_shipping"
-                  type="radio"
-                  name="shippingOption"
-                />
-                <label
-                  onClick={() => handleShippingCost(60)}
-                  htmlFor="flat_shipping"
-                >
-                  Delivery: Today Cost :<span style={{color: '#FCB53B'}}>₹60.00</span>
-                </label>
-                <ErrorMsg msg={errors?.shippingOption?.message} />
-              </span>
-              <span>
-                <input
-                  {...register(`shippingOption`, {
-                    required: `Shipping Option is required!`,
-                  })}
-                  id="flat_rate"
-                  type="radio"
-                  name="shippingOption"
-                />
-                <label
-                  onClick={() => handleShippingCost(20)}
-                  htmlFor="flat_rate"
-                >
-                  Delivery: 7 Days Cost: <span style={{color: '#FCB53B'}}>₹20.00</span>
-                </label>
-                <ErrorMsg msg={errors?.shippingOption?.message} />
-              </span>
-            </div>
-          </li> */}
-
            {/*  subtotal */}
            <li className="tp-order-info-list-subtotal">
             <span>Subtotal</span>

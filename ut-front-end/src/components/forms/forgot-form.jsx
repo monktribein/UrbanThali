@@ -43,7 +43,7 @@ const ForgotForm = () => {
               name="email"
               id="email"
               type="email"
-              placeholder="urbanthali@mail.com"
+              placeholder="Enter Your Email"
             />
           </div>
           <div className="tp-login-input-title">

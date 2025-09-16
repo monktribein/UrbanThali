@@ -67,14 +67,14 @@ const ProductSubmit = () => {
                 register={register}
                 errors={errors}
               />
-              <FormField
+              {/* <FormField
                 title="SKU"
                 isRequired={true}
                 placeHolder="SKU"
                 bottomTitle="Enter the product SKU."
                 register={register}
                 errors={errors}
-              />
+              /> */}
               <FormField
                 title="quantity"
                 isRequired={true}

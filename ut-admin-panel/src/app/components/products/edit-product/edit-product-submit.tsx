@@ -86,7 +86,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   register={register}
                   errors={errors}
                 />
-                <FormField
+                {/* <FormField
                   title="SKU"
                   isRequired={true}
                   placeHolder="SKU"
@@ -94,7 +94,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   defaultValue={product?.sku || ''}
                   register={register}
                   errors={errors}
-                />
+                /> */}
                 <FormField
                   title="quantity"
                   isRequired={true}
