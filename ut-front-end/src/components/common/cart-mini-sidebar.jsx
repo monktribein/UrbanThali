@@ -53,9 +53,7 @@ const handleCloseCartMini = () => {
                 </button>
               </div>
             </div>
-            <div className="cartmini__shipping">
-              <RenderCartProgress/>
-            </div>
+            {/* Removed free-shipping progress per request */}
             {cart_products.length > 0 && <div className="cartmini__widget">
               {cart_products.map((item,i) => (
                 <div key={i} className="cartmini__widget-item">
