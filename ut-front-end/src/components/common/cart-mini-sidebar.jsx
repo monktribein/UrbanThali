@@ -14,12 +14,20 @@ const CartMiniSidebar = () => {
   const { total } = useCartInfo();
   const dispatch = useDispatch();
   
-  // Check if there's at least one thali in cart (case-insensitive, supports object or string)
-  const hasThaliInCart = cart_products.some(
-    item =>
-      (item.category?.name?.toLowerCase?.() === 'thali') ||
-      (typeof item.category === 'string' && item.category.toLowerCase() === 'thali')
-  );
+  // Helper function to check if item is a thali
+  const isThaliItem = (item) => {
+    const categoryName = typeof item.category === 'string' 
+      ? item.category 
+      : item.category?.name;
+    
+    return categoryName === 'Thali' || 
+           categoryName === 'thali' ||
+           item.parent === 'Thali' ||
+           item.productType === 'thali';
+  };
+  
+  // Check if there's at least one thali in cart
+  const hasThaliInCart = cart_products.some(item => isThaliItem(item));
 
   // handle remove product
   const handleRemovePrd = (prd) => {
@@ -73,7 +81,7 @@ const handleCloseCartMini = () => {
             {cart_products.length === 0 && <div className="cartmini__empty text-center">
               <Image src={empty_cart_img} alt="empty-cart-img" />
               <p>Your Cart is empty</p>
-              <Link href="/shop" className="tp-btn">Go to Shop</Link>
+              <Link href="/menu" className="tp-btn">Go to Shop</Link>
             </div>}
           </div>
           <div className="cartmini__checkout">

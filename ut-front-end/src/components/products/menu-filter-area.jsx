@@ -29,7 +29,8 @@ const MenuFilterArea = () => {
       description: item.description || '',
       category: 'thali',
       cuisine: 'Indian, Thali, Traditional',
-      available: item.available
+      available: item.available,
+      quantity: item.quantity || 100  // Add quantity field from API or default to 100
     }));
 
     const apiAddOns = addOnItems.map(item => ({
@@ -44,7 +45,8 @@ const MenuFilterArea = () => {
       description: item.description || '',
       category: 'addons',
       cuisine: 'Add-ons, Extras',
-      available: item.available
+      available: item.available,
+      quantity: item.quantity || 100  // Add quantity field from API or default to 100
     }));
 
     // Only return API data - no fallback
@@ -60,8 +62,20 @@ const MenuFilterArea = () => {
     setActiveFilter(filter);
   };
 
+  // Helper function to check if item is a thali
+  const isThaliItem = (item) => {
+    const categoryName = typeof item.category === 'string' 
+      ? item.category 
+      : item.category?.name;
+    
+    return categoryName === 'Thali' || 
+           categoryName === 'thali' ||
+           item.parent === 'Thali' ||
+           item.productType === 'thali';
+  };
+  
   // Check if there are any thali items in cart
-  const hasThaliInCart = cart_products.some(item => item.category === 'thali' || item.category?.name === 'Thali');
+  const hasThaliInCart = cart_products.some(item => isThaliItem(item));
 
   const handleAddToCart = (item) => {
     // Create cart item with required properties
@@ -88,27 +102,17 @@ const MenuFilterArea = () => {
     const itemId = item.id || item._id || 'unknown';
     
     return (
-      <div key={itemId} style={{
-        flex: '0 0 20%',
-        maxWidth: '20%',
-        minWidth: '240px',
-        boxSizing: 'border-box',
-        padding: '0 12px 32px 12px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-      }}>
+      <div key={itemId} className="col-lg-2 col-md-3 col-sm-6 mb-30" style={{ paddingLeft: '8px', paddingRight: '8px' }}>
         <div className="tp-product-item-3 p-relative transition-3" style={{
           backgroundColor: 'white',
-          borderRadius: '16px',
-          boxShadow: '0 6px 24px rgba(0,0,0,0.10)',
+          borderRadius: '12px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           overflow: 'hidden',
           height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
+          width: '100%'
         }}>
           {/* Product Image */}
-          <div className="tp-product-thumb-3 p-relative fix" style={{height: '170px', overflow: 'hidden', background: '#f8f8f8'}}>
+          <div className="tp-product-thumb-3 p-relative fix" style={{height: '180px', overflow: 'hidden'}}>
             <div 
               className="include-bg"
               style={{
@@ -122,7 +126,7 @@ const MenuFilterArea = () => {
           </div>
 
           {/* Product Content */}
-          <div className="tp-product-content-3" style={{padding: '18px 14px 14px 14px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <div className="tp-product-content-3" style={{padding: '12px'}}>
             <h3 className="tp-product-title-3" style={{
               fontSize: '18px',
               fontWeight: '700',
@@ -210,15 +214,13 @@ const MenuFilterArea = () => {
           <div className="tp-product-bottom-3" style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '12px',
+            alignItems: 'center'
           }}>
             <div className="tp-product-price-3">
               <span style={{
-                fontSize: '22px',
+                fontSize: '20px',
                 fontWeight: '700',
-                color: '#FCB53B',
-                letterSpacing: '-1px',
+                color: '#FCB53B'
               }}>
                 {typeof item.price === 'number' ? `₹${item.price}` : item.price}
               </span>
@@ -230,21 +232,20 @@ const MenuFilterArea = () => {
                 style={{
                   backgroundColor: (item.category === 'addons' && !hasThaliInCart) ? '#6b7280' : '#FCB53B',
                   color: 'white',
-                  padding: '8px 28px',
-                  borderRadius: '8px',
+                  padding: '6px 16px',
+                  borderRadius: '6px',
                   textDecoration: 'none',
-                  fontSize: '15px',
-                  fontWeight: '700',
+                  fontSize: '13px',
+                  fontWeight: '600',
                   border: 'none',
                   cursor: (item.category === 'addons' && !hasThaliInCart) ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.3s cubic-bezier(.4,0,.2,1)',
-                  boxShadow: '0 2px 8px rgba(252,181,59,0.10)',
-                  height: '38px',
-                  minWidth: '90px',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  height: '32px',
+                  minWidth: '80px',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  marginLeft: '8px',
+                  justifyContent: 'center'
                 }}
                 disabled={item.category === 'addons' && !hasThaliInCart}
               >
@@ -365,13 +366,12 @@ const MenuFilterArea = () => {
 
         {/* Menu Items Grid */}
         {activeFilter === 'thali' && (
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0',
-            marginLeft: '-12px',
-            marginRight: '-12px',
-            justifyContent: 'flex-start',
+          <div className="row" style={{ 
+            marginLeft: '0', 
+            marginRight: '0', 
+            display: 'flex', 
+            gap: '12px',
+            flexWrap: 'wrap'
           }}>
             {filteredItems.map((item) => renderProductCard(item))}
           </div>

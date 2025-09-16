@@ -13,10 +13,7 @@ const TopNavbar = () => {
       width: '100%',
       height: '35px',
       minHeight: '35px',
-      backgroundColor: '#f3f4f6', // Light gray background
-      marginBottom: 0,
-      paddingBottom: 0,
-      borderBottom: 'none'
+      backgroundColor: '#f3f4f6' // Light gray background
     }}>
       <div className="container-fluid" style={{ height: '35px', display: 'flex', alignItems: 'center' }}>
         <div className="row align-items-center" style={{ width: '100%' }}>

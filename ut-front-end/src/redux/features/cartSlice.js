@@ -21,23 +21,57 @@ export const cartSlice = createSlice({
         img: payload.img || payload.image
       };
       
+      // Helper function to check category
+      const getCategoryName = (item) => {
+        return typeof item.category === 'string' 
+          ? item.category 
+          : item.category?.name;
+      };
+      
+      const isThaliItem = (item) => {
+        const categoryName = getCategoryName(item);
+        return categoryName === 'Thali' || 
+               categoryName === 'thali' ||
+               item.parent === 'Thali' ||
+               item.productType === 'thali';
+      };
+      
+      const isAddOnItem = (item) => {
+        const categoryName = getCategoryName(item);
+        return categoryName === 'Add-ons' || 
+               categoryName === 'addons' ||
+               item.parent === 'Add-ons' ||
+               item.productType === 'addon';
+      };
+      
+      // Check if the item being added is an add-on
+      const isAddOn = isAddOnItem(normalizedPayload);
+      
+      // If it's an add-on, check if there's a thali in the cart
+      if (isAddOn) {
+        const hasThaliInCart = state.cart_products.some(item => isThaliItem(item));
+        
+        if (!hasThaliInCart) {
+          notifyError("Please add a thali to your cart before adding add-ons");
+          return;
+        }
+      }
+      
       const isExist = state.cart_products.some((i) => i._id === normalizedPayload._id);
       if (!isExist) {
         const newItem = {
           ...normalizedPayload,
-          orderQuantity: state.orderQuantity,
+          orderQuantity: normalizedPayload.orderQuantity || state.orderQuantity,
         };
         state.cart_products.push(newItem);
-        notifySuccess(`${state.orderQuantity} ${normalizedPayload.title} added to cart`);
+        notifySuccess(`${newItem.orderQuantity} ${normalizedPayload.title} added to cart`);
       } else {
         state.cart_products.map((item) => {
           if (item._id === normalizedPayload._id) {
-            if (item.quantity >= item.orderQuantity + state.orderQuantity) {
-              item.orderQuantity =
-                state.orderQuantity !== 1
-                  ? state.orderQuantity + item.orderQuantity
-                  : item.orderQuantity + 1;
-              notifySuccess(`${state.orderQuantity} ${item.title} added to cart`);
+            const quantityToAdd = normalizedPayload.orderQuantity || state.orderQuantity;
+            if (item.quantity >= item.orderQuantity + quantityToAdd) {
+              item.orderQuantity = item.orderQuantity + quantityToAdd;
+              notifySuccess(`${quantityToAdd} ${item.title} added to cart`);
             } else {
               notifyError("No more quantity available for this product!");
               state.orderQuantity = 1;
@@ -75,11 +109,62 @@ export const cartSlice = createSlice({
     },
     remove_product: (state, { payload }) => {
       const itemId = payload.id || payload._id;
-      state.cart_products = state.cart_products.filter(
-        (item) => item._id !== itemId
-      );
+      
+      // Helper functions (same as in add_cart_product)
+      const getCategoryName = (item) => {
+        return typeof item.category === 'string' 
+          ? item.category 
+          : item.category?.name;
+      };
+      
+      const isThaliItem = (item) => {
+        const categoryName = getCategoryName(item);
+        return categoryName === 'Thali' || 
+               categoryName === 'thali' ||
+               item.parent === 'Thali' ||
+               item.productType === 'thali';
+      };
+      
+      const isAddOnItem = (item) => {
+        const categoryName = getCategoryName(item);
+        return categoryName === 'Add-ons' || 
+               categoryName === 'addons' ||
+               item.parent === 'Add-ons' ||
+               item.productType === 'addon';
+      };
+      
+      // Check if the item being removed is a thali
+      const isThali = isThaliItem(payload);
+      
+      // If removing a thali, check if there are add-ons in cart
+      if (isThali) {
+        const addOnsInCart = state.cart_products.filter(item => isAddOnItem(item));
+        
+        // Check if this is the last thali
+        const remainingThalis = state.cart_products.filter(item => 
+          item._id !== itemId && isThaliItem(item)
+        );
+        
+        // If this is the last thali and there are add-ons, remove add-ons too
+        if (remainingThalis.length === 0 && addOnsInCart.length > 0) {
+          state.cart_products = state.cart_products.filter(
+            (item) => item._id !== itemId && !isAddOnItem(item)
+          );
+          notifyError(`${payload.title} and all add-ons removed from cart (add-ons require a thali)`);
+        } else {
+          state.cart_products = state.cart_products.filter(
+            (item) => item._id !== itemId
+          );
+          notifyError(`${payload.title} Remove from cart`);
+        }
+      } else {
+        state.cart_products = state.cart_products.filter(
+          (item) => item._id !== itemId
+        );
+        notifyError(`${payload.title} Remove from cart`);
+      }
+      
       setLocalStorage("cart_products", state.cart_products);
-      notifyError(`${payload.title} Remove from cart`);
     },
     get_cart_products: (state, action) => {
       state.cart_products = getLocalStorage("cart_products");
