@@ -1,13 +1,13 @@
 'use client'
 import React,{ useState} from 'react';
 import Pagination from "@/ui/Pagination";
-import ProductItem from "../products/fashion/product-item";
+// import ProductItem from "../products/fashion/product-item";
 import CategoryFilter from "./shop-filter/category-filter";
 import ColorFilter from "./shop-filter/color-filter";
 import PriceFilter from "./shop-filter/price-filter";
 import ProductBrand from "./shop-filter/product-brand";
 import StatusFilter from "./shop-filter/status-filter";
-import TopRatedProducts from "./shop-filter/top-rated-products";
+// import TopRatedProducts from "./shop-filter/top-rated-products";
 import ShopListItem from "./shop-list-item";
 import ShopTopLeft from "./shop-top-left";
 import ShopTopRight from "./shop-top-right";

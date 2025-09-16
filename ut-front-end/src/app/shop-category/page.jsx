@@ -2,7 +2,7 @@ import Wrapper from "@/layout/wrapper";
 import HeaderTwo from "@/layout/headers/header-2";
 import UrbanThaliFooter from "@/layout/footers/urban-thali-footer";
 import ShopBreadcrumb from "@/components/breadcrumb/shop-breadcrumb";
-import ShopCategoryArea from "@/components/categories/shop-category-area";
+// import ShopCategoryArea from "@/components/categories/shop-category-area";
 
 export const metadata = {
   title: "UrbanThali - Category Page",

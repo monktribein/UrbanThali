@@ -5,7 +5,7 @@ import Link from 'next/link';
 // internal
 import ErrorMsg from '@/components/common/error-msg';
 import { useGetTopRatedProductsQuery } from '@/redux/features/productApi';
-import ShopTopRatedLoader from '@/components/loader/shop/top-rated-prd-loader';
+// import ShopTopRatedLoader from '@/components/loader/shop/top-rated-prd-loader';
 
 const TopRatedProducts = () => {
   const { data: products, isError, isLoading } = useGetTopRatedProductsQuery();

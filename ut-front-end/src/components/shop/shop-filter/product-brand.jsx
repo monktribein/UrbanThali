@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import ErrorMsg from "@/components/common/error-msg";
 import { useGetActiveBrandsQuery } from "@/redux/features/brandApi";
 import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
-import ShopBrandLoader from "@/components/loader/shop/shop-brand-loader";
+// import ShopBrandLoader from "@/components/loader/shop/shop-brand-loader";
 
 const ProductBrand = ({setCurrPage,shop_right=false}) => {
   const { data: brands, isError, isLoading } = useGetActiveBrandsQuery();
