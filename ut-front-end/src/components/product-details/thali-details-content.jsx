@@ -33,8 +33,8 @@ const ThaliDetailsContent = ({ thali }) => {
 
   return (
     <div style={{ 
-      paddingTop: '40px', 
-      paddingBottom: '20px', 
+      paddingTop: '80px', 
+      paddingBottom: '40px', 
       backgroundColor: '#FFF9E6',
       minHeight: 'auto'
     }}>
@@ -130,31 +130,70 @@ const ThaliDetailsContent = ({ thali }) => {
 
                       {/* Items Included */}
                       {thali.items && thali.items.length > 0 && (
-                        <div style={{ marginBottom: '12px' }}>
-                          <span style={{
-                            fontSize: '1rem',
+                        <div style={{ marginBottom: '20px' }}>
+                          <h3 style={{
+                            fontSize: '1.1rem',
                             fontWeight: '600',
                             color: '#1f2937',
-                            marginRight: '8px'
+                            marginBottom: '10px'
                           }}>
                             What&apos;s Included:
-                          </span>
-                          <span style={{
-                            fontSize: '0.95rem',
-                            color: '#4b5563',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            display: 'inline-block',
-                            maxWidth: '100%'
-                          }}>
-                            {thali.items.join(', ')}
-                          </span>
+                          </h3>
+                          <ul style={{ paddingLeft: '0', listStyle: 'none', margin: 0 }}>
+                            {thali.items.map((item, index) => (
+                              <li key={index} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                marginBottom: '5px',
+                                fontSize: '0.9rem',
+                                color: '#4b5563'
+                              }}>
+                                <span style={{
+                                  color: '#FCB53B',
+                                  marginRight: '8px',
+                                  fontSize: '1rem'
+                                }}>
+                                  •
+                                </span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       )}
 
 
-                      {/* Product meta removed per request */}
+                      {/* Product Details */}
+                      <div style={{ marginBottom: '20px' }}>
+                        <div className="row">
+                          {thali.prepTime && (
+                            <div className="col-6">
+                              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
+                                  <circle cx="12" cy="12" r="10"/>
+                                  <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+                                  {thali.prepTime}
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                          <div className="col-6">
+                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                              </svg>
+                              <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+                                {thali.servings}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Bottom Section - Quantity and Add to Cart */}

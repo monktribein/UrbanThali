@@ -147,6 +147,18 @@ const BestSellingThalis = () => {
                     {product.category?.name || 'Thali'}
                   </p>
 
+                  {/* Veg Thali Label */}
+                  <div style={{
+                    fontSize: '12px',
+                    color: '#FCB53B',
+                    fontWeight: '600',
+                    marginBottom: '4px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    Veg Thali
+                  </div>
+
                   {/* Rating */}
                   <div style={{marginBottom: '4px'}}>
                     <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>

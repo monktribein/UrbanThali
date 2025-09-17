@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '135px' }}>
+      <div style={{ paddingTop: '10px' }}>
         <CommonBreadcrumb title="Checkout" subtitle="Checkout" bg_clr={true} />
         <CheckoutArea/>
       </div>

@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: [false, "Password is required"],
+      required: false,
       minLength: [6, "Must be at least 6 character"],
     },
 
@@ -77,8 +77,8 @@ const userSchema = mongoose.Schema(
 );
 
 userSchema.pre("save", function (next) {
-  if (!this.isModified("password")) {
-    //  only run if password is modified, otherwise it will change every time we save the user!
+  if (!this.isModified("password") || !this.password) {
+    //  only run if password is modified and exists, otherwise it will change every time we save the user!
     return next();
   }
   const password = this.password;

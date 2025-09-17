@@ -149,6 +149,18 @@ const MenuFilterArea = () => {
             </p>
           )}
 
+          {/* Veg Thali Label */}
+          <div style={{
+            fontSize: '12px',
+            color: '#FCB53B',
+            fontWeight: '600',
+            marginBottom: '4px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
+          }}>
+            Veg Thali
+          </div>
+
           {/* Rating */}
           <div className="tp-product-rating" style={{marginBottom: '4px'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
@@ -275,7 +287,7 @@ const MenuFilterArea = () => {
   }
 
   return (
-    <section id="menu-section" className="tp-product-area">
+    <section id="menu-section" className="tp-product-area" style={{ paddingTop: '10px' }}>
       <div className="container-fluid" style={{ 
         paddingLeft: '20px', 
         paddingRight: '20px', 

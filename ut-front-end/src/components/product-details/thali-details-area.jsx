@@ -11,6 +11,21 @@ const ThaliDetailsArea = ({ id }) => {
   const transformApiData = (apiData) => {
     if (!apiData) return null;
     
+    // Normalize items list: API may send a single "+" separated string
+    let normalizedItems = Array.isArray(apiData?.ingredients)
+      ? apiData.ingredients
+      : (typeof apiData?.ingredients === 'string'
+          ? apiData.ingredients.split(/\s*\+\s*/).map((p) => p.trim()).filter(Boolean)
+          : []);
+
+    // Fallback: some thalis store the composition in description as a long "+"-separated string
+    if ((!normalizedItems || normalizedItems.length === 0) && typeof apiData?.description === 'string') {
+      normalizedItems = apiData.description
+        .split(/\s*\+\s*/)
+        .map((p) => p.replace(/\s{2,}/g, ' ').trim())
+        .filter(Boolean);
+    }
+
     return {
       id: apiData._id,
       title: apiData.name,
@@ -25,7 +40,7 @@ const ThaliDetailsArea = ({ id }) => {
       cuisine: apiData.cuisine,
       status: apiData.status === "available" ? "in-stock" : "out-of-stock",
       quantity: apiData.quantity,
-      items: apiData.ingredients || [],
+      items: normalizedItems,
       features: apiData.tags || [],
       restaurant: apiData.restaurant?.name,
       sku: apiData.sku,
