@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
 import useNotification from '@/hooks/use-notification';
+import ProductAddonsSection from './product-addons-section';
 
 const ProductDetailsContent = ({ productItem }) => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const ProductDetailsContent = ({ productItem }) => {
       backgroundColor: '#FFF9E6',
       minHeight: 'auto'
     }}>
-      <div className="container" style={{ maxWidth: '900px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div className="row">
           <div className="col-12 mb-4">
             <nav aria-label="breadcrumb">
@@ -239,6 +240,13 @@ const ProductDetailsContent = ({ productItem }) => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Addons Section */}
+        <div className="row mt-4">
+          <div className="col-12">
+            <ProductAddonsSection />
           </div>
         </div>
       </div>

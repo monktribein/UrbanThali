@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
 import useNotification from '@/hooks/use-notification';
+import ProductAddonsSection from './product-addons-section';
 
 const ThaliDetailsContent = ({ thali }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ThaliDetailsContent = ({ thali }) => {
       backgroundColor: '#FFF9E6',
       minHeight: 'auto'
     }}>
-      <div className="container" style={{ maxWidth: '900px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div className="row">
           {/* Breadcrumb */}
           <div className="col-12 mb-4">
@@ -163,37 +164,6 @@ const ThaliDetailsContent = ({ thali }) => {
                       )}
 
 
-                      {/* Product Details */}
-                      <div style={{ marginBottom: '20px' }}>
-                        <div className="row">
-                          {thali.prepTime && (
-                            <div className="col-6">
-                              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
-                                  <circle cx="12" cy="12" r="10"/>
-                                  <polyline points="12,6 12,12 16,14"/>
-                                </svg>
-                                <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                                  {thali.prepTime}
-                                </span>
-                              </div>
-                            </div>
-                          )}
-                          <div className="col-6">
-                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                              </svg>
-                              <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                                {thali.servings}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
 
                     {/* Bottom Section - Quantity and Add to Cart */}
@@ -288,6 +258,13 @@ const ThaliDetailsContent = ({ thali }) => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Addons Section */}
+        <div className="row mt-4">
+          <div className="col-12">
+            <ProductAddonsSection />
           </div>
         </div>
       </div>
