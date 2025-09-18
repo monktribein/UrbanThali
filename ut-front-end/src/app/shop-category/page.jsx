@@ -10,7 +10,7 @@ export const metadata = {
 export default function CategoryPage() {
   return (
     <Wrapper>
-      <HeaderTwo style_2={true} />
+      {/* <HeaderTwo style_2={true} /> */}
       <ShopBreadcrumb title="Only Categories" subtitle="Only Categories" />
       {/* Category section temporarily disabled due to missing component */}
       <UrbanThaliFooter />

@@ -172,7 +172,7 @@ const useCheckoutSubmit = () => {
     if (discountPercentage > 0) {
       recalculateTotal();
     }
-  }, [discountPercentage]);
+  }, [discountPercentage, recalculateTotal]);
 
   // create payment intent
   useEffect(() => {

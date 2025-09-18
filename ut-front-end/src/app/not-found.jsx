@@ -13,7 +13,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <Wrapper>
-      <HeaderTwo style_2={true} />
+      {/* <HeaderTwo style_2={true} /> */}
       {/* 404 area start */}
       <section className="tp-error-area pt-110 pb-110">
         <div className="container">

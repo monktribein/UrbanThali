@@ -10,7 +10,7 @@ export const metadata = {
 export default function ProductVideoDetailsPage() {
   return (
     <Wrapper>
-      <HeaderTwo style_2={true} />
+      {/* <HeaderTwo style_2={true} /> */}
       <ProductDetailsArea id="641e887d05f9ee1717e13496" />
       <UrbanThaliFooter />
     </Wrapper>
