@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 // internal
 import useCartInfo from "@/hooks/use-cart-info";
 import ErrorMsg from "../common/error-msg";
+import CheckoutCoupon from "./checkout-coupon";
 
 const CheckoutOrderArea = ({ checkoutData }) => {
   const {
@@ -18,13 +19,32 @@ const CheckoutOrderArea = ({ checkoutData }) => {
     showCard,
     setShowCard,
     shippingCost,
-    discountAmount
+    discountAmount,
+    handleCouponCode,
+    couponRef,
+    couponApplyMsg
   } = checkoutData;
   const { cart_products } = useSelector((state) => state.cart);
   const { total } = useCartInfo();
   return (
     <div className="tp-checkout-place white-bg">
       <h3 className="tp-checkout-place-title">Your Order</h3>
+
+      {/* Coupon Section - Inside Your Order */}
+      <div className="tp-checkout-coupon-section" style={{ 
+        marginBottom: '20px', 
+        padding: '20px', 
+        backgroundColor: '#f8f9fa', 
+        borderRadius: '8px', 
+        border: '1px solid #e9ecef',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <CheckoutCoupon
+          handleCouponCode={handleCouponCode}
+          couponRef={couponRef}
+          couponApplyMsg={couponApplyMsg}
+        />
+      </div>
 
       <div className="tp-order-info-list">
         <ul>

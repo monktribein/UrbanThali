@@ -28,8 +28,45 @@ const BestSellingThalis = () => {
     dispatch(add_cart_product(cartProduct));
   };
   
-  // Only use API data - no fallback
-  const displayThalis = thaliProducts.slice(0, 5);  // Use API data (up to 5 items)
+  // Custom ordering for Best Selling Thalis
+  const getCustomOrder = (thalis) => {
+    // Define the desired order by price and rating
+    // Order: ₹199 (4.9) → ₹169 (4.6) → ₹139 (4.5) → ₹249 (4.2) → ₹299 (4.0)
+    const orderPriority = [
+      'Urban Premium Thali',      // Position 1 - ₹199, Rating 4.9
+      'Everyday Thali',           // Position 2 - ₹169, Rating 4.6
+      'Mini Urban Thali',         // Position 3 - ₹139, Rating 4.5
+      'Urban Feast Thali',        // Position 4 - ₹249, Rating 4.2
+      'Maharaja Urban Thali'      // Position 5 - ₹299, Rating 4.0
+    ];
+    
+    // Sort thalis based on the custom order
+    const sortedThalis = [...thalis].sort((a, b) => {
+      const aIndex = orderPriority.findIndex(name => 
+        a.name?.toLowerCase().includes(name.toLowerCase())
+      );
+      const bIndex = orderPriority.findIndex(name => 
+        b.name?.toLowerCase().includes(name.toLowerCase())
+      );
+      
+      // If both items are in the priority list, sort by priority
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
+      
+      // If only one item is in the priority list, prioritize it
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+      
+      // If neither is in the priority list, maintain original order
+      return 0;
+    });
+    
+    return sortedThalis.slice(0, 5);
+  };
+
+  // Apply custom ordering to API data
+  const displayThalis = getCustomOrder(thaliProducts);
 
   // Show loading state
   if (isLoading) {
@@ -161,25 +198,50 @@ const BestSellingThalis = () => {
 
                   {/* Rating */}
                   <div style={{marginBottom: '4px'}}>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                      <div style={{display: 'flex', alignItems: 'center'}}>
-                        {[...Array(5)].map((_, i) => (
-                          <svg
-                            key={i}
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill={i < 4 ? '#ffc107' : '#e5e7eb'}
-                            style={{marginRight: '2px'}}
-                          >
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                          </svg>
-                        ))}
-                      </div>
-                      <span style={{fontSize: '12px', color: '#6b7280', marginLeft: '4px'}}>
-                        4.5
-                      </span>
-                    </div>
+                    {/* Custom rating display based on thali name */}
+                    {(() => {
+                      const getRating = (thaliName) => {
+                        const name = thaliName?.toLowerCase() || '';
+                        if (name.includes('urban premium')) return 4.9;
+                        if (name.includes('everyday')) return 4.6;
+                        if (name.includes('mini urban')) return 4.5;
+                        if (name.includes('urban feast')) return 4.2;
+                        if (name.includes('maharaja')) return 4.0;
+                        return product.rating || 4.5; // fallback to API rating
+                      };
+                      
+                      const rating = getRating(product.name);
+                      const fullStars = Math.floor(rating);
+                      const hasHalfStar = rating % 1 !== 0;
+                      
+                      return (
+                        <div style={{display: 'flex', alignItems: 'center', gap: '2px'}}>
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} style={{
+                              color: i < fullStars ? '#fbbf24' : '#d1d5db',
+                              fontSize: '12px'
+                            }}>
+                              ★
+                            </span>
+                          ))}
+                          {hasHalfStar && (
+                            <span style={{
+                              color: '#fbbf24',
+                              fontSize: '12px'
+                            }}>
+                              ☆
+                            </span>
+                          )}
+                          <span style={{
+                            fontSize: '11px',
+                            color: '#6b7280',
+                            marginLeft: '4px'
+                          }}>
+                            {rating}
+                          </span>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Product Details - Time and Servings */}

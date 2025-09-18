@@ -154,7 +154,7 @@
     },
     "status": "available",
     "foodType": "veg",
-    "description": "4 Veg Curries (Dal + Paneer + Chhole/Rajma + Seasonal Veg), 4 Roti / 2 Naan / 2 parathas + Pulao /Jeera Rice, Raita + Salad + Papad + 2 Sweets",
+    "description": "A King's Feast, Urban & Refined.",
     "ingredients": ["Dal", "Paneer", "Chhole or Rajma", "Seasonal Vegetables", "4 Roti or 2 Naan or 2 Parathas", "Pulao or Jeera Rice", "Raita", "Salad", "Papad", "2 Sweets"],
     "preparationTime": 40,
     "spiceLevel": "medium",

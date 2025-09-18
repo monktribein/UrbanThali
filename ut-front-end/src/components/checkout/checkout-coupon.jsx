@@ -2,46 +2,102 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
+const CheckoutCoupon = ({ handleCouponCode, couponRef, couponApplyMsg }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { coupon_info } = useSelector((state) => state.coupon);
+  
   return (
-    <div className="tp-checkout-verify-item">
-      {/* <p className="tp-checkout-verify-reveal">
-        Have a coupon?{" "}
+    <div className="tp-checkout-coupon-wrapper">
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        marginBottom: '15px'
+      }}>
+        <h4 style={{ 
+          margin: 0, 
+          fontSize: '16px', 
+          fontWeight: '600', 
+          color: '#333',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          🎟️ Have a coupon?
+        </h4>
         <button
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           className="tp-checkout-coupon-form-reveal-btn"
+          style={{
+            backgroundColor: isOpen ? '#e6a03a' : '#FCB53B',
+            color: 'white',
+            border: 'none',
+            padding: '8px 16px',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = '#e6a03a';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = isOpen ? '#e6a03a' : '#FCB53B';
+          }}
         >
-          Click here to enter your code
+          {isOpen ? 'Hide Coupon' : 'Apply Coupon'}
         </button>
-      </p> */}
+      </div>
 
       {isOpen && (
-        <div id="tpCheckoutCouponForm" className="tp-return-customer">
-          <form onSubmit={handleCouponCode}>
-            <div className="tp-return-customer-input">
-              <label>Coupon Code :</label>
-              <input ref={couponRef} type="text" placeholder="Coupon" />
+        <div id="tpCheckoutCouponForm" className="tp-checkout-coupon-form">
+          <form onSubmit={handleCouponCode} style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}>
+            <div className="tp-checkout-coupon-input" style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', fontWeight: '500', color: '#333' }}>
+                Coupon Code:
+              </label>
+              <input 
+                ref={couponRef} 
+                type="text" 
+                placeholder="Enter coupon code" 
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid #ddd',
+                  borderRadius: '6px',
+                  fontSize: '14px',
+                  outline: 'none',
+                  transition: 'border-color 0.3s ease'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#FCB53B';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#ddd';
+                }}
+              />
             </div>
             <button
               type="submit"
-              className="tp-return-customer-btn tp-checkout-btn"
+              className="tp-checkout-coupon-btn"
               style={{
                 backgroundColor: '#FCB53B',
                 color: 'white',
                 border: 'none',
-                padding: '8px 16px',
+                padding: '10px 20px',
                 borderRadius: '6px',
                 fontSize: '14px',
                 fontWeight: '600',
                 textAlign: 'center',
                 transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                height: 'fit-content'
               }}
               onMouseOver={(e) => {
-                e.target.style.backgroundColor = '#B45253';
+                e.target.style.backgroundColor = '#e6a03a';
               }}
               onMouseOut={(e) => {
                 e.target.style.backgroundColor = '#FCB53B';
@@ -50,7 +106,21 @@ const CheckoutCoupon = ({ handleCouponCode, couponRef,couponApplyMsg }) => {
               Apply
             </button>
           </form>
-          {couponApplyMsg && <p className="p-2" style={{color:'green'}}>{couponApplyMsg}</p>}
+          {couponApplyMsg && (
+            <p 
+              style={{
+                color: '#28a745',
+                fontSize: '13px',
+                marginTop: '10px',
+                padding: '8px 12px',
+                backgroundColor: '#d4edda',
+                border: '1px solid #c3e6cb',
+                borderRadius: '4px'
+              }}
+            >
+              {couponApplyMsg}
+            </p>
+          )}
         </div>
       )}
     </div>

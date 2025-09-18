@@ -178,6 +178,20 @@ const coupons = [
     productType: "thali",
     description: "35% off on regional special thalis",
     status: "active"
+  },
+  {
+    _id: "64316f4ce2c1bd22cebb2155",
+    title: "BULK10",
+    logo: "https://i.ibb.co/TT5TyvM/offer-1.png",
+    couponCode: "BULK10",
+    endTime: "2026-12-31T23:59:59.000Z",
+    discountPercentage: 10,
+    minimumAmount: 500,
+    productType: "thali",
+    description: "10% off on bulk orders (5+ thalis)",
+    status: "active",
+    type: "bulk_order",
+    minimumQuantity: 5
   }
 ];
 

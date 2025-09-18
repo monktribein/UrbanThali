@@ -39,6 +39,19 @@ const couponSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active"
     },
+    description: {
+      type: String,
+      required: false,
+    },
+    type: {
+      type: String,
+      enum: ["first_order", "next_order", "bulk_order", "social_media", "regular"],
+      default: "regular"
+    },
+    minimumQuantity: {
+      type: Number,
+      required: false,
+    },
   },
   {
     timestamps: true,

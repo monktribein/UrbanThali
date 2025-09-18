@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Wrapper from "@/layout/wrapper";
-import HeaderTwo from "@/layout/headers/header-2";
+// import HeaderTwo from "@/layout/headers/header-2";
 // import Footer from "@/layout/footers/footer";
 import error from '@assets/img/error/error.png';
 import UrbanThaliFooter from "@/layout/footers/urban-thali-footer";

@@ -52,7 +52,7 @@ export const foodItemApi = apiSlice.injectEndpoints({
     
     getThaliItems: builder.query({
       query: () => ({
-        url: `${BACKEND_URL}/api/food-item/all`,
+        url: `${BACKEND_URL}/api/food-item/all?t=${Date.now()}`,
         method: 'GET',
       }),
       transformResponse: (response) => {
@@ -87,7 +87,8 @@ export const foodItemApi = apiSlice.injectEndpoints({
         }
         return [];
       },
-      providesTags: ['ThaliItems']
+      providesTags: ['ThaliItems'],
+      keepUnusedDataFor: 0
     }),
     
     getAddOnItems: builder.query({
