@@ -33,7 +33,7 @@ const SpecialOffers = () => {
   ];
 
   return (
-    <section className="tp-offers-area pt-60 pb-50">
+    <section className="tp-offers-area pt-30 pb-50">
       <div className="container">
         <div className="row">
           <div className="col-xl-12">
