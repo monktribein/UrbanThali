@@ -140,7 +140,7 @@ const ProductAddonsSection = () => {
                 cursor: 'pointer',
                 position: 'relative',
                 overflow: 'hidden',
-                minWidth: '200px',
+                width: '200px',
                 flexShrink: 0
               }}
               onMouseOver={(e) => {

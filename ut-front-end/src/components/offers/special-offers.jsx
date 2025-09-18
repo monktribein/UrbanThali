@@ -6,27 +6,27 @@ const SpecialOffers = () => {
     {
       id: 1,
       title: "First Order Special",
-      description: "Get 20% off on your first order above ₹300",
-      code: "FIRST20",
+      description: "Get surprise addons with your first order and 10% off on your second order",
+      code: "SURPRISE10",
       icon: "🎁",
       bgColor: "#FFF4E6",
       iconBg: "#FCB53B"
     },
     {
       id: 2,
-      title: "Weekend Delight",
-      description: "Free delivery on all orders during weekends",
-      code: "WEEKEND",
-      icon: "🚚",
+      title: "Bulk Order Discount",
+      description: "Order 5 thalis and get 10% off, Order 10 thalis and get 20% off",
+      code: "BULK20",
+      icon: "📦",
       bgColor: "#E6F7E6",
       iconBg: "#84994F"
     },
     {
       id: 3,
-      title: "Premium Combo",
-      description: "Order 2 Premium Thalis and get 15% discount",
-      code: "COMBO15",
-      icon: "%",
+      title: "Social Media Special",
+      description: "Follow, comment on our social media and get 15% discount",
+      code: "SOCIAL15",
+      icon: "📱",
       bgColor: "#E6F3FF",
       iconBg: "#B45253"
     }
