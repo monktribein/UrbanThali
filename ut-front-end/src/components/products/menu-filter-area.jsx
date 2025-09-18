@@ -287,7 +287,7 @@ const MenuFilterArea = () => {
   }
 
   return (
-    <section id="menu-section" className="tp-product-area" style={{ paddingTop: '10px' }}>
+    <section id="menu-section" className="tp-product-area" style={{ paddingTop: '0px' }}>
       <div className="container-fluid" style={{ 
         paddingLeft: '20px', 
         paddingRight: '20px', 

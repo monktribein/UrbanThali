@@ -38,11 +38,11 @@ export default function ContactPage() {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '150px', paddingBottom: '100px', minHeight: '60vh' }}>
+      <div style={{ paddingTop: '50px', paddingBottom: '100px', minHeight: '60vh' }}>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
-              <h1 style={{ fontSize: '48px', fontWeight: '700', color: '#1f2937', marginBottom: '30px', marginTop: '20px' }}>
+              <h1 style={{ fontSize: '48px', fontWeight: '700', color: '#1f2937', marginBottom: '30px', marginTop: '0px' }}>
                 Contact Us
               </h1>
               <p style={{ fontSize: '18px', color: '#6b7280', marginBottom: '60px', marginTop: '10px', lineHeight: '1.6' }}>
