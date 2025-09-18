@@ -64,14 +64,14 @@ export const cartSlice = createSlice({
           orderQuantity: normalizedPayload.orderQuantity || state.orderQuantity,
         };
         state.cart_products.push(newItem);
-        notifySuccess(`${newItem.orderQuantity} ${normalizedPayload.title} added to cart`);
+        // notifySuccess(`${newItem.orderQuantity} ${normalizedPayload.title} added to cart`);
       } else {
         state.cart_products.map((item) => {
           if (item._id === normalizedPayload._id) {
             const quantityToAdd = normalizedPayload.orderQuantity || state.orderQuantity;
             if (item.quantity >= item.orderQuantity + quantityToAdd) {
               item.orderQuantity = item.orderQuantity + quantityToAdd;
-              notifySuccess(`${quantityToAdd} ${item.title} added to cart`);
+              // notifySuccess(`${quantityToAdd} ${item.title} added to cart`);
             } else {
               notifyError("No more quantity available for this product!");
               state.orderQuantity = 1;
