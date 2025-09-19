@@ -2,6 +2,7 @@ import './globals.scss';
 import {Jost, Roboto,Charm,Oregano} from 'next/font/google';
 import Providers from '@/components/provider';
 import SuppressHydrationWarning from '@/components/suppress-hydration-warning';
+import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/gtm/gtm';
 
 export const metadata = {
   title: 'Urban Thali - Order Delicious Food Online',
@@ -53,7 +54,11 @@ const charm = Charm({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <GoogleTagManager />
+      </head>
       <body className={`${body.variable} ${heading.variable} ${p.variable} ${jost.variable} ${roboto.variable} ${oregano.variable} ${charm.variable}`} suppressHydrationWarning>
+        <GoogleTagManagerNoScript />
         <SuppressHydrationWarning />
         <Providers>
           {children}

@@ -51,3 +51,5 @@ export const {
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
+
+

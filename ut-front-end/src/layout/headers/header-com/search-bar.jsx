@@ -224,3 +224,5 @@ const SearchBar = ({ isSearchOpen, setIsSearchOpen }) => {
 };
 
 export default SearchBar;
+
+
