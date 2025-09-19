@@ -3,6 +3,7 @@ import {Jost, Roboto,Charm,Oregano} from 'next/font/google';
 import Providers from '@/components/provider';
 import SuppressHydrationWarning from '@/components/suppress-hydration-warning';
 import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/gtm/gtm';
+import GoogleAnalytics from '@/components/analytics/google-analytics';
 
 export const metadata = {
   title: 'Urban Thali - Order Delicious Food Online',
@@ -56,6 +57,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <GoogleTagManager />
+        <GoogleAnalytics />
       </head>
       <body className={`${body.variable} ${heading.variable} ${p.variable} ${jost.variable} ${roboto.variable} ${oregano.variable} ${charm.variable}`} suppressHydrationWarning>
         <GoogleTagManagerNoScript />
