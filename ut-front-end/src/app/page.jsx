@@ -43,6 +43,7 @@ import Wrapper from "@/layout/wrapper";
 import HeaderThree from "@/layout/headers/header-3";
 import BeautyBanner from "@/components/banner/beauty-banner";
 import BestSellingThalis from "@/components/products/best-selling-thalis";
+import SocialMediaBanner from "@/components/banner/social-media-banner";
 import MenuFilterArea from "@/components/products/menu-filter-area";
 import SpecialOffers from "@/components/offers/special-offers";
 import FeatureAreaTwo from "@/components/features/feature-area-2";
@@ -59,6 +60,7 @@ export default function HomePageThree() {
       <div>
         <BeautyBanner />
         <BestSellingThalis />
+        <SocialMediaBanner />
         <MenuFilterArea />
         <SpecialOffers />
         <FeatureAreaTwo />

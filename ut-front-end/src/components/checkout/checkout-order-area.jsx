@@ -128,6 +128,21 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           )}
           <ErrorMsg msg={errors?.payment?.message} />
         </div>
+        {/* Razorpay option temporarily hidden */}
+        {/* <div className="tp-checkout-payment-item">
+          <input
+            {...register(`payment`, {
+              required: `Payment Option is required!`,
+            })}
+            onClick={() => setShowCard(false)}
+            type="radio"
+            id="razorpay"
+            name="payment"
+            value="Razorpay"
+          />
+          <label htmlFor="razorpay">Razorpay (Cards, UPI, Net Banking)</label>
+          <ErrorMsg msg={errors?.payment?.message} />
+        </div> */}
         <div className="tp-checkout-payment-item">
           <input
             {...register(`payment`, {

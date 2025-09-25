@@ -22,6 +22,14 @@ export const authApi = apiSlice.injectEndpoints({
       },
 
     }),
+    // verifyPayment
+    verifyPayment: builder.mutation({
+      query: (data) => ({
+        url: "api/order/verify-payment",
+        method: "POST",
+        body: data,
+      }),
+    }),
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
@@ -61,6 +69,7 @@ export const authApi = apiSlice.injectEndpoints({
 
 export const {
   useCreatePaymentIntentMutation,
+  useVerifyPaymentMutation,
   useSaveOrderMutation,
   useGetUserOrderByIdQuery,
   useGetUserOrdersQuery,

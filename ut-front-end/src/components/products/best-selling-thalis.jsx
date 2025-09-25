@@ -95,11 +95,12 @@ const BestSellingThalis = () => {
   }
 
   return (
-    <section className="tp-product-area pt-60 pb-60" style={{
+    <section className="tp-product-area pt-60" style={{
       marginLeft: '0', 
       marginRight: '0', 
       paddingLeft: '0', 
-      paddingRight: '0'
+      paddingRight: '0',
+      paddingBottom: '0'
     }}>
       <div className="container-fluid" style={{paddingLeft: '0', paddingRight: '0'}}>
         <div className="row" style={{marginLeft: '0', marginRight: '0'}}>
