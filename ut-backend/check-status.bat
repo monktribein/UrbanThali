@@ -1,0 +1,9 @@
+@echo off
+echo Checking backend status...
+netstat -ano | findstr :7001
+echo.
+echo Checking frontend status...
+netstat -ano | findstr :3000
+echo.
+echo Starting backend on port 7001...
+npm start

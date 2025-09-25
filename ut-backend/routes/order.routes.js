@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   paymentIntent,
+  verifyPayment,
   addOrder,
   getOrders,
   updateOrderStatus,
@@ -16,6 +17,8 @@ router.get("/orders", getOrders);
 router.get("/:id", getSingleOrder);
 // add a create payment intent
 router.post("/create-payment-intent", paymentIntent);
+// verify payment
+router.post("/verify-payment", verifyPayment);
 // save Order
 router.post("/saveOrder", addOrder);
 // update status
