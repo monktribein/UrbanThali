@@ -1,7 +1,5 @@
 const express = require("express");
 const {
-  paymentIntent,
-  verifyPayment,
   addOrder,
   getOrders,
   updateOrderStatus,
@@ -15,10 +13,6 @@ const router = express.Router();
 router.get("/orders", getOrders);
 // single order
 router.get("/:id", getSingleOrder);
-// add a create payment intent
-router.post("/create-payment-intent", paymentIntent);
-// verify payment
-router.post("/verify-payment", verifyPayment);
 // save Order
 router.post("/saveOrder", addOrder);
 // update status
