@@ -58,7 +58,6 @@ export default function RootLayout({ children }) {
       <head>
         <GoogleTagManager />
         <GoogleAnalytics />
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </head>
       <body className={`${body.variable} ${heading.variable} ${p.variable} ${jost.variable} ${roboto.variable} ${oregano.variable} ${charm.variable}`} suppressHydrationWarning>
         <GoogleTagManagerNoScript />
