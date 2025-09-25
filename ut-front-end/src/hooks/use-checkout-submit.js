@@ -3,7 +3,6 @@ import * as dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import Razorpay from "razorpay";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -12,7 +11,7 @@ import useCartInfo from "./use-cart-info";
 import { set_shipping } from "@/redux/features/order/orderSlice";
 import { set_coupon } from "@/redux/features/coupon/couponSlice";
 import { notifyError, notifySuccess } from "@/utils/toast";
-import {useCreatePaymentIntentMutation, useVerifyPaymentMutation, useSaveOrderMutation} from "@/redux/features/order/orderApi";
+import {useSaveOrderMutation} from "@/redux/features/order/orderApi";
 import { useGetOfferCouponsQuery } from "@/redux/features/coupon/couponApi";
 
 const useCheckoutSubmit = () => {
@@ -20,10 +19,6 @@ const useCheckoutSubmit = () => {
   const { data: offerCoupons, isError, isLoading } = useGetOfferCouponsQuery();
   // addOrder
   const [saveOrder, {}] = useSaveOrderMutation();
-  // createPaymentIntent
-  const [createPaymentIntent, {}] = useCreatePaymentIntentMutation();
-  // verifyPayment
-  const [verifyPayment, {}] = useVerifyPaymentMutation();
   // cart_products
   const { cart_products } = useSelector((state) => state.cart);
   // user
@@ -334,9 +329,6 @@ const useCheckoutSubmit = () => {
        return handlePaymentWithStripe(orderData);
       }
     }
-    if (data.payment === 'Razorpay') {
-      handlePaymentWithRazorpay(orderInfo);
-    }
     if (data.payment === 'COD') {
       saveOrder({
         ...orderInfo
@@ -354,101 +346,6 @@ const useCheckoutSubmit = () => {
     }
   };
 
-  // handlePaymentWithRazorpay
-  const handlePaymentWithRazorpay = async (orderInfo) => {
-    try {
-      // Create payment intent
-      const paymentData = await createPaymentIntent({ price: cartTotal });
-      
-      if (paymentData?.data) {
-        const { orderId, amount, currency, key } = paymentData.data;
-        
-        // Check if using test credentials - but still show payment gateway
-        if (key === 'rzp_test_1234567890') {
-          notifySuccess("Test Mode: Using test Razorpay credentials. Payment gateway will open for testing.");
-        }
-        
-        const options = {
-          key: key,
-          amount: amount,
-          currency: currency,
-          name: "Urban Thali",
-          description: "Food Order Payment",
-          order_id: orderId,
-          method: {
-            netbanking: true,
-            wallet: true,
-            upi: true,
-            card: true,
-            emi: true
-          },
-          handler: async function (response) {
-            try {
-              // Verify payment
-              const verificationData = {
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
-              };
-              
-              const verificationResult = await verifyPayment(verificationData);
-              
-              if (verificationResult?.data?.success) {
-                // Save order after successful payment
-                const orderData = {
-                  ...orderInfo,
-                  paymentId: response.razorpay_payment_id,
-                  orderId: response.razorpay_order_id
-                };
-                
-                const orderResult = await saveOrder(orderData);
-                
-                if (orderResult?.data) {
-                  localStorage.removeItem("cart_products");
-                  localStorage.removeItem("couponInfo");
-                  setIsCheckoutSubmit(false);
-                  notifySuccess("Payment successful! Your order is confirmed.");
-                  router.push(`/order/${orderResult.data?.order?._id}`);
-                }
-              } else {
-                notifyError("Payment verification failed!");
-                setIsCheckoutSubmit(false);
-              }
-            } catch (error) {
-              console.error("Payment verification error:", error);
-              notifyError("Payment verification failed!");
-              setIsCheckoutSubmit(false);
-            }
-          },
-          prefill: {
-            name: orderInfo.name,
-            email: orderInfo.email,
-            contact: orderInfo.contact,
-          },
-          theme: {
-            color: "#FCB53B"
-          },
-          modal: {
-            ondismiss: function() {
-              console.log("Payment modal dismissed");
-              setIsCheckoutSubmit(false);
-            }
-          },
-          notes: {
-            address: orderInfo.address,
-            city: orderInfo.city
-          }
-        };
-        
-        const razorpay = new window.Razorpay(options);
-        razorpay.open();
-      }
-    } catch (error) {
-      console.error("Razorpay payment error:", error);
-      notifyError("Payment failed. Please try again.");
-      setIsCheckoutSubmit(false);
-    }
-  };
 
   // handlePaymentWithStripe
   const handlePaymentWithStripe = async (order) => {

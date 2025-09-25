@@ -4,32 +4,6 @@ import { set_client_secret } from "./orderSlice";
 export const authApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    // createPaymentIntent
-    createPaymentIntent: builder.mutation({
-      query: (data) => ({
-        url: "api/order/create-payment-intent",
-        method: "POST",
-        body: data,
-      }),
-
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          dispatch(set_client_secret(result.clientSecret));
-        } catch (err) {
-          // do nothing
-        }
-      },
-
-    }),
-    // verifyPayment
-    verifyPayment: builder.mutation({
-      query: (data) => ({
-        url: "api/order/verify-payment",
-        method: "POST",
-        body: data,
-      }),
-    }),
     // saveOrder
     saveOrder: builder.mutation({
       query: (data) => ({
@@ -68,8 +42,6 @@ export const authApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useCreatePaymentIntentMutation,
-  useVerifyPaymentMutation,
   useSaveOrderMutation,
   useGetUserOrderByIdQuery,
   useGetUserOrdersQuery,
