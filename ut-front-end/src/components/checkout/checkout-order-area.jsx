@@ -104,7 +104,8 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           {/* <label onClick={() => setShowCard(true)} htmlFor="back_transfer" data-bs-toggle="direct-bank-transfer">
             Credit Card
           </label> */}
-          {showCard && (
+          {/* Card payment temporarily disabled */}
+          {/* {showCard && (
             <div className="direct-bank-transfer">
               <div className="payment_card">
                 <CardElement
@@ -125,7 +126,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                 />
               </div>
             </div>
-          )}
+          )} */}
           <ErrorMsg msg={errors?.payment?.message} />
         </div>
         {/* Razorpay option temporarily hidden */}
