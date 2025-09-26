@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 
-const BACKEND_URL = 'http://localhost:7001';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:7001';
 
 export const foodItemApi = apiSlice.injectEndpoints({
   overrideExisting: true,
