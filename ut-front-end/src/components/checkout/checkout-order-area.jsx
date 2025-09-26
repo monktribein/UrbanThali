@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { CardElement } from "@stripe/react-stripe-js";
+// import { CardElement } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 // internal
 import useCartInfo from "@/hooks/use-cart-info";
@@ -162,10 +162,10 @@ const CheckoutOrderArea = ({ checkoutData }) => {
       <div className="tp-checkout-btn-wrapper">
         <button
           type="submit"
-          disabled={!stripe || isCheckoutSubmit}
+          disabled={isCheckoutSubmit}
           className="tp-checkout-btn w-100"
           style={{
-            backgroundColor: (!stripe || isCheckoutSubmit) ? '#6b7280' : '#FCB53B',
+            backgroundColor: isCheckoutSubmit ? '#6b7280' : '#FCB53B',
             color: 'white',
             border: 'none',
             padding: '12px 24px',
@@ -177,11 +177,11 @@ const CheckoutOrderArea = ({ checkoutData }) => {
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            cursor: (!stripe || isCheckoutSubmit) ? 'not-allowed' : 'pointer',
-            opacity: (!stripe || isCheckoutSubmit) ? 0.6 : 1
+            cursor: isCheckoutSubmit ? 'not-allowed' : 'pointer',
+            opacity: isCheckoutSubmit ? 0.6 : 1
           }}
         >
-          Place Order
+          {isCheckoutSubmit ? 'Processing...' : 'Place Order'}
         </button>
       </div>
     </div>

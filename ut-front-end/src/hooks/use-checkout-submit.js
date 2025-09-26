@@ -2,7 +2,7 @@
 import * as dayjs from "dayjs";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -56,8 +56,8 @@ const useCheckoutSubmit = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const stripe = useStripe();
-  const elements = useElements();
+  // const stripe = useStripe();
+  // const elements = useElements();
 
   const {register,handleSubmit,setValue,formState: { errors }} = useForm();
 
@@ -142,20 +142,20 @@ const useCheckoutSubmit = () => {
     couponUpdateTrigger,
   ]);
 
-  // create payment intent
-  useEffect(() => {
-    if (cartTotal) {
-      createPaymentIntent({
-        price: parseInt(cartTotal),
-      })
-        .then((data) => {
-          setClientSecret(data?.data?.clientSecret);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [createPaymentIntent, cartTotal]);
+  // create payment intent - commented out for now
+  // useEffect(() => {
+  //   if (cartTotal) {
+  //     createPaymentIntent({
+  //       price: parseInt(cartTotal),
+  //     })
+  //       .then((data) => {
+  //         setClientSecret(data?.data?.clientSecret);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [createPaymentIntent, cartTotal]);
 
   // handleCouponCode
   const handleCouponCode = (e) => {
@@ -305,29 +305,33 @@ const useCheckoutSubmit = () => {
       user: `${user?._id}`,
     };
     if (data.payment === 'Card') {
-      if (!stripe || !elements) {
-        return;
-      }
-      const card = elements.getElement(CardElement);
-      if (card == null) {
-        return;
-      }
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: card,
-      });
-      if (error && !paymentMethod) {
-        setCardError(error.message);
-        setIsCheckoutSubmit(false);
-      } else {
-        setCardError('');
-        const orderData = {
-          ...orderInfo,
-          cardInfo: paymentMethod,
-        };
+      // Stripe payment temporarily disabled
+      notifyError("Card payment is temporarily unavailable. Please use Cash on Delivery.");
+      setIsCheckoutSubmit(false);
+      return;
+      // if (!stripe || !elements) {
+      //   return;
+      // }
+      // const card = elements.getElement(CardElement);
+      // if (card == null) {
+      //   return;
+      // }
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: 'card',
+      //   card: card,
+      // });
+      // if (error && !paymentMethod) {
+      //   setCardError(error.message);
+      //   setIsCheckoutSubmit(false);
+      // } else {
+      //   setCardError('');
+      //   const orderData = {
+      //     ...orderInfo,
+      //     cardInfo: paymentMethod,
+      //   };
 
-       return handlePaymentWithStripe(orderData);
-      }
+      //  return handlePaymentWithStripe(orderData);
+      // }
     }
     if (data.payment === 'COD') {
       saveOrder({
@@ -347,49 +351,49 @@ const useCheckoutSubmit = () => {
   };
 
 
-  // handlePaymentWithStripe
-  const handlePaymentWithStripe = async (order) => {
-    try {
-      const {paymentIntent, error:intentErr} = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: elements.getElement(CardElement),
-            billing_details: {
-              name: user?.firstName,
-              email: user?.email,
-            },
-          },
-        },
-      );
-      if (intentErr) {
-        notifyError(intentErr.message);
-      } else {
-        // notifySuccess("Your payment processed successfully");
-      }
+  // handlePaymentWithStripe - commented out for now
+  // const handlePaymentWithStripe = async (order) => {
+  //   try {
+  //     const {paymentIntent, error:intentErr} = await stripe.confirmCardPayment(
+  //       clientSecret,
+  //       {
+  //         payment_method: {
+  //           card: elements.getElement(CardElement),
+  //           billing_details: {
+  //             name: user?.firstName,
+  //             email: user?.email,
+  //           },
+  //         },
+  //       },
+  //     );
+  //     if (intentErr) {
+  //       notifyError(intentErr.message);
+  //     } else {
+  //       // notifySuccess("Your payment processed successfully");
+  //     }
 
-      const orderData = {
-        ...order,
-        paymentIntent,
-      };
+  //     const orderData = {
+  //       ...order,
+  //       paymentIntent,
+  //     };
 
-      saveOrder({
-        ...orderData
-      })
-      .then((result) => {
-          if(result?.error){
-          }
-          else {
-            localStorage.removeItem("couponInfo");
-            notifySuccess("Your Order Confirmed!");
-            router.push(`/order/${result.data?.order?._id}`);
-          }
-        })
-       } 
-    catch (err) {
-      console.log(err);
-    }
-  };
+  //     saveOrder({
+  //       ...orderData
+  //     })
+  //     .then((result) => {
+  //         if(result?.error){
+  //         }
+  //         else {
+  //           localStorage.removeItem("couponInfo");
+  //           notifySuccess("Your Order Confirmed!");
+  //           router.push(`/order/${result.data?.order?._id}`);
+  //         }
+  //       })
+  //      } 
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return {
     handleCouponCode,
@@ -407,12 +411,11 @@ const useCheckoutSubmit = () => {
     errors,
     cardError,
     submitHandler,
-    stripe,
+    // stripe, // commented out
     handleSubmit,
-    clientSecret,
-    setClientSecret,
+    // clientSecret, // commented out
+    // setClientSecret, // commented out
     cartTotal,
-    isCheckoutSubmit,
     couponApplyMsg,
     showCard,
     setShowCard,
