@@ -16,6 +16,7 @@ const useNotification = () => {
     showNotification(message, 'success', duration);
   };
 
+  
   const showError = (message, duration = 4000) => {
     showNotification(message, 'error', duration);
   };

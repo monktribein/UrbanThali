@@ -8,7 +8,7 @@ const foodItemSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  img:{
+  img: {
     type: String,
     required: true,
     validate: [validator.isURL, "Please provide valid url(s)"]
@@ -31,21 +31,21 @@ const foodItemSchema = mongoose.Schema({
     default: "plate"
   },
   imageURLs: [{
-    img:{
+    img: {
       type: String,
       required: false,
       validate: [validator.isURL, "Please provide valid url(s)"]
     }
   }],
-  parent:{
-    type:String,
-    required:true,
-    trim:true,
-   },
-  children:{
-    type:String,
-    required:true,
-    trim:true,
+  parent: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  children: {
+    type: String,
+    required: true,
+    trim: true,
   },
   price: {
     type: Number,
@@ -92,10 +92,13 @@ const foodItemSchema = mongoose.Schema({
       message: "status can't be {VALUE} "
     },
     default: "available",
+    // quantity: { type: Number, required: true, min: 0 },
+    // title: { type: String, required: true },
+    // img: { type: String, required: true }
   },
-  reviews: [{type:ObjectId, ref: 'Reviews' }],
-  foodType:{
-    type:String,
+  reviews: [{ type: ObjectId, ref: 'Reviews' }],
+  foodType: {
+    type: String,
     required: true,
     lowercase: true,
     enum: ["veg", "non-veg", "vegan", "jain"]
@@ -132,12 +135,12 @@ const foodItemSchema = mongoose.Schema({
     type: String,
     enum: ["mini", "regular", "large", "family"]
   },
-  offerDate:{
-    startDate:{
-      type:Date
+  offerDate: {
+    startDate: {
+      type: Date
     },
-    endDate:{
-      type:Date
+    endDate: {
+      type: Date
     },
   },
   featured: {

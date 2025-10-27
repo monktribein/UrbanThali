@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const { secret } = require("./config/secret");
 const PORT = secret.port || 7000;
 const morgan = require('morgan')
+// websoct
 // error handler
 const globalErrorHandler = require("./middleware/global-error-handler");
 // routes

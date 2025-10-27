@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-// internal
 const foodItemController = require('../controller/foodItem.controller');
+
+// ✅ Correct route for stock-out items
+router.get("/stock-out", foodItemController.getStockOutFoodItems);
 
 // add a food item
 router.post('/add', foodItemController.addFoodItem);
@@ -41,8 +43,5 @@ router.get('/:type', foodItemController.getFoodItemsByType);
 
 // delete Food Item
 router.delete('/:id', foodItemController.deleteFoodItem);
-
-
-
 
 module.exports = router;

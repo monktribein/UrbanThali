@@ -22,6 +22,7 @@ export const authApi = apiSlice.injectEndpoints({
       providesTags: ["AllProducts"],
       keepUnusedDataFor: 600,
     }),
+
     // add product
     addProduct: builder.mutation<IProductResponse, IAddProduct>({
       query(data: IAddProduct) {
@@ -33,6 +34,7 @@ export const authApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["AllProducts"],
     }),
+
     // edit product
     editProduct: builder.mutation<
       IProductEditResponse,
@@ -47,6 +49,7 @@ export const authApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["AllProducts"],
     }),
+
     // get single product
     getProduct: builder.query<IAddProduct, string>({
       query: (id) => `/api/food-item/single-food-item/${id}`,
@@ -61,6 +64,7 @@ export const authApi = apiSlice.injectEndpoints({
       query: () => `/api/food-item/stock-out`,
       providesTags: ["StockOutProducts"]
     }),
+    
      // delete category
      deleteProduct: builder.mutation<{message:string}, string>({
       query(id: string) {
@@ -82,4 +86,5 @@ export const {
   useGetReviewProductsQuery,
   useGetStockOutProductsQuery,
   useDeleteProductMutation,
+  useLazyGetStockOutProductsQuery,
 } = authApi;

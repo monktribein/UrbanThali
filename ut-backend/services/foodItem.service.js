@@ -192,10 +192,26 @@ exports.getReviewsFoodItems = async () => {
 };
 
 // get Reviews FoodItems
+// exports.getStockOutFoodItems = async () => {
+//   const result = await FoodItem.find({ status: "out-of-stock" }).sort({ createdAt: -1 })
+//   return result;
+// };
+
+// ✅ Professional, consistent naming
 exports.getStockOutFoodItems = async () => {
-  const result = await FoodItem.find({ status: "out-of-stock" }).sort({ createdAt: -1 })
+  const result = await FoodItem.find({
+    $or: [
+      { status: "unavailable" }, // match schema
+      { quantity: { $lte: 0 } }
+    ]
+  })
+    .sort({ createdAt: -1 })
+    .select("title img status createdAt quantity")
+    .lean();
   return result;
 };
+
+
 
 // get Reviews FoodItems
 exports.deleteFoodItem = async (id) => {

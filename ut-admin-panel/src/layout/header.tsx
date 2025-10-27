@@ -95,7 +95,9 @@ const Header = ({ setSideMenu }: IProps) => {
                 handleNotificationOpen={handleNotificationOpen}
               />
               {/* notification area end */}
+              {/* <span></span> */}
             </div>
+            {/* Admin profile */}
             <div
               ref={pRef}
               className="relative w-[70%] flex justify-end items-center"

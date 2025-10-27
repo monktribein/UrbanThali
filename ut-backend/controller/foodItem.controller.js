@@ -4,7 +4,7 @@ const FoodItem = require("../model/Products");
 
 
 // add food item
-exports.addFoodItem = async (req, res,next) => {
+const addFoodItem = async (req, res,next) => {
   console.log('food-item--->',req.body);
   try {
     const firstItem = {
@@ -32,7 +32,7 @@ exports.addFoodItem = async (req, res,next) => {
 
 
 // add all food items
-exports.addAllFoodItems = async (req,res,next) => {
+const addAllFoodItems = async (req,res,next) => {
   try {
     const result = await foodItemServices.addAllFoodItemService(req.body);
     res.json({
@@ -45,7 +45,7 @@ exports.addAllFoodItems = async (req,res,next) => {
 }
 
 // get all food items
-exports.getAllFoodItems = async (req,res,next) => {
+const getAllFoodItems = async (req,res,next) => {
   try {
     console.log('Getting all food items...');
     const result = await foodItemServices.getAllFoodItemsService();
@@ -61,7 +61,7 @@ exports.getAllFoodItems = async (req,res,next) => {
 }
 
 // get all food items by type
-exports.getFoodItemsByType = async (req,res,next) => {
+const getFoodItemsByType = async (req,res,next) => {
   try {
     const result = await foodItemServices.getFoodItemTypeService(req);
     res.status(200).json({
@@ -75,7 +75,7 @@ exports.getFoodItemsByType = async (req,res,next) => {
 }
 
 // get offer food item controller
-exports.getOfferTimerFoodItems = async (req,res,next) => {
+const getOfferTimerFoodItems = async (req,res,next) => {
   try {
     const result = await foodItemServices.getOfferTimerFoodItemService(req.query.type);
     res.status(200).json({
@@ -88,7 +88,7 @@ exports.getOfferTimerFoodItems = async (req,res,next) => {
 }
 
 // get Popular Food Item By Type
-exports.getPopularFoodItemByType = async (req,res,next) => {
+const getPopularFoodItemByType = async (req,res,next) => {
   try {
     const result = await foodItemServices.getPopularFoodItemServiceByType(req.params.type);
     res.status(200).json({
@@ -101,7 +101,7 @@ exports.getPopularFoodItemByType = async (req,res,next) => {
 }
 
 // get top rated Food Items
-exports.getTopRatedFoodItems = async (req,res,next) => {
+const getTopRatedFoodItems = async (req,res,next) => {
   try {
     const result = await foodItemServices.getTopRatedFoodItemService();
     res.status(200).json({
@@ -114,7 +114,7 @@ exports.getTopRatedFoodItems = async (req,res,next) => {
 }
 
 // getSingleFoodItem
-exports.getSingleFoodItem = async (req,res,next) => {
+const getSingleFoodItem = async (req,res,next) => {
   try {
     const foodItem = await foodItemServices.getFoodItemService(req.params.id)
     res.json(foodItem)
@@ -124,7 +124,7 @@ exports.getSingleFoodItem = async (req,res,next) => {
 }
 
 // get Related Food Item
-exports.getRelatedFoodItems = async (req,res,next) => {
+const getRelatedFoodItems = async (req,res,next) => {
   try {
     const foodItems = await foodItemServices.getRelatedFoodItemService(req.params.id)
     res.status(200).json({
@@ -173,7 +173,7 @@ exports.getRelatedFoodItems = async (req,res,next) => {
 
 
 // update food item
-exports.updateFoodItem = async (req, res, next) => {
+const updateFoodItem = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payload = req.body;
@@ -199,7 +199,7 @@ exports.updateFoodItem = async (req, res, next) => {
 
 
 // review food items
-exports.reviewFoodItems = async (req, res,next) => {
+const reviewFoodItems = async (req, res,next) => {
   try {
     const foodItems = await foodItemServices.getReviewsFoodItems()
     res.status(200).json({
@@ -212,7 +212,7 @@ exports.reviewFoodItems = async (req, res,next) => {
 };
 
 // unavailable food items
-exports.unavailableFoodItems = async (req, res,next) => {
+const unavailableFoodItems = async (req, res,next) => {
   try {
     const foodItems = await foodItemServices.getUnavailableFoodItems();
     res.status(200).json({
@@ -224,8 +224,44 @@ exports.unavailableFoodItems = async (req, res,next) => {
   }
 };
 
+
+
+//  show notification of less food items
+const getStockOutFoodItems = async (req, res, next) => {
+  try {
+    console.log("⚡ Fetching stock-out items...");
+
+    const all = await FoodItem.find().select("name quantity status").lean();
+    console.table(all);
+
+    const result = await FoodItem.find({
+      $or: [
+        { status: "unavailable" },
+        { quantity: { $lte: 1 } }
+      ]
+    })
+      .sort({ createdAt: -1 })
+      .select("name img status createdAt quantity")
+      .lean();
+
+    console.log("📦 Stock-out query result:", result.length);
+    console.table(result);
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    console.error("Error in getStockOutFoodItems:", error);
+    next(error);
+  }
+};
+
+
+
+
 // delete food item
-exports.deleteFoodItem = async (req, res,next) => {
+const deleteFoodItem = async (req, res,next) => {
   try {
     await foodItemServices.deleteFoodItem(req.params.id);
     res.status(200).json({
@@ -234,5 +270,24 @@ exports.deleteFoodItem = async (req, res,next) => {
   } catch (error) {
     next(error)
   }
+};
+
+
+
+module.exports = {
+  addFoodItem,
+  addAllFoodItems,
+  getAllFoodItems,
+  getOfferTimerFoodItems,
+  getTopRatedFoodItems,
+  reviewFoodItems,
+  getPopularFoodItemByType,
+  getRelatedFoodItems,
+  getSingleFoodItem,
+  unavailableFoodItems,
+  updateFoodItem,
+  getFoodItemsByType,
+  getStockOutFoodItems,
+  deleteFoodItem,
 };
 

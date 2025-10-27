@@ -11,6 +11,7 @@ const ProductDetailsContent = ({ productItem }) => {
   const [quantity, setQuantity] = useState(1);
   const { showSuccess } = useNotification();
 
+  
   if (!productItem) {
     return (
       <div style={{ 
