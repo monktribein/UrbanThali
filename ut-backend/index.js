@@ -7,7 +7,9 @@ const connectDB = require("./config/db");
 const { secret } = require("./config/secret");
 const PORT = secret.port || 7000;
 const morgan = require('morgan')
-// websoct
+// websoket("
+const http =  require("http");
+const { Server } = require("socket.io")
 // error handler
 const globalErrorHandler = require("./middleware/global-error-handler");
 // routes
@@ -35,6 +37,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 // connect database
 connectDB();
 
+//  create http server
+const server = http.createServer(app);
+
+// setup of socket
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+// connection of socket
+io.on("connection", (socket) => {
+  console.log("Admin connected  to Socket.IO:", socket.id);
+
+  socket.on("disconnected", () => {
+    console.log("Admin disconnected:", socket.id)
+  });
+});
+
+app.set("io", io)
+
 app.use("/api/user", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/brand", brandRoutes);
@@ -52,7 +76,7 @@ app.use("/api/razorpay", razorpayRouter);
 // root route
 app.get("/", (req, res) => res.send("Apps worked successfully"));
 
-app.listen(PORT, () => console.log(`server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 
 // global error handler
 app.use(globalErrorHandler);
@@ -70,5 +94,8 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+server.listen(PORT, () => console.log(`server running on port..... ${PORT}`));
+
 
 module.exports = app;

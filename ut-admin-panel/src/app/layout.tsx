@@ -4,6 +4,7 @@ import "/public/assets/css/custom.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { Poppins } from "next/font/google";
 import { Providers } from "@/redux/provider";
+import OrderNotification from "./components/Notification/order-Notification";
 
 export const metadata: Metadata = {
   title: "Urban Thali - Restaurant Admin Panel",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <OrderNotification/>
         <Providers>
           {children}
         </Providers>

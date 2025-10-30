@@ -90,8 +90,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Razorpay payment error--frontend res:", error);
       alert("Something went wrong during payment--fontend res");
       console.log(
