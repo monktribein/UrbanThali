@@ -29,13 +29,28 @@ const OfferDatePicker = ({
     setOfferDate(newValue);
   };
 
+
+  const parsedValue = defaultValue
+    ? {
+      startDate: defaultValue.startDate ? new Date(defaultValue.startDate) : null,
+      endDate: defaultValue.endDate ? new Date(defaultValue.endDate) : null,
+    }
+    : offerDate
+      ? {
+        startDate: offerDate.startDate ? new Date(offerDate.startDate) : null,
+        endDate: offerDate.endDate ? new Date(offerDate.endDate) : null,
+      }
+      : { startDate: null, endDate: null };
+
+
   return (
     <Datepicker
-      useRange={isRange ? true : false}
+      useRange={isRange}
       inputClassName="input w-full h-[44px] rounded-md border border-gray6 px-6 text-base"
-      value={defaultValue ? defaultValue : offerDate}
+      value={parsedValue}
       onChange={handleValueChange}
     />
+
   );
 };
 

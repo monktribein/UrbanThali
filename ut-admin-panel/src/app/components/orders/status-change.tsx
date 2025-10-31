@@ -18,12 +18,22 @@ const OrderStatusChange = ({ id }: { id: string }) => {
   const [updateStatus, { data: updateStatusData }] = useUpdateStatusMutation();
   const handleChange = async (value: string | undefined, id: string) => {
     if (value) {
+      // const res = await updateStatus({ id, status: { status: value } });
+      // if ("data" in res) {
+      //   if ("message" in res.data) {
+      //     notifySuccess(res.data.message);
+      //   }
+      // }
+
       const res = await updateStatus({ id, status: { status: value } });
-      if ("data" in res) {
-        if ("message" in res.data) {
-          notifySuccess(res.data.message);
+
+      if ("data" in res && res.data && typeof res.data === "object") {
+        const dataObj = res.data as { message?: string };
+        if (dataObj.message) {
+          notifySuccess(dataObj.message);
         }
       }
+
     }
   };
   return (

@@ -7,10 +7,28 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
 } from "react-hook-form";
+import { CouponFormValues } from "@/types/coupon-form";
 import CouponFormField from "../brand/form-field-two";
 import ProductType from "../products/add-product/product-type";
 
 // prop type
+// type IPropType<T extends FieldValues = FieldValues> = {
+//   propsItems: {
+//     openSidebar: boolean;
+//     setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+//     setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+//     setSelectProductType: React.Dispatch<React.SetStateAction<string>>;
+//     setLogo: React.Dispatch<React.SetStateAction<string>>;
+//     handleCouponSubmit: (data: T) => void;
+//     isSubmitted: boolean;
+//     register: UseFormRegister<T>;
+//     errors: FieldErrors<T>;
+//     logo: string;
+//     handleSubmit: UseFormHandleSubmit<T>;
+//     control: Control<T>;
+//   };
+// };
+
 type IPropType = {
   propsItems: {
     openSidebar: boolean;
@@ -18,17 +36,33 @@ type IPropType = {
     setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectProductType: React.Dispatch<React.SetStateAction<string>>;
     setLogo: React.Dispatch<React.SetStateAction<string>>;
-    handleCouponSubmit: (data: any) => void;
+    handleCouponSubmit: (data: CouponFormValues) => void;
     isSubmitted: boolean;
-    register: UseFormRegister<any>;
-    errors: FieldErrors<any>;
+    register: UseFormRegister<CouponFormValues>;
+    errors: FieldErrors<CouponFormValues>;
     logo: string;
-    handleSubmit: UseFormHandleSubmit<any, undefined>;
-    control: Control;
+    handleSubmit: UseFormHandleSubmit<CouponFormValues>;
+    control: Control<CouponFormValues>;
   };
 };
+const CouponOffcanvas = ({
+  propsItems,
+}: IPropType) => {
+  // const {
+  //   openSidebar,
+  //   setOpenSidebar,
+  //   isSubmitted,
+  //   setIsSubmitted,
+  //   setLogo,
+  //   errors,
+  //   handleCouponSubmit,
+  //   handleSubmit,
+  //   logo,
+  //   register,
+  //   control,
+  //   setSelectProductType,
+  // } = propsItems;
 
-const CouponOffcanvas = ({ propsItems }: IPropType) => {
   const {
     openSidebar,
     setOpenSidebar,
@@ -43,6 +77,7 @@ const CouponOffcanvas = ({ propsItems }: IPropType) => {
     control,
     setSelectProductType,
   } = propsItems;
+
   return (
     <>
       <div
@@ -110,11 +145,14 @@ const CouponOffcanvas = ({ propsItems }: IPropType) => {
                 <div className="mb-6">
                   <p className="mb-0 text-base text-black">Product Type</p>
                   <div className="category-add-select select-bordered">
-                    <ProductType
+                    <ProductType<CouponFormValues>
+                      name="productType"
                       setSelectProductType={setSelectProductType}
                       control={control}
                       errors={errors}
                     />
+
+
                   </div>
                 </div>
                 {/* Product Type */}
@@ -127,7 +165,7 @@ const CouponOffcanvas = ({ propsItems }: IPropType) => {
               >
                 Add Coupon
               </button>
-              <button  onClick={() => setOpenSidebar(false)} className="tp-btn w-full sm:w-1/2 items-center justify-around border border-gray6 bg-white text-black hover:text-white hover:border-danger hover:bg-danger">
+              <button onClick={() => setOpenSidebar(false)} className="tp-btn w-full sm:w-1/2 items-center justify-around border border-gray6 bg-white text-black hover:text-white hover:border-danger hover:bg-danger">
                 Cancel
               </button>
             </div>

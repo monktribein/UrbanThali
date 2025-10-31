@@ -22,19 +22,50 @@ const DeleteReviews = ({ id }: { id: string }) => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
+          // try {
+          //   const res = await deleteReviews(id);
+          //   if('data' in res){
+          //     if('message' in res.data){
+          //       Swal.fire("Deleted!", `${res.data.message}`, "success");
+          //     }
+          //   }
+          //   else {
+          //     Swal.fire("Deleted!", `Product reviews not found`, "error");
+          //   }
+          // } catch (error) {
+          //   // Handle error or show error message
+          // }
+
           try {
             const res = await deleteReviews(id);
-            if('data' in res){
-              if('message' in res.data){
-                Swal.fire("Deleted!", `${res.data.message}`, "success");
+
+            if ("error" in res) {
+              console.error("Delete reviews error:", res.error);
+
+              // Safely check for nested error data
+              if (res.error && typeof res.error === "object" && "data" in res.error) {
+                const errorData = (res.error as { data?: { message?: string } }).data;
+                if (typeof errorData?.message === "string") {
+                  return Swal.fire("Error", errorData.message, "error");
+                }
               }
+
+              return Swal.fire("Error", "Failed to delete product reviews. Please try again.", "error");
             }
-            else {
-              Swal.fire("Deleted!", `Product reviews not found`, "error");
+
+            // Success path
+            if ("data" in res && res.data && typeof res.data === "object") {
+              const message = (res.data as { message?: string }).message;
+              Swal.fire("Deleted!", message || "Reviews deleted successfully.", "success");
+            } else {
+              Swal.fire("Error", "Product reviews not found.", "error");
             }
-          } catch (error) {
-            // Handle error or show error message
+
+          } catch (err) {
+            console.error("Unexpected error while deleting reviews:", err);
+            Swal.fire("Error", "An unexpected error occurred while deleting reviews.", "error");
           }
+
         }
       });
     }

@@ -10,7 +10,7 @@ const useBrandSubmit = () => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const router = useRouter();
   // add
-  const [addBrand,{ data:brandData,isError,isLoading }] = useAddBrandMutation();
+  const [addBrand, { data: brandData, isError, isLoading }] = useAddBrandMutation();
   // add
   const [editBrand, { data: brandEditData, isError: brandIsErr, isLoading: brandLoading }] =
     useEditBrandMutation();
@@ -38,20 +38,44 @@ const useBrandSubmit = () => {
         logo: logo,
         status: status
       };
+      // const res = await addBrand({ ...brand_data });
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Brand added successfully");
+      //   setIsSubmitted(true);
+      //   reset();
+      //   setLogo("");
+      // }
+
+
+
       const res = await addBrand({ ...brand_data });
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Add brand error:", res.error);
+
+        // ✅ Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to add brand. Please try again.");
       } else {
         notifySuccess("Brand added successfully");
         setIsSubmitted(true);
         reset();
         setLogo("");
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");
@@ -70,20 +94,43 @@ const useBrandSubmit = () => {
         logo: logo,
         status: status
       };
+      // const res = await editBrand({ id, data: brand_data });
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Brand update successfully");
+      //   router.push('/brands')
+      //   setIsSubmitted(true);
+      //   reset();
+      // }
+
+
       const res = await editBrand({ id, data: brand_data });
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Edit brand error:", res.error);
+
+        // ✅ Safely check if res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to update brand. Please try again.");
       } else {
-        notifySuccess("Brand update successfully");
-        router.push('/brands')
+        notifySuccess("Brand updated successfully");
+        router.push("/brands");
         setIsSubmitted(true);
         reset();
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");

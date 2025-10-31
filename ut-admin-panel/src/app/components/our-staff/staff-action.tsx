@@ -29,21 +29,39 @@ const StaffAction = ({ id }: IPropType) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // try {
+        //   const res = await deleteStaff(id);
+        //   if ("error" in res) {
+        //     if ("data" in res.error) {
+        //       const errorData = res.error.data as { message?: string };
+        //       if (typeof errorData.message === "string") {
+        //         return notifyError(errorData.message);
+        //       }
+        //     }
+        //   } else {
+        //     Swal.fire("Deleted!", `Your stuff has been deleted.`, "success");
+        //   }
+        // } catch (error) {
+        //   // Handle error or show error message
+        // }
+
         try {
           const res = await deleteStaff(id);
-          if ("error" in res) {
-            if ("data" in res.error) {
-              const errorData = res.error.data as { message?: string };
-              if (typeof errorData.message === "string") {
-                return notifyError(errorData.message);
-              }
+
+          // check if res.error exists and has data
+          if ("error" in res && res.error && typeof res.error === "object" && "data" in res.error) {
+            const errorData = res.error.data as { message?: string };
+            if (typeof errorData.message === "string") {
+              return notifyError(errorData.message);
             }
           } else {
-            Swal.fire("Deleted!", `Your stuff has been deleted.`, "success");
+            Swal.fire("Deleted!", `Your staff has been deleted.`, "success");
           }
         } catch (error) {
           // Handle error or show error message
+          notifyError("Something went wrong!");
         }
+
       }
     });
   };

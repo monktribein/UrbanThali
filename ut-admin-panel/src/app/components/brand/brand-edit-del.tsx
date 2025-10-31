@@ -31,22 +31,48 @@ const BrandEditDelete = ({ id }: IPropType) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // try {
+        //   const res = await deleteBrand(id);
+        //   if ("error" in res) {
+        //     if ("data" in res.error) {
+        //       const errorData = res.error.data as { message?: string };
+        //       if (typeof errorData.message === "string") {
+        //         return notifyError(errorData.message);
+        //       }
+        //     }
+        //   } else {
+        //     Swal.fire("Deleted!", `Your category has been deleted.`, "success");
+        //     router.push('/brands')
+        //   }
+        // } catch (error) {
+        //   // Handle error or show error message
+        // }
+
+
         try {
           const res = await deleteBrand(id);
+
           if ("error" in res) {
-            if ("data" in res.error) {
-              const errorData = res.error.data as { message?: string };
-              if (typeof errorData.message === "string") {
+            console.error("Delete error:", res.error);
+
+            // Safely check for data property like in editProduct
+            if (res.error && typeof res.error === "object" && "data" in res.error) {
+              const errorData = (res.error as { data?: { message?: string } }).data;
+              if (typeof errorData?.message === "string") {
                 return notifyError(errorData.message);
               }
             }
-          } else {
-            Swal.fire("Deleted!", `Your category has been deleted.`, "success");
-            router.push('/brands')
+
+            return notifyError("Failed to delete brand. Please try again.");
           }
-        } catch (error) {
-          // Handle error or show error message
+
+          Swal.fire("Deleted!", "Your category has been deleted.", "success");
+          router.push("/brands");
+        } catch (err) {
+          console.error("Unexpected error:", err);
+          notifyError("An unexpected error occurred while deleting.");
         }
+
       }
     });
   };

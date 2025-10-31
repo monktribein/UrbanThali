@@ -23,19 +23,43 @@ const EditDeleteBtn = ({ id }: { id: string }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // try {
+        //   const res = await deleteProduct(productId);
+        //   if ("error" in res) {
+        //     if ("data" in res.error) {
+        //       const errorData = res.error.data as { message?: string };
+        //       if (typeof errorData.message === "string") {
+        //         return notifyError(errorData.message);
+        //       }
+        //     }
+        //   } else {
+        //     Swal.fire("Deleted!", `Your product has been deleted.`, "success");
+        //   }
+        // } catch (error) {}
+
         try {
           const res = await deleteProduct(productId);
+
           if ("error" in res) {
-            if ("data" in res.error) {
-              const errorData = res.error.data as { message?: string };
-              if (typeof errorData.message === "string") {
+            console.error("Delete error:", res.error);
+
+            // Safe check for error.data (same style as editProduct)
+            if (res.error && typeof res.error === "object" && "data" in res.error) {
+              const errorData = (res.error as { data?: { message?: string } }).data;
+              if (typeof errorData?.message === "string") {
                 return notifyError(errorData.message);
               }
             }
-          } else {
-            Swal.fire("Deleted!", `Your product has been deleted.`, "success");
+
+            return notifyError("Failed to delete product. Please try again.");
           }
-        } catch (error) {}
+
+          Swal.fire("Deleted!", "Your product has been deleted.", "success");
+        } catch (error) {
+          console.error("Unexpected error:", error);
+          notifyError("An unexpected error occurred while deleting the product.");
+        }
+
       }
     });
   };

@@ -18,7 +18,7 @@ const schema = Yup.object().shape({
 
 const ForgetPasswordPage = ({ params }: { params: { token: string } }) => {
   const token = params.token;
-  const [adminConfirmForgotPassword, {}] =
+  const [adminConfirmForgotPassword, { }] =
     useAdminConfirmForgotPasswordMutation();
   // react hook form
   const {
@@ -35,21 +35,43 @@ const ForgetPasswordPage = ({ params }: { params: { token: string } }) => {
       password: data.password,
       token,
     });
+    // if ("error" in res) {
+    //   if ("data" in res.error) {
+    //     const errorData = res.error.data as { message?: string };
+    //     if (typeof errorData.message === "string") {
+    //       return notifyError(errorData.message);
+    //     }
+    //   }
+    // } else {
+    //   if ("data" in res) {
+    //     if("message" in res.data){
+    //       notifySuccess(res.data.message);
+    //     }
+    //   }
+    //   reset();
+    // }
+
     if ("error" in res) {
-      if ("data" in res.error) {
-        const errorData = res.error.data as { message?: string };
-        if (typeof errorData.message === "string") {
+      console.error("Error response:", res.error);
+
+      // Safely check if res.error exists and has a data property
+      if (res.error && typeof res.error === "object" && "data" in res.error) {
+        const errorData = (res.error as { data?: { message?: string } }).data;
+        if (typeof errorData?.message === "string") {
           return notifyError(errorData.message);
         }
       }
+
+      return notifyError("Failed to reset password. Please try again.");
     } else {
       if ("data" in res) {
-        if("message" in res.data){
+        if ("message" in res.data) {
           notifySuccess(res.data.message);
         }
       }
       reset();
     }
+
   };
   return (
     <div className="tp-main-wrapper h-screen">
@@ -78,7 +100,7 @@ const ForgetPasswordPage = ({ params }: { params: { token: string } }) => {
                 </div>
                 <div className="mb-5">
                   <p className="mb-0 text-base text-black">
-                  confirm password <span className="text-red">*</span>
+                    confirm password <span className="text-red">*</span>
                   </p>
                   <input
                     {...register("confirmPassword")}

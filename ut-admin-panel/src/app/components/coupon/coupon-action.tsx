@@ -8,11 +8,11 @@ import Link from "next/link";
 
 // prop type 
 type IPropType = {
-  id:string;
+  id: string;
   setOpenSidebar?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CouponAction = ({ id,setOpenSidebar }: IPropType) => {
+const CouponAction = ({ id, setOpenSidebar }: IPropType) => {
   const [showEdit, setShowEdit] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
 
@@ -31,16 +31,31 @@ const CouponAction = ({ id,setOpenSidebar }: IPropType) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // try {
+        //   const res = await deleteCoupon(delId);
+        //   if ("data" in res) {
+        //     if ("success" in res.data) {
+        //       Swal.fire("Deleted!", `Your coupon has been deleted.`, "success");
+        //     }
+        //   }
+        // } catch (error) {
+        //   // Handle error or show error message
+        // }
+
         try {
           const res = await deleteCoupon(delId);
-          if ("data" in res) {
-            if ("success" in res.data) {
-              Swal.fire("Deleted!", `Your coupon has been deleted.`, "success");
-            }
+
+          // Safe check for res.data
+          if (res.data && typeof res.data === "object" && "success" in res.data) {
+            Swal.fire("Deleted!", "Your coupon has been deleted.", "success");
+          } else {
+            alert("Failed to delete coupon. Please try again.");
           }
         } catch (error) {
-          // Handle error or show error message
+          console.error("Unexpected error:", error);
+          alert("An unexpected error occurred while deleting the coupon.");
         }
+
       }
     });
   };
@@ -49,13 +64,13 @@ const CouponAction = ({ id,setOpenSidebar }: IPropType) => {
     <div className="flex items-center justify-end space-x-2">
       <div className="relative">
         <Link href={`/coupon/${id}`}>
-        <button
-          onMouseEnter={() => setShowEdit(true)}
-          onMouseLeave={() => setShowEdit(false)}
-          className="w-10 h-10 leading-10 text-tiny bg-success text-white rounded-md hover:bg-green-600"
-        >
-          <Edit />
-        </button>
+          <button
+            onMouseEnter={() => setShowEdit(true)}
+            onMouseLeave={() => setShowEdit(false)}
+            className="w-10 h-10 leading-10 text-tiny bg-success text-white rounded-md hover:bg-green-600"
+          >
+            <Edit />
+          </button>
         </Link>
         <EditTooltip showEdit={showEdit} />
       </div>

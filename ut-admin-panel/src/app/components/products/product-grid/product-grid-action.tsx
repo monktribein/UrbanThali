@@ -27,17 +27,32 @@ const ProductGridAction = ({ id }: { id: string }) => {
       if (result.isConfirmed) {
         try {
           const res = await deleteProduct(productId);
+          // if ("error" in res) {
+          //   if ("data" in res.error) {
+          //     const errorData = res.error.data as { message?: string };
+          //     if (typeof errorData.message === "string") {
+          //       return notifyError(errorData.message);
+          //     }
+          //   }
+          // } else {
+          //   Swal.fire("Deleted!", `Your product has been deleted.`, "success");
+          // }
+
           if ("error" in res) {
-            if ("data" in res.error) {
-              const errorData = res.error.data as { message?: string };
-              if (typeof errorData.message === "string") {
+            console.error("Error response:", res.error);
+
+            // Safely check for data property (consistent with deleteBrand approach)
+            if (res.error && typeof res.error === "object" && "data" in res.error) {
+              const errorData = (res.error as { data?: { message?: string } }).data;
+              if (typeof errorData?.message === "string") {
                 return notifyError(errorData.message);
               }
             }
-          } else {
-            Swal.fire("Deleted!", `Your product has been deleted.`, "success");
+
+            return notifyError("An error occurred. Please try again.");
           }
-        } catch (error) {}
+
+        } catch (error) { }
       }
     });
   };

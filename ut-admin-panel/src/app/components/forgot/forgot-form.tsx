@@ -13,7 +13,7 @@ const schema = Yup.object().shape({
 });
 
 const ForgotForm = () => {
-  const [forgetPassword, {}] = useForgetPasswordMutation();
+  const [forgetPassword, { }] = useForgetPasswordMutation();
   // react hook form
   const {
     register,
@@ -28,21 +28,35 @@ const ForgotForm = () => {
     const res = await forgetPassword({
       email: data.email,
     });
-    if ("error" in res) {
-      if ("data" in res.error) {
-        const errorData = res.error.data as { message?: string };
-        if (typeof errorData.message === "string") {
-          return notifyError(errorData.message);
-        }
+    // if ("error" in res) {
+    //   if ("data" in res.error) {
+    //     const errorData = res.error.data as { message?: string };
+    //     if (typeof errorData.message === "string") {
+    //       return notifyError(errorData.message);
+    //     }
+    //   }
+    // } else {
+    //   if ("data" in res) {
+    //     if("message" in res.data){
+    //       notifySuccess(res.data.message);
+    //     }
+    //   }
+    //   reset();
+    // }
+
+    if ("error" in res && res.error && typeof res.error === "object") {
+      const errorObj = res.error as { data?: { message?: string } };
+      if (errorObj.data && typeof errorObj.data.message === "string") {
+        return notifyError(errorObj.data.message);
       }
-    } else {
-      if ("data" in res) {
-        if("message" in res.data){
-          notifySuccess(res.data.message);
-        }
+    } else if ("data" in res && res.data && typeof res.data === "object") {
+      const dataObj = res.data as { message?: string };
+      if (dataObj.message) {
+        notifySuccess(dataObj.message);
       }
       reset();
     }
+
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

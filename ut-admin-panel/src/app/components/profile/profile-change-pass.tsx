@@ -1,5 +1,5 @@
 "use client";
-import { useAdminChangePasswordMutation} from "@/redux/auth/authApi";
+import { useAdminChangePasswordMutation } from "@/redux/auth/authApi";
 import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
 
 const ProfileChangePass = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const [changePassword, {}] = useAdminChangePasswordMutation();
+  const [changePassword, { }] = useAdminChangePasswordMutation();
   // react hook form
   const {
     register,
@@ -35,24 +35,39 @@ const ProfileChangePass = () => {
   // on submit
   const onSubmit = async (data: { password: string; newPassword: string }) => {
     if (user) {
-     const res =  await changePassword({
+      const res = await changePassword({
         email: user.email,
         oldPass: data.password,
         newPass: data.newPassword,
       });
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Password change successfully");
+      //   reset();
+      // }
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Error response:", res.error);
+
+        // Safely check that res.error exists and is an object
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
-      } else {
-        notifySuccess("Password change successfully");
-        reset();
+
+        return notifyError("Failed to change password. Please try again.");
       }
+
     }
-    reset();
+    // reset();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

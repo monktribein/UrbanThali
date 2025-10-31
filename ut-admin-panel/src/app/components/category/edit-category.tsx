@@ -10,7 +10,7 @@ import { useGetCategoryQuery } from "@/redux/category/categoryApi";
 import CategoryParent from "./category-parent";
 import CategoryDescription from "./category-description";
 
-const  EditCategory = ({ id }: { id: string }) => {
+const EditCategory = ({ id }: { id: string }) => {
   const { data: categoryData, isError, isLoading } = useGetCategoryQuery(id);
   const {
     selectProductType,
@@ -65,12 +65,19 @@ const  EditCategory = ({ id }: { id: string }) => {
               <div className="mb-6">
                 <p className="mb-0 text-base text-black">Product Type</p>
                 <div className="category-add-select select-bordered">
-                  <ProductType
+                  {/* <ProductType
                     setSelectProductType={setSelectProductType}
                     control={control}
                     errors={errors}
                     default_value={categoryData.productType}
+                  /> */}
+                  <ProductType
+                    name="productType"       
+                    setSelectProductType={setSelectProductType}
+                    control={control}
+                    errors={errors}
                   />
+
                 </div>
               </div>
               {/* Product Type */}

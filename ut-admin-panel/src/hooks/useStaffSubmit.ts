@@ -39,20 +39,43 @@ const useStaffSubmit = () => {
           ? data.joiningdate
           : dayjs(new Date()).format("YYYY-MM-DD"),
       };
+      // const res = await addStaff({ ...stuff_data });
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Stuff added successfully");
+      //   setIsSubmitted(true);
+      //   reset();
+      //   setStaffImg("");
+      // }
+
+
       const res = await addStaff({ ...stuff_data });
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Add staff error:", res.error);
+
+        // Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to add staff. Please try again.");
       } else {
-        notifySuccess("Stuff added successfully");
+        notifySuccess("Staff added successfully");
         setIsSubmitted(true);
         reset();
         setStaffImg("");
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");
@@ -74,19 +97,39 @@ const useStaffSubmit = () => {
       };
       const res = await updateProfile({ id, data: stuff_data });
       console.log(res)
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Stuff update successfully");
+      //   router.push('/our-staff')
+      //   setIsSubmitted(true);
+      //   reset();
+      // }
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Update staff error:", res.error);
+
+        // Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to update staff. Please try again.");
       } else {
-        notifySuccess("Stuff update successfully");
-        router.push('/our-staff')
+        notifySuccess("Staff update successfully");
+        router.push("/our-staff");
         setIsSubmitted(true);
         reset();
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");

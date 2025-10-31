@@ -44,14 +44,37 @@ const useCategorySubmit = () => {
         productType: data?.productType?.value,
         children: categoryChildren,
       };
+      // const res = await addCategory({ ...category_data });
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Category added successfully");
+      //   setIsSubmitted(true);
+      //   reset();
+      //   setCategoryChildren([]);
+      //   setCategoryImg("");
+      // }
+
+
       const res = await addCategory({ ...category_data });
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Add category error:", res.error);
+
+        // ✅ Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to add category. Please try again.");
       } else {
         notifySuccess("Category added successfully");
         setIsSubmitted(true);
@@ -59,6 +82,7 @@ const useCategorySubmit = () => {
         setCategoryChildren([]);
         setCategoryImg("");
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");
@@ -76,19 +100,39 @@ const useCategorySubmit = () => {
       };
       const res = await editCategory({ id, data: category_data });
       // console.log(res)
+      // if ("error" in res) {
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      // } else {
+      //   notifySuccess("Category update successfully");
+      //   router.push('/category')
+      //   setIsSubmitted(true);
+      //   reset();
+      // }
+
       if ("error" in res) {
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+        console.error("Update category error:", res.error);
+
+        // Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
+        return notifyError("Failed to update category. Please try again.");
       } else {
         notifySuccess("Category update successfully");
-        router.push('/category')
+        router.push("/category");
         setIsSubmitted(true);
         reset();
       }
+
     } catch (error) {
       console.log(error);
       notifyError("Something went wrong");

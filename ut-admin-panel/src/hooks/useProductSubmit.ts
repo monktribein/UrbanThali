@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import slugify from "slugify";
 import { useForm } from "react-hook-form";
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useAddProductMutation, useEditProductMutation } from "@/redux/product/productApi";
 import { notifyError, notifySuccess } from "@/utils/toast";
 
@@ -157,7 +157,7 @@ const useProductSubmit = () => {
       tags: tags,
     };
 
-    console.log('productData-------------------..>',productData)
+    console.log('productData-------------------..>', productData)
 
 
     if (!img) {
@@ -170,22 +170,43 @@ const useProductSubmit = () => {
       return notifyError("Product price must be gether than discount");
     } else {
       const res = await addProduct(productData);
+      // if ("error" in res) {
+      //   console.log("Add product error:", res.error);
+      //   if ("data" in res.error) {
+      //     const errorData = res.error.data as { message?: string };
+      //     if (typeof errorData.message === "string") {
+      //       return notifyError(errorData.message);
+      //     }
+      //   }
+      //   // Fallback error message
+      //   return notifyError("Failed to add food item. Please check all required fields.");
+      // } else {
+      //   notifySuccess("Food item created successfully!");
+      //   setIsSubmitted(true);
+      //   resetForm();
+      //   router.push('/product-grid')
+      // }
+
       if ("error" in res) {
         console.log("Add product error:", res.error);
-        if ("data" in res.error) {
-          const errorData = res.error.data as { message?: string };
-          if (typeof errorData.message === "string") {
+
+        // Safely check that res.error exists and is an object before accessing .data
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
             return notifyError(errorData.message);
           }
         }
+
         // Fallback error message
         return notifyError("Failed to add food item. Please check all required fields.");
       } else {
         notifySuccess("Food item created successfully!");
         setIsSubmitted(true);
         resetForm();
-        router.push('/product-grid')
+        router.push("/product-grid");
       }
+
     }
   };
   // handle edit product
@@ -193,7 +214,7 @@ const useProductSubmit = () => {
   //   console.log("=== EDIT FORM SUBMISSION DEBUG ===");
   //   console.log("Edit form data--->", data);
   //   console.log("Form errors--->", errors);
-    
+
   //   // Ensure brand is set - use first available brand as default if none selected
   //   let selectedBrand = brand;
   //   if (!brand.name || !brand.id) {
@@ -203,7 +224,7 @@ const useProductSubmit = () => {
   //       id: "68c1e077e3a8f3a04982b617"
   //     };
   //   }
-    
+
   //   // product data
   //   const productData = {
   //     sku: data.SKU,
@@ -259,125 +280,125 @@ const useProductSubmit = () => {
 
 
   const handleEditProduct = async (data: any, id: string) => {
-  console.log("=== EDIT FORM SUBMISSION DEBUG ===");
-  console.log("Edit form data--->", data);
-  console.log("Form errors--->", errors);
+    console.log("=== EDIT FORM SUBMISSION DEBUG ===");
+    console.log("Edit form data--->", data);
+    console.log("Form errors--->", errors);
 
-  // ✅ Ensure brand/restaurant is defined
-  const selectedBrand = brand?.name
-    ? brand
-    : {
+    // ✅ Ensure brand/restaurant is defined
+    const selectedBrand = brand?.name
+      ? brand
+      : {
         name: "Urban Kitchen",
         id: "68c1e077e3a8f3a04982b617",
       };
 
-  // ✅ Ensure category has fallback
-  const selectedCategory = category?.name
-    ? category
-    : {
+    // ✅ Ensure category has fallback
+    const selectedCategory = category?.name
+      ? category
+      : {
         name: "Thali",
         id: "default-category-id",
       };
 
-  const productData = {
-    sku: data.SKU,
-    img: img || "",
-    name: data["Dish_Name"] || data.title || data.name || "Untitled Item",
-    title: data["Dish_Name"] || data.title || data.name || "Untitled Item",
-    slug: slugify(
-      data["Dish_Name"] || data.title || data.name || "item",
-      { replacement: "-", lower: true }
-    ),
-    unit: data.unit || "plate",
-    imageURLs: imageURLs || [],
-    parent: parent || "Thali",
-    children: children || "Main Course",
-    price: Number(data.price) || 0,
-    discount: Number(data["discount_percentage"]) || 0,
-    quantity: Number(data.quantity) || 0,
+    const productData = {
+      sku: data.SKU,
+      img: img || "",
+      name: data["Dish_Name"] || data.title || data.name || "Untitled Item",
+      title: data["Dish_Name"] || data.title || data.name || "Untitled Item",
+      slug: slugify(
+        data["Dish_Name"] || data.title || data.name || "item",
+        { replacement: "-", lower: true }
+      ),
+      unit: data.unit || "plate",
+      imageURLs: imageURLs || [],
+      parent: parent || "Thali",
+      children: children || "Main Course",
+      price: Number(data.price) || 0,
+      discount: Number(data["discount_percentage"]) || 0,
+      quantity: Number(data.quantity) || 0,
 
-    // ✅ Always send valid objects
-    brand: selectedBrand,
-    restaurant: selectedBrand,
-    category: selectedCategory,
+      // ✅ Always send valid objects
+      brand: selectedBrand,
+      restaurant: selectedBrand,
+      category: selectedCategory,
 
-    status: status || "available",
-    productType: productType || "veg",
-    offerDate: {
-      startDate: offerDate?.startDate || null,
-      endDate: offerDate?.endDate || null,
-    },
-    foodType:
-      ["veg", "non-veg", "vegan", "jain"].includes(productType)
-        ? productType
-        : "veg",
-    description: data.description || "",
-    videoId: data.youtube_video_Id || "",
-    ingredients: data.ingredients
-      ? data.ingredients.split(",").map((i: string) => i.trim())
-      : [],
-    preparationTime:
-      Number(data.preparationTime) ||
-      Number(data["Preparation_Time_(mins)"]) ||
-      5,
-    spiceLevel: data.spiceLevel || "mild",
-    thaliType: data.thaliType || "",
-    featured: data.featured || false,
-    additionalInformation: additionalInformation || [],
-    tags: tags || [],
-  };
+      status: status || "available",
+      productType: productType || "veg",
+      offerDate: {
+        startDate: offerDate?.startDate || null,
+        endDate: offerDate?.endDate || null,
+      },
+      foodType:
+        ["veg", "non-veg", "vegan", "jain"].includes(productType)
+          ? productType
+          : "veg",
+      description: data.description || "",
+      videoId: data.youtube_video_Id || "",
+      ingredients: data.ingredients
+        ? data.ingredients.split(",").map((i: string) => i.trim())
+        : [],
+      preparationTime:
+        Number(data.preparationTime) ||
+        Number(data["Preparation_Time_(mins)"]) ||
+        5,
+      spiceLevel: data.spiceLevel || "mild",
+      thaliType: data.thaliType || "",
+      featured: data.featured || false,
+      additionalInformation: additionalInformation || [],
+      tags: tags || [],
+    };
 
-  console.log("edit productData---->", productData);
+    console.log("edit productData---->", productData);
 
-  // try {
-  //   const res = await editProduct({ id, data: productData });
-  //   if ("error" in res) {
-  //     console.error("Edit error:", res.error);
+    // try {
+    //   const res = await editProduct({ id, data: productData });
+    //   if ("error" in res) {
+    //     console.error("Edit error:", res.error);
 
-  //     const errorData = res?.error?.data as { message?: string };
-  //     if (typeof errorData?.message === "string") {
-  //       return notifyError(errorData.message);
-  //     }
-  //     return notifyError("Failed to edit product. Check required fields.");
-  //   }
+    //     const errorData = res?.error?.data as { message?: string };
+    //     if (typeof errorData?.message === "string") {
+    //       return notifyError(errorData.message);
+    //     }
+    //     return notifyError("Failed to edit product. Check required fields.");
+    //   }
 
-  //   notifySuccess("Product edited successfully!");
-  //   setIsSubmitted(true);
-  //   router.push("/product-grid");
-  //   resetForm();
-  // } catch (err) {
-  //   console.error("Unexpected error:", err);
-  //   notifyError("An unexpected error occurred while editing.");
-  // }
+    //   notifySuccess("Product edited successfully!");
+    //   setIsSubmitted(true);
+    //   router.push("/product-grid");
+    //   resetForm();
+    // } catch (err) {
+    //   console.error("Unexpected error:", err);
+    //   notifyError("An unexpected error occurred while editing.");
+    // }
 
 
-  try {
-  const res = await editProduct({ id, data: productData });
+    try {
+      const res = await editProduct({ id, data: productData });
 
-  if ("error" in res) {
-    console.error("Edit error:", res.error);
+      if ("error" in res) {
+        console.error("Edit error:", res.error);
 
-    // check if the error object has a "data" property
-    if (res.error && typeof res.error === "object" && "data" in res.error) {
-      const errorData = (res.error as { data?: { message?: string } }).data;
-      if (typeof errorData?.message === "string") {
-        return notifyError(errorData.message);
+        // check if the error object has a "data" property
+        if (res.error && typeof res.error === "object" && "data" in res.error) {
+          const errorData = (res.error as { data?: { message?: string } }).data;
+          if (typeof errorData?.message === "string") {
+            return notifyError(errorData.message);
+          }
+        }
+
+        return notifyError("Failed to edit product. Check required fields.");
       }
+
+      notifySuccess("Product edited successfully!");
+      setIsSubmitted(true);
+      router.push("/product-grid");
+      resetForm();
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      notifyError("An unexpected error occurred while editing.");
     }
 
-    return notifyError("Failed to edit product. Check required fields.");
-  }
-
-  notifySuccess("Product edited successfully!");
-  setIsSubmitted(true);
-  router.push("/product-grid");
-  resetForm();
-} catch (err) {
-  console.error("Unexpected error:", err);
-  notifyError("An unexpected error occurred while editing.");
-}
-
-};
+  };
 
 
   return {

@@ -17,29 +17,60 @@ const schema = Yup.object().shape({
 });
 
 const RegisterForm = () => {
-  const [registerAdmin, {}] = useRegisterAdminMutation();
+  const [registerAdmin, { }] = useRegisterAdminMutation();
   const router = useRouter();
   // react hook form
-  const {register,handleSubmit,formState: { errors },reset} = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
   // on submit
-  const onSubmit = async (data:{name:string;email:string;password:string}) => {
-    const res = await registerAdmin({name:data.name,email:data.email,password:data.password});
+  // const onSubmit = async (data:{name:string;email:string;password:string}) => {
+  //   const res = await registerAdmin({name:data.name,email:data.email,password:data.password});
+  //   if ("error" in res) {
+  //     if ("data" in res.error) {
+  //       const errorData = res.error.data as { message?: string };
+  //       if (typeof errorData.message === "string") {
+  //         return notifyError(errorData.message);
+  //       }
+  //     }
+  //   } else {
+  //     notifySuccess("Register successfully");
+  //     router.push('/dashboard')
+  //     reset();
+  //   }
+  //   reset();
+  // };
+
+
+
+  const onSubmit = async (data: { name: string; email: string; password: string }) => {
+    const res = await registerAdmin({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+
     if ("error" in res) {
-      if ("data" in res.error) {
-        const errorData = res.error.data as { message?: string };
-        if (typeof errorData.message === "string") {
+      console.error("Register error:", res.error);
+
+      // Safely check that res.error exists and is an object before accessing data
+      if (res.error && typeof res.error === "object" && "data" in res.error) {
+        const errorData = (res.error as { data?: { message?: string } }).data;
+        if (typeof errorData?.message === "string") {
           return notifyError(errorData.message);
         }
       }
+
+      return notifyError("Failed to register. Please try again.");
     } else {
       notifySuccess("Register successfully");
-      router.push('/dashboard')
+      router.push("/dashboard");
       reset();
     }
+
     reset();
   };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

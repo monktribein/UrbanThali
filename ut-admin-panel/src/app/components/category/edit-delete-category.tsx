@@ -31,22 +31,48 @@ const CategoryEditDelete = ({ id }: IPropType) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // try {
+        //   const res = await deleteCategory(id);
+        //   if ("error" in res) {
+        //     if ("data" in res.error) {
+        //       const errorData = res.error.data as { message?: string };
+        //       if (typeof errorData.message === "string") {
+        //         return notifyError(errorData.message);
+        //       }
+        //     }
+        //   } else {
+        //     Swal.fire("Deleted!", `Your category has been deleted.`, "success");
+        //     router.push('/category')
+        //   }
+        // } catch (error) {
+        //   // Handle error or show error message
+        // }
+
+
         try {
           const res = await deleteCategory(id);
+
           if ("error" in res) {
-            if ("data" in res.error) {
-              const errorData = res.error.data as { message?: string };
-              if (typeof errorData.message === "string") {
+            console.error("Delete error:", res.error);
+
+            // Safe check for error.data (same as editProduct)
+            if (res.error && typeof res.error === "object" && "data" in res.error) {
+              const errorData = (res.error as { data?: { message?: string } }).data;
+              if (typeof errorData?.message === "string") {
                 return notifyError(errorData.message);
               }
             }
-          } else {
-            Swal.fire("Deleted!", `Your category has been deleted.`, "success");
-            router.push('/category')
+
+            return notifyError("Failed to delete category. Please try again.");
           }
+
+          Swal.fire("Deleted!", "Your category has been deleted.", "success");
+          router.push('/category');
         } catch (error) {
-          // Handle error or show error message
+          console.error("Unexpected error:", error);
+          notifyError("An unexpected error occurred while deleting the category.");
         }
+
       }
     });
   };

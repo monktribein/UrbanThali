@@ -52,10 +52,12 @@ const AddCategory = () => {
               <p className="mb-0 text-base text-black">Food Category Type</p>
               <div className="category-add-select select-bordered">
                 <ProductType
+                  name="productType"        
                   setSelectProductType={setSelectProductType}
                   control={control}
                   errors={errors}
                 />
+
               </div>
             </div>
             {/* Food Category Type */}
