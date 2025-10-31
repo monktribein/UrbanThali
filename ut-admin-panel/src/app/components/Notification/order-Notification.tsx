@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+
 
 // ✅ Define the socket type for TypeScript
 const socket: Socket = io("http://localhost:7001"); // your backend URL

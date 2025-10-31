@@ -65,7 +65,7 @@ const DeleteReviews = ({ id }: { id: string }) => {
             console.error("Unexpected error while deleting reviews:", err);
             Swal.fire("Error", "An unexpected error occurred while deleting reviews.", "error");
           }
-
+ord
         }
       });
     }
