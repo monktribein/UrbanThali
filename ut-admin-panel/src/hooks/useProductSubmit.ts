@@ -329,25 +329,54 @@ const useProductSubmit = () => {
 
   console.log("edit productData---->", productData);
 
+  // try {
+  //   const res = await editProduct({ id, data: productData });
+  //   if ("error" in res) {
+  //     console.error("Edit error:", res.error);
+
+  //     const errorData = res?.error?.data as { message?: string };
+  //     if (typeof errorData?.message === "string") {
+  //       return notifyError(errorData.message);
+  //     }
+  //     return notifyError("Failed to edit product. Check required fields.");
+  //   }
+
+  //   notifySuccess("Product edited successfully!");
+  //   setIsSubmitted(true);
+  //   router.push("/product-grid");
+  //   resetForm();
+  // } catch (err) {
+  //   console.error("Unexpected error:", err);
+  //   notifyError("An unexpected error occurred while editing.");
+  // }
+
+
   try {
-    const res = await editProduct({ id, data: productData });
-    if ("error" in res) {
-      console.error("Edit error:", res.error);
-      const errorData = res?.error?.data as { message?: string };
+  const res = await editProduct({ id, data: productData });
+
+  if ("error" in res) {
+    console.error("Edit error:", res.error);
+
+    // check if the error object has a "data" property
+    if (res.error && typeof res.error === "object" && "data" in res.error) {
+      const errorData = (res.error as { data?: { message?: string } }).data;
       if (typeof errorData?.message === "string") {
         return notifyError(errorData.message);
       }
-      return notifyError("Failed to edit product. Check required fields.");
     }
 
-    notifySuccess("Product edited successfully!");
-    setIsSubmitted(true);
-    router.push("/product-grid");
-    resetForm();
-  } catch (err) {
-    console.error("Unexpected error:", err);
-    notifyError("An unexpected error occurred while editing.");
+    return notifyError("Failed to edit product. Check required fields.");
   }
+
+  notifySuccess("Product edited successfully!");
+  setIsSubmitted(true);
+  router.push("/product-grid");
+  resetForm();
+} catch (err) {
+  console.error("Unexpected error:", err);
+  notifyError("An unexpected error occurred while editing.");
+}
+
 };
 
 
