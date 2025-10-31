@@ -1,6 +1,6 @@
 import React from "react";
 
-function ThItem({ title,cls }: { title: string,cls?:string }): React.JSX.Element {
+function ThItem({ title,cls }: { title: string,cls?:string }): JSX.Element {
   return (
     <th
       scope="col"
@@ -11,7 +11,7 @@ function ThItem({ title,cls }: { title: string,cls?:string }): React.JSX.Element
   );
 }
 
-const TableHead = () => {
+const TableHead = (): JSX.Element => {
   return (
     <thead className="bg-white">
       <tr className="border-b border-gray6 text-tiny">
