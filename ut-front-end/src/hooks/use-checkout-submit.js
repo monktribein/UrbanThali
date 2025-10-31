@@ -290,69 +290,69 @@ const useCheckoutSubmit = () => {
       orderNote: data.orderNote,
       user: `${user?._id}`,
     };
-    if (data.payment === 'Card') {
-      try {
-        // 🔹 Create Razorpay order on your backend
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/razorpay-order`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: cartTotal }),
-        });
+    // if (data.payment === 'Card') {
+    //   try {
+    //     // 🔹 Create Razorpay order on your backend
+    //     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/razorpay-order`, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({ amount: cartTotal }),
+    //     });
 
-        const orderDataRes = await response.json();
+    //     const orderDataRes = await response.json();
 
-        if (!orderDataRes?.id) {
-          notifyError("Failed to create Razorpay order!");
-          setIsCheckoutSubmit(false);
-          return;
-        }
+    //     if (!orderDataRes?.id) {
+    //       notifyError("Failed to create Razorpay order!");
+    //       setIsCheckoutSubmit(false);
+    //       return;
+    //     }
 
-        const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: orderDataRes.amount,
-          currency: "INR",
-          name: "Urban Thali",
-          description: "Order Payment",
-          order_id: orderDataRes.id,
-          handler: async function (paymentResponse) {
-            // 🔹 Save order after successful payment
-            const finalOrder = {
-              ...orderInfo,
-              paymentId: paymentResponse.razorpay_payment_id,
-              razorpayOrderId: paymentResponse.razorpay_order_id,
-              razorpaySignature: paymentResponse.razorpay_signature,
-              paymentMethod: "Razorpay",
-              status: "Paid",
-            };
+    //     const options = {
+    //       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+    //       amount: orderDataRes.amount,
+    //       currency: "INR",
+    //       name: "Urban Thali",
+    //       description: "Order Payment",
+    //       order_id: orderDataRes.id,
+    //       handler: async function (paymentResponse) {
+    //         // 🔹 Save order after successful payment
+    //         const finalOrder = {
+    //           ...orderInfo,
+    //           paymentId: paymentResponse.razorpay_payment_id,
+    //           razorpayOrderId: paymentResponse.razorpay_order_id,
+    //           razorpaySignature: paymentResponse.razorpay_signature,
+    //           paymentMethod: "Razorpay",
+    //           status: "Paid",
+    //         };
 
-            saveOrder(finalOrder).then((res) => {
-              if (res?.error) {
-                notifyError("Order could not be saved!");
-              } else {
-                localStorage.removeItem("cart_products");
-                localStorage.removeItem("couponInfo");
-                notifySuccess("Your Order Confirmed!");
-                router.push(`/order/${res.data?.order?._id}`);
-              }
-              setIsCheckoutSubmit(false);
-            });
-          },
-          prefill: {
-            name: `${data.firstName} ${data.lastName}`,
-            email: data.email,
-            contact: data.contactNo,
-          },
-          theme: { color: "#FCB53B" },
-        };
+    //         saveOrder(finalOrder).then((res) => {
+    //           if (res?.error) {
+    //             notifyError("Order could not be saved!");
+    //           } else {
+    //             localStorage.removeItem("cart_products");
+    //             localStorage.removeItem("couponInfo");
+    //             notifySuccess("Your Order Confirmed!");
+    //             router.push(`/order/${res.data?.order?._id}`);
+    //           }
+    //           setIsCheckoutSubmit(false);
+    //         });
+    //       },
+    //       prefill: {
+    //         name: `${data.firstName} ${data.lastName}`,
+    //         email: data.email,
+    //         contact: data.contactNo,
+    //       },
+    //       theme: { color: "#FCB53B" },
+    //     };
 
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-      } catch (error) {
-        console.error(error);
-        notifyError("Something went wrong while starting Razorpay payment!");
-        setIsCheckoutSubmit(false);
-      }
-    }
+    //     const rzp = new window.Razorpay(options);
+    //     rzp.open();
+    //   } catch (error) {
+    //     console.error(error);
+    //     notifyError("Something went wrong while starting Razorpay payment!");
+    //     setIsCheckoutSubmit(false);
+    //   }
+    // }
 
 
     if (data.payment === 'COD') {

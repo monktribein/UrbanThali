@@ -21,8 +21,8 @@ module.exports.secret = {
   cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET, 
   cloudinary_upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET, 
   
-  razorpay_key_ID: process.env.RAZORPAY_KEY_ID, 
-  razorpay_key_secret: process.env.RAZORPAY_KEY_SECRET, 
+  // razorpay_key_ID: process.env.RAZORPAY_KEY_ID, 
+  // razorpay_key_secret: process.env.RAZORPAY_KEY_SECRET, 
   client_url: process.env.STORE_URL, 
   admin_url:process.env.ADMIN_URL, 
 }

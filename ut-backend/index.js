@@ -26,7 +26,7 @@ const adminRoutes = require("./routes/admin.routes");
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 // RzorPay
 // const razorpayRouter = require("./routes/razorpay.router");
-const razorpayRouter = require("./routes/razorpay.routes");
+// const razorpayRouter = require("./routes/razorpay.routes");
 
 // middleware
 app.use(cors());
@@ -72,7 +72,7 @@ app.use("/api/cloudinary", cloudinaryRoutes);
 app.use("/api/admin", adminRoutes);
 
 // razorPay Route
-app.use("/api/razorpay", razorpayRouter);
+// app.use("/api/razorpay", razorpayRouter);
 // root route
 app.get("/", (req, res) => res.send("Apps worked successfully"));
 
